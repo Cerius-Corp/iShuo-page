@@ -65,3 +65,49 @@
     font-family: var(--font-han);
   }
 }
+
+/* The hero's phones on a touch screen: as the page scrolls the first
+   900px, the front one rises and the side ones lean out. Driven by the
+   scroll itself, so the browser runs it smoothly off the main thread (with
+   a mouse, Hero.tsx moves them instead). Without support, they stay put. */
+@media (pointer: coarse) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .hero-rise,
+    .hero-spread-left,
+    .hero-spread-right {
+      animation: linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 900px;
+      will-change: translate, rotate;
+    }
+    .hero-rise {
+      animation-name: hero-rise;
+    }
+    .hero-spread-left {
+      animation-name: hero-spread-left;
+    }
+    .hero-spread-right {
+      animation-name: hero-spread-right;
+    }
+  }
+}
+
+@keyframes hero-rise {
+  to {
+    translate: 0 -70px;
+  }
+}
+
+@keyframes hero-spread-left {
+  to {
+    translate: -20% 0;
+    rotate: -7deg;
+  }
+}
+
+@keyframes hero-spread-right {
+  to {
+    translate: 20% 0;
+    rotate: 7deg;
+  }
+}

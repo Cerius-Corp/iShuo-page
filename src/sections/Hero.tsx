@@ -12,10 +12,11 @@ const ease = [0.22, 1, 0.36, 1] as const
 /** Three screens of the app, fanned out; as the page scrolls on, the side
  *  ones lean further away. `x` is a share of the phone's own width;
  *  `depth` and `turn` are how far each drifts and turns with the mouse;
- *  `alt` is which description (in the copy) it has. */
-const sidePhones: { src: string; alt: "learn" | "words"; x: string[]; rotate: number[]; delay: number; depth: number; turn: number }[] = [
-  { src: "/img/screens/learn.jpg", alt: "learn", x: ["-64%", "-84%"], rotate: [-8, -15], delay: 0.45, depth: -26, turn: 10 },
-  { src: "/img/screens/words.jpg", alt: "words", x: ["64%", "84%"], rotate: [8, 15], delay: 0.55, depth: -38, turn: -8 },
+ *  `alt` is which description (in the copy) it has; `spread` the CSS class
+ *  that leans it out on a phone (see index.css). */
+const sidePhones: { src: string; alt: "learn" | "words"; x: string[]; rotate: number[]; spread: string; delay: number; depth: number; turn: number }[] = [
+  { src: "/img/screens/learn.jpg", alt: "learn", x: ["-64%", "-84%"], rotate: [-8, -15], spread: "hero-spread-left", delay: 0.45, depth: -26, turn: 10 },
+  { src: "/img/screens/words.jpg", alt: "words", x: ["64%", "84%"], rotate: [8, 15], spread: "hero-spread-right", delay: 0.55, depth: -38, turn: -8 },
 ]
 
 /** Where the mouse is across the hero, -1…1 each way, eased. */
@@ -28,8 +29,10 @@ export function Hero() {
   const lift = useTransform(scrollYProgress, [0, 1], [0, -70])
 
   // With a mouse, the phones drift with it and spread as the hero scrolls
-  // away. On a phone they stay put once they've risen in: moving three big
-  // screenshots with every scroll is what made it stutter there.
+  // away, moved from here. On a phone the same rise and spread is a CSS
+  // scroll-driven animation (hero-rise, hero-spread-* in index.css), which
+  // the browser runs off the main thread: moving them from here with every
+  // scroll is what made it stutter there.
   const reduce = useReducedMotion()
   const moving = useMedia("(pointer: fine)") && !reduce
   const px = useMotionValue(0)
@@ -97,7 +100,7 @@ export function Hero() {
             transition={{ type: "spring", stiffness: 90, damping: 18, delay: 0.3 }}
             className="absolute left-1/2 top-0 z-10 w-[180px] -translate-x-1/2 sm:w-[235px] lg:w-[250px]"
           >
-            <motion.div style={moving ? { y: lift } : undefined} className={moving ? "will-change-transform" : undefined}>
+            <motion.div style={moving ? { y: lift } : undefined} className={moving ? "will-change-transform" : "hero-rise"}>
               <Drift pointer={pointer} moving={moving} depth={14} turn={7}>
                 <Phone src="/img/screens/live.jpg" alt={hero.alts.live} eager />
               </Drift>
@@ -215,7 +218,7 @@ function SidePhone({ phone, alt, progress, pointer, moving }: {
       className="absolute left-1/2 top-[9%] w-[150px] -translate-x-1/2 sm:w-[200px] lg:w-[212px]"
     >
       <Drift pointer={pointer} moving={moving} depth={phone.depth} turn={phone.turn}>
-        <motion.div style={moving ? { x, rotate } : { x: phone.x[0], rotate: phone.rotate[0] }}>
+        <motion.div style={moving ? { x, rotate } : { x: phone.x[0], rotate: phone.rotate[0] }} className={moving ? undefined : phone.spread}>
           <Phone src={phone.src} alt={alt} eager />
         </motion.div>
       </Drift>

@@ -2,14 +2,14 @@ import { motion } from "motion/react"
 import { useEffect, useState } from "react"
 import { SentenceMorph } from "../components/Morph"
 import { Reveal } from "../components/Reveal"
+import { KindIcon, type Kind } from "../components/KindIcon"
 import { Doodle, StickyNote, Tape } from "../components/Stationery"
 
-/** Sentences learners really say, each a different kind of fix, with the
- *  mark the app gives that kind in Belajar. */
-const examples = [
+/** Sentences learners really say, each a different kind of fix. */
+const examples: { kind: string; mark: Kind; said: string; better: string; pinyin: string; meaning: string; why: string }[] = [
   {
     kind: "Pemilihan kata",
-    mark: "A",
+    mark: "choice",
     said: "我不听懂。",
     better: "我没听懂。",
     pinyin: "Wǒ méi tīng dǒng.",
@@ -18,7 +18,7 @@ const examples = [
   },
   {
     kind: "Urutan letak kata",
-    mark: "⇆",
+    mark: "order",
     said: "我吃饭在食堂。",
     better: "我在食堂吃饭。",
     pinyin: "Wǒ zài shítáng chīfàn.",
@@ -27,7 +27,7 @@ const examples = [
   },
   {
     kind: "Kata kurang/lebih",
-    mark: "±",
+    mark: "missingOrExtra",
     said: "他说中文说很快。",
     better: "他说中文说得很快。",
     pinyin: "Tā shuō Zhōngwén shuō de hěn kuài.",
@@ -72,37 +72,42 @@ export function Demo() {
           </h2>
           <p className="mt-4 max-w-sm text-[17px] leading-relaxed text-ink-soft">Kalimat yang sering diucapkan pelajar. Pilih satu, lalu lihat yang lebih tepat.</p>
 
-          <div className="mt-8 space-y-2" role="tablist" aria-label="Contoh kalimat" aria-orientation="vertical">
-            {examples.map((e, i) => {
-              const on = pick === i
-              return (
-                <button
-                  key={e.kind}
-                  role="tab"
-                  aria-selected={on}
-                  onClick={() => choose(i)}
-                  className="group relative flex w-full cursor-pointer items-center gap-4 rounded-2xl px-4 py-3.5 text-left"
-                >
-                  {on && (
-                    <motion.span
-                      layoutId="demo-pick"
-                      className="absolute inset-0 rounded-2xl border border-grid bg-paper"
-                      transition={{ type: "spring", stiffness: 420, damping: 34 }}
-                    />
-                  )}
-                  <span className={`relative flex size-10 shrink-0 items-center justify-center rounded-xl text-lg font-bold transition-colors ${on ? "bg-brand text-white" : "bg-box text-brand"}`}>
-                    {e.mark}
-                  </span>
-                  <span className="relative min-w-0 flex-1">
-                    <span className={`block text-[16px] font-bold transition-colors ${on ? "text-ink" : "text-ink-soft group-hover:text-ink"}`}>{e.kind}</span>
-                    <span className="han block truncate text-[15px] text-ink-soft" lang="zh-Hans">{e.said}</span>
-                  </span>
-                  <svg viewBox="0 0 24 24" aria-hidden className={`relative size-5 shrink-0 fill-none stroke-current transition-all ${on ? "translate-x-0 text-brand opacity-100" : "-translate-x-1 text-ink-soft opacity-0 group-hover:translate-x-0 group-hover:opacity-100"}`} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="m9 6 6 6-6 6" />
-                  </svg>
-                </button>
-              )
-            })}
+          {/* The sentences on a ruled note, the picked one marked with a highlighter. */}
+          <div className="relative mt-10 max-w-md rotate-[-1deg] rounded-[4px] bg-paper px-2 py-3 shadow-[0_10px_24px_-14px_rgba(0,9,55,0.35)]">
+            <Tape className="-top-4 left-1/2 -translate-x-1/2 rotate-[3deg]" />
+            <span aria-hidden className="absolute inset-y-0 left-[52px] w-px bg-pin/30" />
+            <div role="tablist" aria-label="Contoh kalimat" aria-orientation="vertical">
+              {examples.map((e, i) => {
+                const on = pick === i
+                return (
+                  <button
+                    key={e.kind}
+                    role="tab"
+                    aria-selected={on}
+                    onClick={() => choose(i)}
+                    className="group relative flex w-full cursor-pointer items-center gap-5 border-b border-dashed border-grid py-4 pl-3 pr-4 text-left last:border-b-0"
+                  >
+                    <span className={`flex w-7 shrink-0 justify-center transition-colors ${on ? "text-brand" : "text-ink-soft/60 group-hover:text-ink-soft"}`}>
+                      <KindIcon kind={e.mark} />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="relative inline-block">
+                        {on && (
+                          <motion.span
+                            layoutId="demo-pick"
+                            aria-hidden
+                            className="absolute -inset-x-1.5 bottom-0 top-1/3 -skew-x-6 rounded-[2px] bg-butter"
+                            transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                          />
+                        )}
+                        <span className={`relative text-[16px] font-bold transition-colors ${on ? "text-ink" : "text-ink-soft group-hover:text-ink"}`}>{e.kind}</span>
+                      </span>
+                      <span className="han mt-0.5 block truncate text-[15px] text-ink-soft" lang="zh-Hans">{e.said}</span>
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
           </div>
         </Reveal>
 

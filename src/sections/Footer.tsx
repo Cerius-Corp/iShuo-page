@@ -26,8 +26,8 @@ export function Footer() {
                   <span className="block text-[13px] font-semibold text-white/45">{c.label}</span>
                   <span className="block break-all text-lg font-bold sm:text-xl">{c.value}</span>
                 </span>
-                <svg viewBox="0 0 24 24" aria-hidden className="size-5 shrink-0 fill-none stroke-current text-white/50 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M7 17 17 7M8 7h9v9" />
+                <svg viewBox="0 0 24 24" aria-hidden className="size-5 shrink-0 fill-none stroke-current text-white/50 transition-[translate,color] duration-300 group-hover:translate-x-1.5 group-hover:text-white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
               </a>
             </li>

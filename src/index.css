@@ -52,10 +52,9 @@
   }
 
   /* A stamp's perforated edge: a coloured sheet with holes punched along
-     its border (the paper on top hides the ones inside). */
+     its border (the paper on top hides the ones inside). The hole size
+     (--hole, --step) comes from the Stamp around it. */
   .perforated {
-    --hole: 5px;
-    --step: 16px;
     -webkit-mask:
       radial-gradient(circle var(--hole), #0000 98%, #000) calc(var(--step) / -2) calc(var(--step) / -2) / var(--step) var(--step) round;
     mask:

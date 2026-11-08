@@ -41,7 +41,7 @@ export function Hero() {
     <section ref={ref} onPointerMove={onMove} onPointerLeave={() => { px.set(0); py.set(0) }} className="relative overflow-hidden">
       <CursorGrid className="[mask-image:linear-gradient(to_bottom,#000_55%,transparent)]" />
       <Doodle kind="flower" className="-left-8 top-24 w-24 sm:w-32 lg:left-[3%] lg:top-16" />
-      <div className="relative mx-auto grid max-w-6xl items-center gap-6 px-4 pb-10 pt-10 sm:px-6 md:pt-16 lg:grid-cols-[1fr_1.05fr] lg:gap-4 lg:pb-24">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-6 px-4 pb-10 pt-28 sm:px-6 md:pt-36 lg:grid-cols-[1fr_1.05fr] lg:gap-4 lg:pb-24">
         <div className="relative z-10 text-center lg:text-left">
           <h1 className="text-[44px] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-[64px] lg:text-[68px]">
             <Rise delay={0.15}>Ngobrol</Rise>

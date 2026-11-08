@@ -25,12 +25,11 @@ export function FAQ() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="text-[34px] font-extrabold leading-[1.08] tracking-[-0.03em] sm:text-5xl"
           >
-            Yang sering ditanyakan.
+            FAQ
           </motion.h2>
           <p className="mt-4 text-[17px] text-white/60">
             Belum terjawab? <a href="#kontak" className="font-semibold text-white underline decoration-white/30 underline-offset-4 hover:decoration-white">Tanya kami</a>.
           </p>
-          <img src="/img/mascotreading.png" alt="" aria-hidden className="mt-10 hidden w-36 lg:block" />
         </div>
 
         <ul className="border-t border-white/12">

@@ -1,8 +1,9 @@
-import { motion, useScroll, useTransform } from "motion/react"
-import { useRef } from "react"
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react"
+import { useEffect, useRef, useState } from "react"
 import { CursorGrid } from "../components/CursorGrid"
+import { Stamp } from "../components/Stationery"
 
-/** The rest of the app, each with a screen from it. `tilt` fans the three
+/** The rest of the app, each on a stamp with a screen from it. `tilt` fans the three
  *  cards out on a laptop (written whole, so Tailwind sees the classes). */
 const cards = [
   {
@@ -36,6 +37,9 @@ export function Features() {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] })
   const slide = useTransform(scrollYProgress, [0, 1], ["0%", "-38%"])
+  const wide = useWide()
+  const row = useRef<HTMLDivElement>(null)
+  const { scrollYProgress: spread } = useScroll({ target: row, offset: ["start end", "center 60%"] })
 
   return (
     <section id="fitur" ref={ref} className="relative overflow-hidden bg-brand py-20 text-white lg:py-28">
@@ -58,36 +62,9 @@ export function Features() {
       </div>
 
       {/* Phone: a row to swipe through. Laptop: three cards fanned out. */}
-      <div className="relative mx-auto mt-12 flex max-w-6xl snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-10 [scrollbar-width:none] sm:px-6 lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:pb-12">
+      <div ref={row} className="relative mx-auto mt-12 flex max-w-6xl snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-10 [scrollbar-width:none] sm:px-6 lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:pb-12">
         {cards.map((c, i) => (
-          <motion.article
-            key={c.title}
-            initial={{ opacity: 0, y: 90 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-            transition={{ type: "spring", stiffness: 110, damping: 18, delay: i * 0.12 }}
-            className="w-[80vw] max-w-[330px] shrink-0 snap-center lg:w-auto lg:max-w-none"
-          >
-            {/* On hover it straightens and lifts, and the screen inside scrolls down a little. */}
-            <div className={`group rounded-[30px] bg-paper p-3 pb-6 text-ink shadow-[0_30px_60px_-30px_rgba(0,9,55,0.6)] transition-[rotate,translate,scale] duration-500 ease-out lg:hover:-translate-y-3 lg:hover:rotate-0 lg:hover:scale-[1.03] ${c.tilt}`}>
-              <div className="relative h-[300px] overflow-hidden rounded-[22px] bg-canvas sm:h-[340px]">
-                <motion.img
-                  src={c.src}
-                  alt={c.alt}
-                  loading="lazy"
-                  draggable={false}
-                  initial={{ opacity: 0, scale: 1.12, y: 24 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-                  transition={{ duration: 0.9, delay: 0.25 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-x-0 top-0 w-full origin-top select-none transition-[translate] duration-700 ease-out lg:group-hover:-translate-y-[18%]"
-                />
-                <div aria-hidden className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-paper to-transparent" />
-              </div>
-              <h3 className="mt-4 px-3 text-xl font-extrabold tracking-tight">{c.title}</h3>
-              <p className="mt-1.5 px-3 text-[15px] leading-relaxed text-ink-soft">{c.text}</p>
-            </div>
-          </motion.article>
+          <FeatureCard key={c.title} card={c} index={i} spread={spread} wide={wide} />
         ))}
       </div>
 
@@ -107,4 +84,61 @@ export function Features() {
       </ul>
     </section>
   )
+}
+
+/** One card. On a laptop the three start close together in the middle and
+ *  spread to their places as the band scrolls in (and close up again on the
+ *  way back); on a phone they sit in a row to swipe through. */
+function FeatureCard({ card: c, index, spread, wide }: {
+  card: (typeof cards)[number]
+  index: number
+  spread: MotionValue<number>
+  wide: boolean
+}) {
+  const x = useTransform(spread, [0, 1], [`${(1 - index) * 62}%`, "0%"])
+  return (
+    <motion.article
+      style={wide ? { x, zIndex: index === 1 ? 2 : 1 } : undefined}
+      initial={{ opacity: 0, y: 90 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+      transition={{ type: "spring", stiffness: 110, damping: 18, delay: index * 0.12 }}
+      className="w-[80vw] max-w-[330px] shrink-0 snap-center lg:w-auto lg:max-w-none"
+    >
+      {/* On hover it straightens and lifts, and the screen inside scrolls down a little. */}
+      <Stamp edge="bg-paper" className={`group text-ink transition-[rotate,translate,scale] duration-500 ease-out lg:hover:-translate-y-3 lg:hover:rotate-0 lg:hover:scale-[1.03] ${c.tilt}`}>
+        <div className="p-2 pb-6">
+          <div className="relative h-[300px] overflow-hidden rounded-[14px] bg-canvas sm:h-[340px]">
+            <motion.img
+              src={c.src}
+              alt={c.alt}
+              loading="lazy"
+              draggable={false}
+              initial={{ opacity: 0, scale: 1.12, y: 24 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+              transition={{ duration: 0.9, delay: 0.25 + index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-x-0 top-0 w-full origin-top select-none transition-[translate] duration-700 ease-out lg:group-hover:-translate-y-[18%]"
+            />
+            <div aria-hidden className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-paper to-transparent" />
+          </div>
+          <h3 className="mt-4 px-3 text-xl font-extrabold tracking-tight">{c.title}</h3>
+          <p className="mt-1.5 px-3 text-[15px] leading-relaxed text-ink-soft">{c.text}</p>
+        </div>
+      </Stamp>
+    </motion.article>
+  )
+}
+
+/** Whether the screen is laptop-wide (Tailwind's `lg`), following resizes. */
+function useWide() {
+  const query = "(min-width: 1024px)"
+  const [wide, setWide] = useState(() => matchMedia(query).matches)
+  useEffect(() => {
+    const list = matchMedia(query)
+    const change = () => setWide(list.matches)
+    list.addEventListener("change", change)
+    return () => list.removeEventListener("change", change)
+  }, [])
+  return wide
 }

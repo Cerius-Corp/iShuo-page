@@ -5,13 +5,20 @@
 import { motion, type MotionStyle } from "motion/react"
 import type { CSSProperties, ReactNode } from "react"
 
-/** A postage stamp: its perforated edge round paper, a soft shadow under the holes. */
+/** A stamp's holes: their radius and how far apart they are. */
+const holeSizes = {
+  regular: { "--hole": "5px", "--step": "19px" },
+  small: { "--hole": "3.5px", "--step": "13px" },
+} as const
+
+/** A postage stamp: its perforated edge round paper, a soft shadow under the
+ *  holes. The edge is as thick as one row of holes allows, so only the
+ *  half-holes along the outside show, as on a real stamp. */
 export function Stamp({
   children,
   className = "",
   edge = "bg-brand",
   paper = "bg-paper",
-  pad = "p-3",
   small = false,
 }: {
   children: ReactNode
@@ -19,16 +26,14 @@ export function Stamp({
   /** The edge's colour (a Tailwind background class). */
   edge?: string
   paper?: string
-  /** How thick the edge is. */
-  pad?: string
   /** A little stamp: smaller holes, closer together. */
   small?: boolean
 }) {
-  const holes = small ? ({ "--hole": "2.5px", "--step": "8px" } as CSSProperties) : undefined
+  const holes = holeSizes[small ? "small" : "regular"] as CSSProperties
   return (
-    <div className={`relative ${pad} ${className}`}>
+    <div className={`relative p-[calc(var(--step)-var(--hole)-1px)] ${className}`} style={holes}>
       <div className="absolute inset-0 drop-shadow-[0_6px_10px_rgba(15,31,92,0.16)]" aria-hidden>
-        <div className={`perforated absolute inset-0 ${edge}`} style={holes} />
+        <div className={`perforated absolute inset-0 ${edge}`} />
       </div>
       <div className={`relative h-full ${paper}`}>{children}</div>
     </div>

@@ -50,7 +50,7 @@ export function Download() {
           className="hidden items-center gap-4 md:flex"
         >
           <span className="text-sm font-semibold text-ink-soft">atau pindai</span>
-          <Stamp pad="p-2.5" small>
+          <Stamp small>
             <div className="p-3">
               <QRCodeSVG value={downloadURL} size={104} fgColor="#000937" bgColor="#ffffff" level="M" marginSize={0} title="QR code untuk membuka iShuo di iPhone" />
             </div>

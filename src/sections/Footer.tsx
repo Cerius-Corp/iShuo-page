@@ -8,7 +8,7 @@ const year = new Date().getFullYear()
 export function Footer() {
   return (
     <footer className="bg-ink px-4 text-white sm:px-6">
-      <div id="kontak" className="mx-auto grid max-w-6xl gap-10 pb-16 pt-20 lg:grid-cols-[1fr_1fr] lg:items-end lg:pt-28">
+      <div id="kontak" className="mx-auto grid max-w-6xl gap-10 pb-16 pt-20 lg:grid-cols-[1fr_1fr] lg:items-center lg:pt-28">
         <div>
           <h2 className="text-[40px] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-6xl">Ada pertanyaan?</h2>
           <p className="mt-4 text-[17px] text-white/60">Tulis saja. Semua masukan kami baca.</p>

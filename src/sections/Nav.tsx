@@ -12,7 +12,7 @@ export function Nav() {
       className="sticky top-3 z-50 px-3 sm:top-4 sm:px-6"
     >
       <nav
-        className="mx-auto flex h-14 max-w-5xl items-center justify-between rounded-full border border-grid bg-paper/85 pl-3 pr-2 shadow-[0_10px_30px_-18px_rgba(0,9,55,0.35)] backdrop-blur-md sm:h-16 sm:pl-4"
+        className="mx-auto flex h-14 max-w-5xl items-center justify-between rounded-full border border-grid bg-paper/85 pl-3 pr-2 shadow-[0_6px_20px_-14px_rgba(0,9,55,0.25)] backdrop-blur-md sm:h-16 sm:pl-4"
         aria-label="Utama"
       >
         <a href="#" className="flex items-center gap-2.5 font-extrabold tracking-tight">

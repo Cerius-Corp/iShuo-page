@@ -5,9 +5,9 @@ import { Bubble, Stamp, StickyNote } from "../components/Stationery"
 
 /** The three steps, and where along the section's scroll each one starts. */
 const steps = [
-  { title: "Rekam obrolanmu", text: "Buka Ngobrol langsung saat bicara dengan teman, dosen, atau penjual. Tiap kalimat muncul dengan pinyin dan artinya.", from: 0 },
-  { title: "iShuo memeriksa", text: "Setelah selesai, iShuo mencari kalimatmu yang bisa lebih tepat, lalu menjelaskan kenapa.", from: 0.34 },
-  { title: "Latih sampai lancar", text: "Di Belajar, ucapkan lagi kalimat yang sudah diperbaiki. Tiap karakter dicek sampai pas.", from: 0.67 },
+  { title: "Rekam obrolanmu", text: "Nyalakan Ngobrol langsung. Tiap kalimat muncul dengan pinyin dan artinya.", from: 0 },
+  { title: "iShuo memeriksa", text: "Kalimat yang bisa lebih tepat ditandai, lengkap dengan alasannya.", from: 0.34 },
+  { title: "Latih sampai lancar", text: "Ucapkan lagi kalimatnya. Tiap karakter dicek sampai pas.", from: 0.67 },
 ]
 const stepEnd = (i: number) => steps[i + 1]?.from ?? 1
 
@@ -21,7 +21,7 @@ const said = { hanzi: "我来中国两个月。", pinyin: "wǒ lái Zhōngguó l
 const better = {
   hanzi: "我来中国两个月了。",
   meaning: "Aku sudah dua bulan di China.",
-  why: "了 di akhir kalimat: sesuatu yang sudah berlangsung sampai sekarang, dan masih berlanjut.",
+  why: "了 di akhir kalimat: sudah berlangsung sampai sekarang.",
   chars: [["我", "wǒ"], ["来", "lái"], ["中", "zhōng"], ["国", "guó"], ["两", "liǎng"], ["个", "gè"], ["月", "yuè"], ["了", "le"]],
 }
 
@@ -40,8 +40,7 @@ export function Story() {
       <div className="sticky top-0 flex h-svh items-center overflow-hidden">
         <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 pt-20 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16 lg:pt-16">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.14em] text-brand">Cara kerja</p>
-            <h2 className="mt-3 hidden text-[44px] font-extrabold leading-[1.08] tracking-[-0.03em] lg:block">Dari obrolan ke kalimat yang lancar.</h2>
+            <h2 className="hidden text-[44px] font-extrabold leading-[1.08] tracking-[-0.03em] lg:block">Dari obrolan ke kalimat yang lancar.</h2>
 
             {/* Laptop: all three steps, the current one lit, each with its own progress. */}
             <ol className="mt-10 hidden space-y-7 lg:block">
@@ -63,7 +62,7 @@ export function Story() {
 
             {/* Phone: only the current step, with three bars for where you are. */}
             <div className="lg:hidden">
-              <div className="mt-3 flex gap-1.5" aria-hidden>
+              <div className="flex gap-1.5" aria-hidden>
                 {steps.map((s, i) => (
                   <span key={s.title} className="h-1 flex-1 overflow-hidden rounded-full bg-grid">
                     <StepFill progress={scrollYProgress} index={i} axis="x" />
@@ -119,7 +118,7 @@ function Talk({ progress }: { progress: MotionValue<number> }) {
     <motion.div {...swap} className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
       {/* Older lines slide up under the label, as in a chat. */}
       <div aria-hidden className="absolute inset-x-0 top-0 z-10 h-20 bg-gradient-to-b from-paper via-paper/80 to-transparent" />
-      <p className="absolute left-5 top-5 z-10 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#d4371c] sm:left-6 sm:top-6">
+      <p className="absolute left-5 top-5 z-10 flex items-center gap-2 text-[13px] font-bold text-[#d4371c] sm:left-6 sm:top-6">
         <span className="relative flex size-2.5">
           <span className="absolute inline-flex size-full animate-ping rounded-full bg-[#d4371c] opacity-60 motion-reduce:hidden" />
           <span className="relative inline-flex size-2.5 rounded-full bg-[#d4371c]" />
@@ -238,7 +237,7 @@ function Practice() {
           animate={{ scale: [1, 1.35, 1], opacity: [0.8, 0, 0.8] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
         />
-        <span className="relative flex size-[64px] items-center justify-center rounded-full bg-brand text-white shadow-[0_10px_24px_-10px_rgba(15,68,209,0.9)]">
+        <span className="relative flex size-[64px] items-center justify-center rounded-full bg-brand text-white shadow-[0_4px_12px_-6px_rgba(15,68,209,0.5)]">
           <svg viewBox="0 0 24 24" aria-hidden className="size-7 fill-current">
             <path d="M12 14.5a3.5 3.5 0 0 0 3.5-3.5V5.5a3.5 3.5 0 1 0-7 0V11a3.5 3.5 0 0 0 3.5 3.5Zm6-3.5a.9.9 0 1 0-1.8 0 4.2 4.2 0 0 1-8.4 0 .9.9 0 1 0-1.8 0 6 6 0 0 0 5.1 5.93V19H9.5a.9.9 0 1 0 0 1.8h5a.9.9 0 1 0 0-1.8h-1.6v-2.07A6 6 0 0 0 18 11Z" />
           </svg>

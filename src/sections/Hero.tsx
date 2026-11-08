@@ -21,17 +21,7 @@ export function Hero() {
     <section ref={ref} className="relative overflow-hidden">
       <div className="mx-auto grid max-w-6xl items-center gap-6 px-4 pb-10 pt-10 sm:px-6 md:pt-16 lg:grid-cols-[1fr_1.05fr] lg:gap-4 lg:pb-24">
         <div className="relative z-10 text-center lg:text-left">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mx-auto inline-flex items-center gap-2 rounded-full border border-grid bg-paper px-3.5 py-1.5 text-[13px] font-semibold text-ink-soft lg:mx-0"
-          >
-            <span className="size-2 rounded-full bg-mint" />
-            Beta di iPhone · untuk pelajar Indonesia di China
-          </motion.p>
-
-          <h1 className="mt-6 text-[44px] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-[64px] lg:text-[68px]">
+          <h1 className="text-[44px] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-[64px] lg:text-[68px]">
             <Rise delay={0.15}>Ngobrol</Rise>
             <Rise delay={0.22}>Mandarin,</Rise>
             <Rise delay={0.29} className="text-brand">tanpa takut</Rise>
@@ -58,7 +48,7 @@ export function Hero() {
             transition={{ delay: 0.45 }}
             className="mx-auto mt-8 max-w-[31rem] text-[17px] leading-relaxed text-ink-soft sm:text-lg lg:mx-0"
           >
-            Rekam obrolanmu yang asli, di kampus, di warung, atau dengan teman. iShuo menunjukkan kalimat mana yang bisa lebih tepat, lalu melatihnya bersamamu sampai lancar.
+            Rekam obrolanmu sehari-hari. iShuo menunjukkan kalimat yang bisa lebih tepat, lalu melatihnya bersamamu.
           </motion.p>
 
           <motion.div
@@ -125,7 +115,7 @@ function Rise({ children, delay, className = "", underlined = false }: {
   underlined?: boolean
 }) {
   return (
-    <span className={`block overflow-hidden ${underlined ? "-mb-4 pb-5" : "pb-1"}`}>
+    <span className={`block overflow-hidden ${underlined ? "-mb-4 pb-5" : "-mb-[0.16em] pb-[0.16em]"}`}>
       <motion.span
         className={`inline-block ${className}`}
         initial={{ y: "105%" }}

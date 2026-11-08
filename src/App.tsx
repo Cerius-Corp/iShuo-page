@@ -2,7 +2,7 @@ import Lenis from "lenis"
 import "lenis/dist/lenis.css"
 import { MotionConfig } from "motion/react"
 import { useEffect } from "react"
-import { Contact, Footer } from "./sections/Contact"
+import { Footer } from "./sections/Footer"
 import { Demo } from "./sections/Demo"
 import { Download } from "./sections/Download"
 import { FAQ } from "./sections/FAQ"
@@ -35,7 +35,6 @@ export default function App() {
         <Demo />
         <FAQ />
         <Download />
-        <Contact />
       </main>
       <Footer />
     </MotionConfig>

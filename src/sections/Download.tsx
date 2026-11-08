@@ -35,8 +35,8 @@ export function Download() {
         className="mx-auto mt-6 max-w-lg text-[17px] leading-relaxed text-ink-soft text-balance"
       >
         {onAppStore
-          ? "Download iShuo di iPhone-mu, lalu rekam obrolan pertamamu."
-          : "iShuo sedang dalam beta di TestFlight. Pasang TestFlight, buka undangannya, dan iShuo siap dipakai. Segera hadir di App Store."}
+          ? "Download iShuo, lalu rekam obrolan pertamamu."
+          : "Gratis selama beta. Pasang TestFlight, buka undangannya, dan mulai."}
       </motion.p>
 
       <div className="mt-10 flex flex-col items-center justify-center gap-8 md:flex-row">

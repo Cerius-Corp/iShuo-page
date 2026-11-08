@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react"
 import { useRef } from "react"
 
-/** What a learner thinks on the way home. Each word lights up as the page
+/** What a learner thinks on the way home, on a sticky-note yellow band. Each word lights up as the page
  *  scrolls past it; the second sentence is the one that hurts, in blue. */
 const lines = [
   { text: "“Tadi aku bilang apa, ya? Rasanya ada yang salah,", accent: false },
@@ -14,7 +14,7 @@ export function Quote() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 45%"] })
 
   return (
-    <section className="px-4 py-24 sm:px-6 lg:py-36">
+    <section className="bg-butter px-4 py-24 sm:px-6 lg:py-32">
       <div ref={ref} className="mx-auto max-w-4xl text-center">
         <p className="text-[34px] font-extrabold leading-[1.15] tracking-[-0.03em] sm:text-5xl lg:text-[60px]">
           {words.map((x, i) => (
@@ -28,9 +28,9 @@ export function Quote() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "0px 0px -10% 0px" }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto mt-8 max-w-xl text-[17px] leading-relaxed text-ink-soft"
+          className="mx-auto mt-8 max-w-xl text-[17px] leading-relaxed text-butter-ink text-balance"
         >
-          Di kelas lancar. Di warung, kalimatnya keluar terbalik. Lawan bicaramu tetap paham, jadi tidak ada yang bilang, dan besoknya kamu mengulang hal yang sama.
+          Lawan bicaramu tetap paham, jadi tidak ada yang bilang. Besoknya, kalimat yang sama terulang lagi.
         </motion.p>
       </div>
     </section>

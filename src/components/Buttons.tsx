@@ -12,7 +12,7 @@ export function DownloadButton({ className = "", children }: { className?: strin
       whileHover={{ y: -2 }}
       whileTap={{ scale: 0.97 }}
       transition={{ type: "spring", stiffness: 500, damping: 30 }}
-      className={`inline-flex min-h-[52px] items-center gap-2.5 rounded-full bg-brand px-6 text-[15px] font-semibold text-white shadow-[0_10px_24px_-12px_rgba(15,68,209,0.8)] ${className}`}
+      className={`inline-flex min-h-[52px] items-center gap-2.5 rounded-full bg-brand px-6 text-[15px] font-semibold text-white ${className}`}
     >
       <AppleMark />
       {children ?? (onAppStore ? "Download di App Store" : "Coba gratis di TestFlight")}

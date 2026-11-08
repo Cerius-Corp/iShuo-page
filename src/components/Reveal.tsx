@@ -14,17 +14,15 @@ export function Reveal({ delay = 0, y = 28, ...props }: HTMLMotionProps<"div"> &
   )
 }
 
-/** A section's small label and heading. */
-export function SectionHead({ kicker, title, children, center = false }: {
-  kicker: string
+/** A section's heading, and a line under it. */
+export function SectionHead({ title, children, center = false }: {
   title: ReactNode
   children?: ReactNode
   center?: boolean
 }) {
   return (
     <Reveal className={center ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
-      <p className="text-sm font-bold uppercase tracking-[0.14em] text-brand">{kicker}</p>
-      <h2 className="mt-3 text-[32px] font-extrabold leading-[1.1] tracking-[-0.025em] sm:text-[44px]">{title}</h2>
+      <h2 className="text-[34px] font-extrabold leading-[1.08] tracking-[-0.03em] text-balance sm:text-5xl">{title}</h2>
       {children && <p className="mt-4 text-[17px] leading-relaxed text-ink-soft">{children}</p>}
     </Reveal>
   )

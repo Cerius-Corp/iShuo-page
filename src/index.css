@@ -31,6 +31,7 @@
   }
   ::selection {
     background: var(--color-butter);
+    color: var(--color-ink);
   }
   :focus-visible {
     outline: 3px solid var(--color-brand);

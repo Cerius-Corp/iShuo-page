@@ -5,24 +5,24 @@ import { useRef } from "react"
  *  cards out on a laptop (written whole, so Tailwind sees the classes). */
 const cards = [
   {
-    src: "/img/screens/words.jpg",
-    alt: "Kosa kata untuk daftar di kampus: paspor, surat penerimaan, foto, dokumen",
+    src: "/img/screens/folders.jpg",
+    alt: "Kosa Kata: folder per situasi, dari daftar di kampus sampai perpustakaan",
     title: "Kosa kata per situasi",
-    text: "Daftar di kampus, makan bersama keluarga, naik taksi: pelajari kata yang biasanya muncul sebelum kamu ke sana.",
+    text: "Mau daftar kampus atau naik taksi? Pelajari katanya dulu.",
     tilt: "lg:-rotate-4 lg:translate-y-8",
   },
   {
     src: "/img/screens/practice.jpg",
     alt: "Latihan dengan AI di kafe, dengan contoh jawaban untuk diucapkan",
     title: "Latihan dengan AI",
-    text: "Ngobrol dengan iShuo kapan saja. Bingung mau jawab apa? Ketuk Bantuan jawaban.",
+    text: "Ngobrol kapan saja. Bingung jawab? Ada contoh jawabannya.",
     tilt: "",
   },
   {
     src: "/img/screens/progress.jpg",
     alt: "Progress: jumlah percakapan naik, yang bisa diperbaiki turun",
     title: "Progress yang jujur",
-    text: "Lihat jenis perbaikan mana yang makin jarang muncul di obrolanmu. Tanpa streak, tanpa tekanan.",
+    text: "Lihat apa yang makin jarang perlu diperbaiki. Tanpa streak.",
     tilt: "lg:rotate-4 lg:translate-y-8",
   },
 ]
@@ -53,7 +53,7 @@ export function Features() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-2xl text-[34px] font-extrabold leading-[1.08] tracking-[-0.03em] text-balance sm:text-5xl"
         >
-          Siap sebelum ngobrol, terus latihan sesudahnya.
+          Siap sebelum ngobrol, lanjut latihan sesudahnya.
         </motion.h2>
       </div>
 

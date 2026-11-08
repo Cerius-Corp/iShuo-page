@@ -6,8 +6,9 @@ export const site = {
   /** The App Store page, once it's live. Empty: TestFlight is shown. */
   appStoreURL: "",
   /** Where questions and feedback go. */
-  contactEmail: "",
-  instagram: "",
+  contactEmail: "cerius.corp@gmail.com",
+  /** The Instagram handle, without the @. */
+  instagram: "cerius_id",
 } as const
 
 /** Where the download buttons go now. */

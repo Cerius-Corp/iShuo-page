@@ -4,6 +4,7 @@ import { DownloadButton } from "../components/Buttons"
 import { CursorGrid } from "../components/CursorGrid"
 import { Phone } from "../components/Phone"
 import { Doodle } from "../components/Stationery"
+import { useMedia } from "../hooks/useMedia"
 import { useCopy } from "../i18n/useCopy"
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -26,8 +27,11 @@ export function Hero() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
   const lift = useTransform(scrollYProgress, [0, 1], [0, -70])
 
-  // The phones and stickers drift with the mouse, each at its own depth.
+  // With a mouse, the phones drift with it and spread as the hero scrolls
+  // away. On a phone they stay put once they've risen in: moving three big
+  // screenshots with every scroll is what made it stutter there.
   const reduce = useReducedMotion()
+  const moving = useMedia("(pointer: fine)") && !reduce
   const px = useMotionValue(0)
   const py = useMotionValue(0)
   const follow = { stiffness: 110, damping: 18 }
@@ -85,7 +89,7 @@ export function Hero() {
         {/* The phones: Ngobrol langsung in front, Belajar and Kosa Kata behind. */}
         <div className="relative mx-auto h-[390px] w-full max-w-[500px] sm:h-[520px] lg:h-[560px]">
           {sidePhones.map((p) => (
-            <SidePhone key={p.src} phone={p} alt={hero.alts[p.alt]} progress={scrollYProgress} pointer={pointer} />
+            <SidePhone key={p.src} phone={p} alt={hero.alts[p.alt]} progress={scrollYProgress} pointer={pointer} moving={moving} />
           ))}
           <motion.div
             initial={{ opacity: 0, y: 140 }}
@@ -93,11 +97,11 @@ export function Hero() {
             transition={{ type: "spring", stiffness: 90, damping: 18, delay: 0.3 }}
             className="absolute left-1/2 top-0 z-10 w-[180px] -translate-x-1/2 sm:w-[235px] lg:w-[250px]"
           >
-            <motion.div style={{ y: lift }}>
-              <Drift pointer={pointer} depth={14} turn={7}>
+            <motion.div style={moving ? { y: lift } : undefined} className={moving ? "will-change-transform" : undefined}>
+              <Drift pointer={pointer} moving={moving} depth={14} turn={7}>
                 <Phone src="/img/screens/live.jpg" alt={hero.alts.live} eager />
               </Drift>
-              <Drift pointer={pointer} depth={44} className="absolute -left-6 top-[18%] sm:-left-12">
+              <Drift pointer={pointer} moving={moving} depth={44} className="absolute -left-6 top-[18%] sm:-left-12">
                 <motion.span
                   initial={{ opacity: 0, scale: 0.6, rotate: -14 }}
                   animate={{ opacity: 1, scale: 1, rotate: -6 }}
@@ -111,7 +115,7 @@ export function Hero() {
                   {hero.recording}
                 </motion.span>
               </Drift>
-              <Drift pointer={pointer} depth={60} className="absolute -right-5 bottom-[22%] sm:-right-10">
+              <Drift pointer={pointer} moving={moving} depth={60} className="absolute -right-5 bottom-[22%] sm:-right-10">
                 <motion.span
                   initial={{ opacity: 0, scale: 0.6, rotate: 14 }}
                   animate={{ opacity: 1, scale: 1, rotate: 5 }}
@@ -170,9 +174,11 @@ function Rise({ children, delay, className = "", underlined = false }: {
 }
 
 /** Drifts `depth` pixels with the mouse (negative: against it) and turns
- *  up to `turn` degrees, so things at different depths move apart. */
-function Drift({ pointer, depth, turn = 0, className = "", children }: {
+ *  up to `turn` degrees, so things at different depths move apart. Holds
+ *  still unless `moving`. */
+function Drift({ pointer, moving, depth, turn = 0, className = "", children }: {
   pointer: Pointer
+  moving: boolean
   depth: number
   turn?: number
   className?: string
@@ -182,15 +188,23 @@ function Drift({ pointer, depth, turn = 0, className = "", children }: {
   const y = useTransform(pointer.y, (v) => v * depth * 0.6)
   const rotateY = useTransform(pointer.x, (v) => v * turn)
   const rotateX = useTransform(pointer.y, (v) => -v * turn * 0.7)
+  if (!moving) return <div className={className}>{children}</div>
   return (
-    <motion.div style={{ x, y, rotateX, rotateY, transformPerspective: 1200 }} className={className}>
+    <motion.div style={{ x, y, rotateX, rotateY, transformPerspective: 1200 }} className={`will-change-transform ${className}`}>
       {children}
     </motion.div>
   )
 }
 
 /** A phone behind the front one, leaning further out as the hero scrolls away. */
-function SidePhone({ phone, alt, progress, pointer }: { phone: (typeof sidePhones)[number]; alt: string; progress: MotionValue<number>; pointer: Pointer }) {
+function SidePhone({ phone, alt, progress, pointer, moving }: {
+  phone: (typeof sidePhones)[number]
+  alt: string
+  progress: MotionValue<number>
+  pointer: Pointer
+  /** Spreading with the scroll; otherwise it stays where it starts. */
+  moving: boolean
+}) {
   const x = useTransform(progress, [0, 1], phone.x)
   const rotate = useTransform(progress, [0, 1], phone.rotate)
   return (
@@ -200,8 +214,8 @@ function SidePhone({ phone, alt, progress, pointer }: { phone: (typeof sidePhone
       transition={{ type: "spring", stiffness: 80, damping: 18, delay: phone.delay }}
       className="absolute left-1/2 top-[9%] w-[150px] -translate-x-1/2 sm:w-[200px] lg:w-[212px]"
     >
-      <Drift pointer={pointer} depth={phone.depth} turn={phone.turn}>
-        <motion.div style={{ x, rotate }}>
+      <Drift pointer={pointer} moving={moving} depth={phone.depth} turn={phone.turn}>
+        <motion.div style={moving ? { x, rotate } : { x: phone.x[0], rotate: phone.rotate[0] }}>
           <Phone src={phone.src} alt={alt} eager />
         </motion.div>
       </Drift>

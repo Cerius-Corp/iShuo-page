@@ -11,8 +11,8 @@ export const languages = {
 
 export type Lang = keyof typeof languages
 
-/** The page's own language, used until (or unless) another is worked out. */
-export const defaultLang: Lang = "id"
+/** The language used until (or unless) the visitor's country says otherwise. */
+export const defaultLang: Lang = "en"
 
 const isLang = (value: string | null): value is Lang => value !== null && value in languages
 
@@ -44,7 +44,7 @@ export function rememberLang(lang: Lang) {
 
 /** The language for a country (an ISO code like "ID"): Indonesian in
  *  Indonesia, Chinese in China, English anywhere else. None when the
- *  country isn't known, so the page stays in its own language. */
+ *  country isn't known, so the page stays in the default (English). */
 export function langForCountry(country: string): Lang | null {
   if (!country) return null
   return country === "ID" ? "id" : country === "CN" ? "zh" : "en"

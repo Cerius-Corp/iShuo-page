@@ -3,7 +3,7 @@ import { chosenLang, defaultLang, langForCountry, languages, rememberLang, type 
 import { LanguageContext } from "./useCopy"
 
 /** Holds the language: one asked for (a `?lang=` link or an earlier pick),
- *  else the one for the visitor's country, else Indonesian. Keeps the page's
+ *  else the one for the visitor's country, else English. Keeps the page's
  *  `lang`, title and description in step, and remembers picks from the menu. */
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(() => chosenLang() ?? defaultLang)
@@ -11,7 +11,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   // Nothing asked for: ask the site which country the visitor is in. Where
   // that isn't known (or the function isn't there, as when run locally),
-  // the page simply stays in Indonesian.
+  // the page simply stays in English.
   useEffect(() => {
     if (chosenLang()) return
     const request = new AbortController()

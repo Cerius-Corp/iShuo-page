@@ -31,8 +31,13 @@ export function Story() {
   const { story } = useCopy()
   const [step, setStep] = useState(0)
   const fit = usePhoneFit()
+  // Only a change of step re-renders, not every scrolled pixel.
+  const shown = useRef(0)
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    setStep(steps.findLastIndex((s) => v >= s.from))
+    const now = steps.findLastIndex((s) => v >= s.from)
+    if (now === shown.current) return
+    shown.current = now
+    setStep(now)
   })
 
   /** Scrolls to just inside a step, so it can be picked from the list. */
@@ -215,8 +220,10 @@ function Talk({ progress }: { progress: MotionValue<number> }) {
         }
         action={<BarPill>{story.screen.end}</BarPill>}
       />
-      {/* Older lines slide up and fade under the bar, as in a chat. */}
-      <div className="flex flex-1 flex-col justify-end space-y-3 overflow-hidden px-4 pb-28 [mask-image:linear-gradient(to_bottom,transparent,#000_16%)]">
+      {/* Older lines slide up and fade under the bar, as in a chat (a fading
+          cover, not a mask: masking moving bubbles is slow on phones). */}
+      <div className="relative flex flex-1 flex-col justify-end space-y-3 overflow-hidden px-4 pb-28">
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-10 h-16 bg-gradient-to-b from-canvas to-transparent" />
         {lines.map((l, i) => {
           const last = i === lines.length - 1
           return (

@@ -43,11 +43,11 @@ Then open the address Vite prints (usually http://localhost:5173).
 
 - **Editing text:** change it in `src/copy/id.ts`, `en.ts` and `zh.ts`.
 - **Going live on the App Store:** set `appStoreURL` in `src/site.ts`. The buttons, their labels and the QR code switch from TestFlight to the App Store.
-- **Which language opens:** a `?lang=id`, `?lang=en` or `?lang=zh` link wins, then the language last picked from the menu on that device. Otherwise the visitor's country decides (Indonesian in Indonesia, Chinese in China, English elsewhere), read by `api/country.ts` from the header Vercel adds; where it isn't known, as when running locally, the page stays in Indonesian.
+- **Which language opens:** a `?lang=id`, `?lang=en` or `?lang=zh` link wins, then the language last picked from the menu on that device. Otherwise the visitor's country decides (Indonesian in Indonesia, Chinese in China, English elsewhere), read by `api/country.ts` from the header Vercel adds; where it isn't known, as when running locally, the page opens in English.
 
 ## Deploying
 
-The site is static. On Vercel or Netlify, use `npm run build` as the build command and `dist` as the output folder. `vercel.json` sends every path to `index.html`.
+The site is built for Vercel: `npm run build` as the build command and `dist` as the output folder. `api/country.ts` runs as a Vercel Function, and `vercel.json` sends every other path to `index.html`. Elsewhere the page still works; it just opens in English.
 
 ---
 

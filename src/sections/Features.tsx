@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react"
-import { useEffect, useRef, useState } from "react"
+import { useRef } from "react"
 import { CursorGrid } from "../components/CursorGrid"
+import { useMedia } from "../hooks/useMedia"
 import { Stamp } from "../components/Stationery"
 import { useCopy } from "../i18n/useCopy"
 
@@ -20,7 +21,7 @@ export function Features() {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] })
   const slide = useTransform(scrollYProgress, [0, 1], ["0%", "-38%"])
-  const wide = useWide()
+  const wide = useMedia("(min-width: 1024px)")
   const row = useRef<HTMLDivElement>(null)
   const { scrollYProgress: spread } = useScroll({ target: row, offset: ["start end", "center 60%"] })
 
@@ -28,7 +29,7 @@ export function Features() {
     <section id="fitur" ref={ref} className="relative overflow-hidden bg-brand py-14 text-white sm:py-20 lg:py-28">
       <CursorGrid tone="brand" />
 
-      <motion.p aria-hidden style={{ x: slide }} className="relative whitespace-nowrap text-[18vw] font-extrabold leading-[0.9] tracking-[-0.04em] text-white/15 lg:text-[15vw]">
+      <motion.p aria-hidden style={{ x: slide }} className="relative whitespace-nowrap will-change-transform text-[18vw] font-extrabold leading-[0.9] tracking-[-0.04em] text-white/15 lg:text-[15vw]">
         {Array(4).fill(features.marquee).join(" · ")}
       </motion.p>
 
@@ -113,17 +114,4 @@ function FeatureCard({ card: c, words, index, spread, wide }: {
       </Stamp>
     </motion.article>
   )
-}
-
-/** Whether the screen is laptop-wide (Tailwind's `lg`), following resizes. */
-function useWide() {
-  const query = "(min-width: 1024px)"
-  const [wide, setWide] = useState(() => matchMedia(query).matches)
-  useEffect(() => {
-    const list = matchMedia(query)
-    const change = () => setWide(list.matches)
-    list.addEventListener("change", change)
-    return () => list.removeEventListener("change", change)
-  }, [])
-  return wide
 }

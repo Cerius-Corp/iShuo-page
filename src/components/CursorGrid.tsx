@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react"
 
 /** The grid's lines, faint everywhere and brighter where the cursor is. */
 const tones = {
-  canvas: { base: "rgba(196,192,236,0.45)", lit: "rgba(15,68,209,0.4)" },
+  canvas: { base: "rgba(196,192,236,0.22)", lit: "rgba(15,68,209,0.3)" },
   brand: { base: "rgba(255,255,255,0.1)", lit: "rgba(255,255,255,0.5)" },
 } as const
 

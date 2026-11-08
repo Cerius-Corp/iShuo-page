@@ -95,10 +95,8 @@ export const en: Copy = {
     items: [
       { q: "Is iShuo free?", a: "Yes, it's free during the TestFlight beta." },
       { q: "Which iPhones can use iShuo?", a: "iPhones on iOS 26 or later. Apple Intelligence isn't needed." },
-      { q: "Are my recordings kept?", a: "No. Voice recordings are deleted once the conversation has been analysed. The text stays on your iPhone and is only sent to iShuo's AI to be checked." },
-      { q: "Do I need to ask before recording?", a: "Yes. Always ask the people you're talking with first." },
-      { q: "What level is it for?", a: "Every level. The explanations follow the level you choose." },
-      { q: "What if I mix in Indonesian?", a: "That's fine. iShuo still understands, and shows you how to say it in Mandarin." },
+      { q: "What level is it for?", a: "For learners who already have the basics, around HSK 3 and up. The explanations follow the level you choose." },
+      { q: "Are my recordings kept?", a: "No. Voice recordings are deleted once the conversation has been analysed, and the text is only sent to iShuo's AI to be checked. Always ask the people you're talking with before you record." },
       { q: "How do I join the beta?", a: "Install TestFlight from the App Store, open iShuo's invite link on your iPhone, then tap Accept and Install." },
     ],
   },

@@ -101,10 +101,8 @@ export const id = {
     items: [
       { q: "Apakah iShuo gratis?", a: "Ya, gratis selama masa beta di TestFlight." },
       { q: "iPhone apa yang bisa memakai iShuo?", a: "iPhone dengan iOS 26 ke atas. Tidak perlu Apple Intelligence." },
-      { q: "Apakah rekaman obrolanku disimpan?", a: "Tidak. Rekaman suara dihapus setelah obrolan dianalisis. Teksnya tersimpan di iPhone-mu dan hanya dikirim ke AI iShuo untuk diperiksa." },
-      { q: "Perlu minta izin sebelum merekam?", a: "Ya. Selalu minta izin dulu ke lawan bicaramu." },
-      { q: "Untuk level berapa?", a: "Semua level. Penjelasannya menyesuaikan level yang kamu pilih." },
-      { q: "Bagaimana kalau aku campur bahasa Indonesia?", a: "Tidak apa-apa. iShuo tetap paham dan menunjukkan padanan Mandarinnya." },
+      { q: "Untuk level berapa?", a: "Untuk yang sudah punya dasar, sekitar HSK 3 ke atas. Penjelasannya menyesuaikan level yang kamu pilih." },
+      { q: "Apakah rekaman obrolanku disimpan?", a: "Tidak. Rekaman suara dihapus setelah obrolan dianalisis, dan teksnya hanya dikirim ke AI iShuo untuk diperiksa. Selalu minta izin dulu ke lawan bicaramu sebelum merekam." },
       { q: "Bagaimana cara ikut beta?", a: "Pasang TestFlight dari App Store, buka link undangan iShuo di iPhone, lalu ketuk Terima dan Instal." },
     ],
   },

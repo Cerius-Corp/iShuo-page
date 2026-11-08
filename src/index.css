@@ -24,7 +24,6 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }
   body {
@@ -64,11 +63,5 @@
 
   .han {
     font-family: var(--font-han);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
   }
 }

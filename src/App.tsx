@@ -1,25 +1,38 @@
+import Lenis from "lenis"
+import "lenis/dist/lenis.css"
 import { MotionConfig } from "motion/react"
+import { useEffect } from "react"
 import { Contact, Footer } from "./sections/Contact"
 import { Demo } from "./sections/Demo"
 import { Download } from "./sections/Download"
 import { FAQ } from "./sections/FAQ"
 import { Features } from "./sections/Features"
 import { Hero } from "./sections/Hero"
-import { HowItWorks } from "./sections/HowItWorks"
 import { Nav } from "./sections/Nav"
-import { Problem } from "./sections/Problem"
+import { Quote } from "./sections/Quote"
+import { Story } from "./sections/Story"
+
+/** How far below the nav a section lands when a link scrolls to it. */
+const anchorOffset = -88
 
 export default function App() {
+  // Smooth scrolling (and smooth jumps to #sections), unless Reduce Motion is on.
+  useEffect(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const lenis = new Lenis({ autoRaf: true, anchors: { offset: anchorOffset } })
+    return () => lenis.destroy()
+  }, [])
+
   return (
     // Animations follow the system's Reduce Motion setting.
     <MotionConfig reducedMotion="user">
       <Nav />
       <main>
         <Hero />
-        <Problem />
-        <HowItWorks />
-        <Demo />
+        <Quote />
+        <Story />
         <Features />
+        <Demo />
         <FAQ />
         <Download />
         <Contact />

@@ -14,3 +14,18 @@ export const site = {
 /** Where the download buttons go now. */
 export const downloadURL = site.appStoreURL || site.testFlightURL
 export const onAppStore = site.appStoreURL !== ""
+
+/** The page's sections, for the nav and the footer. */
+export const sections = [
+  { href: "#cara-kerja", label: "Cara kerja" },
+  { href: "#fitur", label: "Fitur" },
+  { href: "#faq", label: "FAQ" },
+  { href: "#kontak", label: "Kontak" },
+] as const
+
+/** Ways to reach the team: email and Instagram when set, TestFlight's feedback always. */
+export const contacts = [
+  site.contactEmail && { label: "Email", value: site.contactEmail, href: `mailto:${site.contactEmail}` },
+  site.instagram && { label: "Instagram", value: `@${site.instagram}`, href: `https://instagram.com/${site.instagram}` },
+  { label: "Dari iPhone", value: "Send Beta Feedback di TestFlight", href: site.testFlightURL },
+].filter((c) => !!c)

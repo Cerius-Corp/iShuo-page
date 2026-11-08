@@ -104,13 +104,3 @@ export function Bubble({
 export function Tape({ className = "" }: { className?: string }) {
   return <img src="/img/washitape.png" alt="" aria-hidden className={`pointer-events-none absolute w-24 select-none ${className}`} />
 }
-
-/** Hanzi with its pinyin under it. */
-export function Han({ hanzi, pinyin, className = "" }: { hanzi: string; pinyin?: string; className?: string }) {
-  return (
-    <span className={`inline-flex flex-col leading-tight ${className}`}>
-      <span className="han font-bold" lang="zh-Hans">{hanzi}</span>
-      {pinyin && <span className="text-[0.62em] font-medium text-ink-soft">{pinyin}</span>}
-    </span>
-  )
-}

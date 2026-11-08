@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from "motion/react"
 import { useState } from "react"
-import { Reveal, SectionHead } from "../components/Reveal"
 
 const faqs = [
   {
@@ -33,36 +32,43 @@ const faqs = [
   },
 ]
 
-/** Questions people ask, one open at a time, like index cards. */
+/** Questions people ask, on a dark band; one open at a time. */
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0)
   return (
-    <section id="faq" className="scroll-mt-20 px-4 py-20 sm:px-6 lg:py-28">
-      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="lg:sticky lg:top-28 lg:self-start">
-          <SectionHead kicker="FAQ" title="Yang sering ditanyakan." />
-          <Reveal delay={0.1}>
-            <img src="/img/mascotreading.png" alt="" aria-hidden className="mt-8 hidden w-40 lg:block" />
-          </Reveal>
+    <section id="faq" className="bg-ink px-4 py-20 text-white sm:px-6 lg:py-28">
+      <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <div className="lg:sticky lg:top-32 lg:self-start">
+          <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#9db5ff]">FAQ</p>
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-3 text-[34px] font-extrabold leading-[1.08] tracking-[-0.03em] sm:text-5xl"
+          >
+            Yang sering ditanyakan.
+          </motion.h2>
+          <img src="/img/mascotreading.png" alt="" aria-hidden className="mt-10 hidden w-36 lg:block" />
         </div>
 
-        <Reveal className="divide-y divide-grid overflow-hidden rounded-[28px] border border-grid bg-paper">
+        <div className="border-t border-white/12">
           {faqs.map((f, i) => {
             const isOpen = open === i
             return (
-              <div key={f.q}>
+              <div key={f.q} className="border-b border-white/12">
                 <h3>
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
                     aria-expanded={isOpen}
                     aria-controls={`faq-${i}`}
-                    className="flex min-h-[64px] w-full cursor-pointer items-center justify-between gap-4 px-6 py-4 text-left text-[17px] font-bold transition-colors hover:bg-canvas"
+                    className="flex min-h-[68px] w-full cursor-pointer items-center justify-between gap-4 py-4 text-left text-[17px] font-bold transition-colors hover:text-[#c9d6ff] sm:text-lg"
                   >
                     {f.q}
                     <motion.span
                       animate={{ rotate: isOpen ? 45 : 0 }}
                       transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                      className={`flex size-8 shrink-0 items-center justify-center rounded-full text-xl leading-none ${isOpen ? "bg-brand text-white" : "bg-box text-brand"}`}
+                      className={`flex size-8 shrink-0 items-center justify-center rounded-full text-xl leading-none transition-colors ${isOpen ? "bg-white text-ink" : "bg-white/10 text-white"}`}
                       aria-hidden
                     >
                       +
@@ -79,14 +85,14 @@ export function FAQ() {
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                       className="overflow-hidden"
                     >
-                      <p className="px-6 pb-6 text-[16px] leading-relaxed text-ink-soft">{f.a}</p>
+                      <p className="max-w-2xl pb-6 pr-10 text-[16px] leading-relaxed text-white/70">{f.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
             )
           })}
-        </Reveal>
+        </div>
       </div>
     </section>
   )

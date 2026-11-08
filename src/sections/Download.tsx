@@ -1,52 +1,61 @@
 import { motion } from "motion/react"
 import { QRCodeSVG } from "qrcode.react"
 import { DownloadButton } from "../components/Buttons"
-import { Reveal } from "../components/Reveal"
 import { Stamp } from "../components/Stationery"
 import { downloadURL, onAppStore } from "../site"
 
-/** The way in: a button, and on a laptop a QR code to scan with the iPhone
- *  (a phone can't scan its own screen, so there it's the button alone). */
+/** The way in: the icon, a big line, the button, and on a laptop a QR code
+ *  to scan with the iPhone (a phone can't scan its own screen). */
 export function Download() {
   return (
-    <section className="px-4 pb-20 sm:px-6 lg:pb-28">
-      <Reveal className="mx-auto max-w-6xl">
-        <div className="relative overflow-hidden rounded-[36px] bg-brand px-6 py-14 text-white sm:px-12 lg:px-16">
-          {/* Faint squared paper over the blue. */}
-          <div aria-hidden className="absolute inset-0 opacity-[0.12] [background-image:linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] [background-size:28px_28px]" />
-          <img src="/img/mascotcheer.png" alt="" aria-hidden className="pointer-events-none absolute -bottom-6 -right-6 hidden w-56 opacity-95 md:block lg:right-[30%] lg:w-52" />
+    <section className="relative overflow-hidden px-4 py-24 text-center sm:px-6 lg:py-32">
+      <motion.img
+        src="/img/appicon.png"
+        alt=""
+        initial={{ opacity: 0, scale: 0.5, rotate: -18 }}
+        whileInView={{ opacity: 1, scale: 1, rotate: -6 }}
+        viewport={{ once: true }}
+        transition={{ type: "spring", stiffness: 200, damping: 14 }}
+        className="mx-auto size-24 rounded-[24px] shadow-[0_24px_40px_-18px_rgba(15,68,209,0.7)] sm:size-28 sm:rounded-[28px]"
+      />
+      <motion.h2
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        className="mx-auto mt-10 max-w-3xl text-[44px] font-extrabold leading-[1.02] tracking-[-0.035em] text-balance sm:text-7xl"
+      >
+        Mulai ngobrol <span className="text-brand">hari ini.</span>
+      </motion.h2>
+      <motion.p
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="mx-auto mt-6 max-w-lg text-[17px] leading-relaxed text-ink-soft text-balance"
+      >
+        {onAppStore
+          ? "Download iShuo di iPhone-mu, lalu rekam obrolan pertamamu."
+          : "iShuo sedang dalam beta di TestFlight. Pasang TestFlight, buka undangannya, dan iShuo siap dipakai. Segera hadir di App Store."}
+      </motion.p>
 
-          <div className="relative grid items-center gap-10 lg:grid-cols-[1.3fr_1fr]">
-            <div>
-              <p className="text-sm font-bold uppercase tracking-[0.14em] text-white/70">{onAppStore ? "Sudah di App Store" : "Beta terbuka"}</p>
-              <h2 className="mt-3 text-[34px] font-extrabold leading-[1.08] tracking-[-0.025em] text-balance sm:text-5xl">
-                Mulai ngobrol hari ini.
-              </h2>
-              <p className="mt-4 max-w-md text-[17px] leading-relaxed text-white/80">
-                {onAppStore
-                  ? "Download iShuo di iPhone-mu, lalu rekam obrolan pertamamu."
-                  : "iShuo sedang dalam beta di TestFlight. Pasang TestFlight, buka undangannya, dan iShuo siap dipakai. Segera hadir di App Store."}
-              </p>
-              <DownloadButton className="mt-8 !bg-white !text-brand !shadow-[0_10px_24px_-12px_rgba(0,0,0,0.5)]" />
+      <div className="mt-10 flex flex-col items-center justify-center gap-8 md:flex-row">
+        <DownloadButton />
+        <motion.div
+          initial={{ opacity: 0, rotate: -12, scale: 0.85 }}
+          whileInView={{ opacity: 1, rotate: 3, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ type: "spring", stiffness: 160, damping: 15, delay: 0.3 }}
+          className="hidden items-center gap-4 md:flex"
+        >
+          <span className="text-sm font-semibold text-ink-soft">atau pindai</span>
+          <Stamp pad="p-2.5" small>
+            <div className="p-3">
+              <QRCodeSVG value={downloadURL} size={104} fgColor="#000937" bgColor="#ffffff" level="M" marginSize={0} title="QR code untuk membuka iShuo di iPhone" />
             </div>
-
-            <motion.div
-              initial={{ rotate: -10, opacity: 0, scale: 0.9 }}
-              whileInView={{ rotate: 4, opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 160, damping: 16, delay: 0.15 }}
-              className="mx-auto hidden w-[230px] md:block lg:ml-auto lg:mr-0"
-            >
-              <Stamp edge="bg-paper" paper="bg-paper" pad="p-3">
-                <div className="flex flex-col items-center px-4 pb-4 pt-5 text-ink">
-                  <QRCodeSVG value={downloadURL} size={168} fgColor="#000937" bgColor="#ffffff" level="M" marginSize={0} title="QR code untuk membuka iShuo di iPhone" />
-                  <p className="mt-4 text-center text-sm font-bold">Pindai dengan kamera iPhone</p>
-                </div>
-              </Stamp>
-            </motion.div>
-          </div>
-        </div>
-      </Reveal>
+          </Stamp>
+        </motion.div>
+      </div>
     </section>
   )
 }

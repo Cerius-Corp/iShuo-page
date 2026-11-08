@@ -2,11 +2,13 @@ import { motion } from "motion/react"
 import { QRCodeSVG } from "qrcode.react"
 import { DownloadButton } from "../components/Buttons"
 import { Doodle, Stamp } from "../components/Stationery"
+import { useCopy } from "../i18n/useCopy"
 import { downloadURL, onAppStore } from "../site"
 
 /** The way in: the icon, a big line, the button, and on a laptop a QR code
  *  to scan with the iPhone (a phone can't scan its own screen). */
 export function Download() {
+  const copy = useCopy()
   return (
     <section className="relative overflow-hidden px-4 py-24 text-center sm:px-6 lg:py-32">
       <Doodle kind="flower" className="left-1/2 top-14 w-16 translate-x-[70px] rotate-12 sm:top-16 sm:w-20 sm:translate-x-[84px]" />
@@ -26,7 +28,7 @@ export function Download() {
         transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         className="mx-auto mt-10 max-w-3xl text-[44px] font-extrabold leading-[1.02] tracking-[-0.035em] text-balance sm:text-7xl"
       >
-        Mulai ngobrol <span className="text-brand">hari ini.</span>
+        {copy.get.title}<span className="text-brand">{copy.get.titleAccent}</span>
       </motion.h2>
       <motion.p
         initial={{ opacity: 0, y: 16 }}
@@ -35,9 +37,7 @@ export function Download() {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="mx-auto mt-6 max-w-lg text-[17px] leading-relaxed text-ink-soft text-balance"
       >
-        {onAppStore
-          ? "Download iShuo, lalu rekam obrolan pertamamu."
-          : "Gratis selama beta. Pasang TestFlight, buka undangannya, dan mulai."}
+        {onAppStore ? copy.get.store : copy.get.beta}
       </motion.p>
 
       <div className="mt-10 flex flex-col items-center justify-center gap-8 md:flex-row">
@@ -49,10 +49,10 @@ export function Download() {
           transition={{ type: "spring", stiffness: 160, damping: 15, delay: 0.3 }}
           className="hidden items-center gap-4 md:flex"
         >
-          <span className="text-sm font-semibold text-ink-soft">atau pindai</span>
+          <span className="text-sm font-semibold text-ink-soft">{copy.get.scan}</span>
           <Stamp small>
             <div className="p-3">
-              <QRCodeSVG value={downloadURL} size={104} fgColor="#000937" bgColor="#ffffff" level="M" marginSize={0} title="QR code untuk membuka iShuo di iPhone" />
+              <QRCodeSVG value={downloadURL} size={104} fgColor="#000937" bgColor="#ffffff" level="M" marginSize={0} title={copy.get.qr} />
             </div>
           </Stamp>
         </motion.div>

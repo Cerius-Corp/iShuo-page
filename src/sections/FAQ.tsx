@@ -1,18 +1,10 @@
 import { AnimatePresence, motion } from "motion/react"
 import { useState } from "react"
-
-const faqs = [
-  { q: "Apakah iShuo gratis?", a: "Ya, gratis selama masa beta di TestFlight." },
-  { q: "iPhone apa yang bisa memakai iShuo?", a: "iPhone dengan iOS 26 ke atas. Tidak perlu Apple Intelligence." },
-  { q: "Apakah rekaman obrolanku disimpan?", a: "Tidak. Rekaman suara dihapus setelah obrolan dianalisis. Teksnya tersimpan di iPhone-mu dan hanya dikirim ke AI iShuo untuk diperiksa." },
-  { q: "Perlu minta izin sebelum merekam?", a: "Ya. Selalu minta izin dulu ke lawan bicaramu." },
-  { q: "Untuk level berapa?", a: "Semua level. Penjelasannya menyesuaikan level yang kamu pilih." },
-  { q: "Bagaimana kalau aku campur bahasa Indonesia?", a: "Tidak apa-apa. iShuo tetap paham dan menunjukkan padanan Mandarinnya." },
-  { q: "Bagaimana cara ikut beta?", a: "Pasang TestFlight dari App Store, buka link undangan iShuo di iPhone, lalu ketuk Terima dan Instal." },
-]
+import { useCopy } from "../i18n/useCopy"
 
 /** Questions people ask, on a dark band; one open at a time. */
 export function FAQ() {
+  const { faq } = useCopy()
   const [open, setOpen] = useState<number | null>(0)
   return (
     <section id="faq" className="bg-ink px-4 py-14 text-white sm:px-6 sm:py-20 lg:py-28">
@@ -25,15 +17,16 @@ export function FAQ() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="text-[28px] font-extrabold leading-[1.08] tracking-[-0.03em] sm:text-5xl"
           >
-            FAQ
+            {faq.title}
           </motion.h2>
           <p className="mt-2 text-[15px] text-white/60 sm:mt-4 sm:text-[17px]">
-            Belum terjawab? <a href="#kontak" className="font-semibold text-white underline decoration-white/30 underline-offset-4 hover:decoration-white">Tanya kami</a>.
+            {faq.more}{" "}
+            <a href="#kontak" className="font-semibold text-white underline decoration-white/30 underline-offset-4 hover:decoration-white">{faq.ask}</a>
           </p>
         </div>
 
         <ul className="border-t border-white/12">
-          {faqs.map((f, i) => {
+          {faq.items.map((f, i) => {
             const isOpen = open === i
             return (
               <li key={f.q} className="border-b border-white/12">

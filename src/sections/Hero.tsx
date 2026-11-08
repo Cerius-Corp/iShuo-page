@@ -4,21 +4,24 @@ import { DownloadButton } from "../components/Buttons"
 import { CursorGrid } from "../components/CursorGrid"
 import { Phone } from "../components/Phone"
 import { Doodle } from "../components/Stationery"
+import { useCopy } from "../i18n/useCopy"
 
 const ease = [0.22, 1, 0.36, 1] as const
 
 /** Three screens of the app, fanned out; as the page scrolls on, the side
  *  ones lean further away. `x` is a share of the phone's own width;
- *  `depth` and `turn` are how far each drifts and turns with the mouse. */
-const sidePhones = [
-  { src: "/img/screens/learn.jpg", alt: "Halaman Belajar: 22 kalimat dari obrolan menunggu dilatih", x: ["-64%", "-84%"], rotate: [-8, -15], delay: 0.45, depth: -26, turn: 10 },
-  { src: "/img/screens/words.jpg", alt: "Kosa kata untuk daftar di kampus, tiap kata di perangko", x: ["64%", "84%"], rotate: [8, 15], delay: 0.55, depth: -38, turn: -8 },
+ *  `depth` and `turn` are how far each drifts and turns with the mouse;
+ *  `alt` is which description (in the copy) it has. */
+const sidePhones: { src: string; alt: "learn" | "words"; x: string[]; rotate: number[]; delay: number; depth: number; turn: number }[] = [
+  { src: "/img/screens/learn.jpg", alt: "learn", x: ["-64%", "-84%"], rotate: [-8, -15], delay: 0.45, depth: -26, turn: 10 },
+  { src: "/img/screens/words.jpg", alt: "words", x: ["64%", "84%"], rotate: [8, 15], delay: 0.55, depth: -38, turn: -8 },
 ]
 
 /** Where the mouse is across the hero, -1…1 each way, eased. */
 type Pointer = { x: MotionValue<number>; y: MotionValue<number> }
 
 export function Hero() {
+  const { hero } = useCopy()
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
   const lift = useTransform(scrollYProgress, [0, 1], [0, -70])
@@ -44,24 +47,16 @@ export function Hero() {
       <div className="relative mx-auto grid max-w-6xl items-center gap-6 px-4 pb-8 pt-24 sm:px-6 sm:pb-10 sm:pt-28 md:pt-36 lg:grid-cols-[1fr_1.05fr] lg:gap-4 lg:pb-24">
         <div className="relative z-10 text-center lg:text-left">
           <h1 className="text-[38px] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-[64px] lg:text-[68px]">
-            <Rise delay={0.15}>Ngobrol</Rise>
-            <Rise delay={0.22}>Mandarin,</Rise>
-            <Rise delay={0.29} className="text-brand">tanpa takut</Rise>
-            <Rise delay={0.36} className="relative text-brand" underlined>
-              salah.
-              <svg viewBox="0 0 300 18" aria-hidden className="absolute -bottom-3 left-0 h-4 w-full" preserveAspectRatio="none">
-                <motion.path
-                  d="M3 12 C 60 2, 120 16, 180 8 S 270 4, 297 10"
-                  fill="none"
-                  stroke="#ffd34d"
-                  strokeWidth="6"
-                  strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ delay: 0.9, duration: 0.9, ease: "easeInOut" }}
-                />
-              </svg>
-            </Rise>
+            {/* A line each; from accentFrom on in blue, the last one underlined. */}
+            {hero.lines.map((line, i) => {
+              const last = i === hero.lines.length - 1
+              return (
+                <Rise key={line + i} delay={0.15 + i * 0.07} className={`${i >= hero.accentFrom ? "text-brand" : ""} ${last ? "relative" : ""}`} underlined={last}>
+                  {line}
+                  {last && <Squiggle />}
+                </Rise>
+              )
+            })}
           </h1>
 
           <motion.p
@@ -70,7 +65,7 @@ export function Hero() {
             transition={{ delay: 0.45 }}
             className="mx-auto mt-6 max-w-[31rem] text-[15px] leading-relaxed text-ink-soft sm:mt-8 sm:text-lg lg:mx-0"
           >
-            Rekam obrolanmu sehari-hari. iShuo menunjukkan kalimat yang bisa lebih tepat, lalu melatihnya bersamamu.
+            {hero.lead}
           </motion.p>
 
           <motion.div
@@ -81,7 +76,7 @@ export function Hero() {
           >
             <DownloadButton className="!min-h-[46px] !px-5 !text-[14px] sm:!min-h-[52px] sm:!px-6 sm:!text-[15px]" />
             <a href="#cara-kerja" className="group inline-flex min-h-[44px] items-center gap-1.5 px-2 text-[15px] font-semibold text-brand">
-              Lihat cara kerjanya
+              {hero.how}
               <span className="transition-transform group-hover:translate-y-0.5" aria-hidden>↓</span>
             </a>
           </motion.div>
@@ -90,7 +85,7 @@ export function Hero() {
         {/* The phones: Ngobrol langsung in front, Belajar and Kosa Kata behind. */}
         <div className="relative mx-auto h-[390px] w-full max-w-[500px] sm:h-[520px] lg:h-[560px]">
           {sidePhones.map((p) => (
-            <SidePhone key={p.src} phone={p} progress={scrollYProgress} pointer={pointer} />
+            <SidePhone key={p.src} phone={p} alt={hero.alts[p.alt]} progress={scrollYProgress} pointer={pointer} />
           ))}
           <motion.div
             initial={{ opacity: 0, y: 140 }}
@@ -100,7 +95,7 @@ export function Hero() {
           >
             <motion.div style={{ y: lift }}>
               <Drift pointer={pointer} depth={14} turn={7}>
-                <Phone src="/img/screens/live.jpg" alt="Ngobrol langsung: tiap kalimat muncul dengan pinyin dan artinya" eager />
+                <Phone src="/img/screens/live.jpg" alt={hero.alts.live} eager />
               </Drift>
               <Drift pointer={pointer} depth={44} className="absolute -left-6 top-[18%] sm:-left-12">
                 <motion.span
@@ -113,7 +108,7 @@ export function Hero() {
                     <span className="absolute inline-flex size-full animate-ping rounded-full bg-[#d4371c] opacity-60 motion-reduce:hidden" />
                     <span className="relative inline-flex size-2.5 rounded-full bg-[#d4371c]" />
                   </span>
-                  Merekam obrolan
+                  {hero.recording}
                 </motion.span>
               </Drift>
               <Drift pointer={pointer} depth={60} className="absolute -right-5 bottom-[22%] sm:-right-10">
@@ -123,7 +118,7 @@ export function Hero() {
                   transition={{ type: "spring", stiffness: 260, damping: 16, delay: 1.3 }}
                   className="inline-block whitespace-nowrap rounded-[3px] bg-butter px-3.5 py-2 text-[13px] font-bold text-ink shadow-[0_10px_24px_-12px_rgba(0,9,55,0.45)] sm:text-sm"
                 >
-                  <span className="han" lang="zh-Hans">你呢？</span> = Kalau kamu?
+                  <span className="han" lang="zh-Hans">你呢？</span> = {hero.sticker}
                 </motion.span>
               </Drift>
             </motion.div>
@@ -131,6 +126,24 @@ export function Hero() {
         </div>
       </div>
     </section>
+  )
+}
+
+/** The yellow line drawn under the headline's last line. */
+function Squiggle() {
+  return (
+    <svg viewBox="0 0 300 18" aria-hidden className="absolute -bottom-3 left-0 h-4 w-full" preserveAspectRatio="none">
+      <motion.path
+        d="M3 12 C 60 2, 120 16, 180 8 S 270 4, 297 10"
+        fill="none"
+        stroke="#ffd34d"
+        strokeWidth="6"
+        strokeLinecap="round"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ delay: 0.9, duration: 0.9, ease: "easeInOut" }}
+      />
+    </svg>
   )
 }
 
@@ -177,7 +190,7 @@ function Drift({ pointer, depth, turn = 0, className = "", children }: {
 }
 
 /** A phone behind the front one, leaning further out as the hero scrolls away. */
-function SidePhone({ phone, progress, pointer }: { phone: (typeof sidePhones)[number]; progress: MotionValue<number>; pointer: Pointer }) {
+function SidePhone({ phone, alt, progress, pointer }: { phone: (typeof sidePhones)[number]; alt: string; progress: MotionValue<number>; pointer: Pointer }) {
   const x = useTransform(progress, [0, 1], phone.x)
   const rotate = useTransform(progress, [0, 1], phone.rotate)
   return (
@@ -189,7 +202,7 @@ function SidePhone({ phone, progress, pointer }: { phone: (typeof sidePhones)[nu
     >
       <Drift pointer={pointer} depth={phone.depth} turn={phone.turn}>
         <motion.div style={{ x, rotate }}>
-          <Phone src={phone.src} alt={phone.alt} eager />
+          <Phone src={phone.src} alt={alt} eager />
         </motion.div>
       </Drift>
     </motion.div>

@@ -1,9 +1,11 @@
 import type { ReactNode } from "react"
 import { motion } from "motion/react"
+import { useCopy } from "../i18n/useCopy"
 import { downloadURL, onAppStore } from "../site"
 
 /** The way in: TestFlight for now, the App Store once it's live. */
 export function DownloadButton({ className = "", children }: { className?: string; children?: ReactNode }) {
+  const copy = useCopy()
   return (
     <motion.a
       href={downloadURL}
@@ -15,7 +17,7 @@ export function DownloadButton({ className = "", children }: { className?: strin
       className={`inline-flex min-h-[52px] items-center gap-2.5 rounded-full bg-brand px-6 text-[15px] font-semibold text-white ${className}`}
     >
       <AppleMark />
-      {children ?? (onAppStore ? "Download di App Store" : "Coba gratis di TestFlight")}
+      {children ?? (onAppStore ? copy.download.appStore : copy.download.testFlight)}
     </motion.a>
   )
 }

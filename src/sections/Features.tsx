@@ -2,38 +2,21 @@ import { motion, useScroll, useTransform, type MotionValue } from "motion/react"
 import { useEffect, useRef, useState } from "react"
 import { CursorGrid } from "../components/CursorGrid"
 import { Stamp } from "../components/Stationery"
+import { useCopy } from "../i18n/useCopy"
 
-/** The rest of the app, each on a stamp with a screen from it. `tilt` fans the three
- *  cards out on a laptop (written whole, so Tailwind sees the classes). */
+/** The rest of the app, each on a stamp with a screen from it (its words
+ *  are in the copy, in the same order). `tilt` fans the three cards out on
+ *  a laptop (written whole, so Tailwind sees the classes). */
 const cards = [
-  {
-    src: "/img/screens/folders.jpg",
-    alt: "Kosa Kata: folder per situasi, dari daftar di kampus sampai perpustakaan",
-    title: "Kosa kata per situasi",
-    text: "Mau daftar kampus atau naik taksi? Pelajari katanya dulu.",
-    tilt: "lg:-rotate-4 lg:translate-y-8",
-  },
-  {
-    src: "/img/screens/practice.jpg",
-    alt: "Latihan dengan AI di kafe, dengan contoh jawaban untuk diucapkan",
-    title: "Latihan dengan AI",
-    text: "Ngobrol kapan saja. Bingung jawab? Ada contoh jawabannya.",
-    tilt: "",
-  },
-  {
-    src: "/img/screens/progress.jpg",
-    alt: "Progress: jumlah percakapan naik, yang bisa diperbaiki turun",
-    title: "Progress yang jujur",
-    text: "Lihat apa yang makin jarang perlu diperbaiki. Tanpa streak.",
-    tilt: "lg:rotate-4 lg:translate-y-8",
-  },
+  { src: "/img/screens/folders.jpg", tilt: "lg:-rotate-4 lg:translate-y-8" },
+  { src: "/img/screens/practice.jpg", tilt: "" },
+  { src: "/img/screens/progress.jpg", tilt: "lg:rotate-4 lg:translate-y-8" },
 ]
-
-const extras = ["Pocket kata di samping mic", "Bisa campur bahasa Indonesia", "Latih lafal per karakter", "Folder kosa kata per topik"]
 
 /** A band of brand blue: "ngobrol" sliding past in huge letters, then
  *  the rest of the app on cards. */
 export function Features() {
+  const { features } = useCopy()
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] })
   const slide = useTransform(scrollYProgress, [0, 1], ["0%", "-38%"])
@@ -46,7 +29,7 @@ export function Features() {
       <CursorGrid tone="brand" />
 
       <motion.p aria-hidden style={{ x: slide }} className="relative whitespace-nowrap text-[18vw] font-extrabold leading-[0.9] tracking-[-0.04em] text-white/15 lg:text-[15vw]">
-        NGOBROL · NGOBROL · NGOBROL · NGOBROL
+        {Array(4).fill(features.marquee).join(" · ")}
       </motion.p>
 
       <div className="relative mx-auto mt-6 max-w-6xl px-4 sm:mt-10 sm:px-6 lg:mt-14">
@@ -57,19 +40,19 @@ export function Features() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-2xl text-[28px] font-extrabold leading-[1.1] tracking-[-0.03em] text-balance sm:text-5xl"
         >
-          Siap sebelum ngobrol, lanjut latihan sesudahnya.
+          {features.title}
         </motion.h2>
       </div>
 
       {/* Phone: a row to swipe through. Laptop: three cards fanned out. */}
       <div ref={row} className="relative mx-auto mt-8 flex max-w-6xl snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-10 [scrollbar-width:none] sm:px-6 lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:pb-12">
         {cards.map((c, i) => (
-          <FeatureCard key={c.title} card={c} index={i} spread={spread} wide={wide} />
+          <FeatureCard key={c.src} card={c} words={features.cards[i]} index={i} spread={spread} wide={wide} />
         ))}
       </div>
 
       <ul className="relative mx-auto mt-2 flex max-w-6xl flex-wrap gap-2 sm:mt-4 sm:gap-2.5 px-4 sm:px-6 lg:mt-10">
-        {extras.map((e, i) => (
+        {features.extras.map((e, i) => (
           <motion.li
             key={e}
             initial={{ opacity: 0, scale: 0.8 }}
@@ -89,8 +72,10 @@ export function Features() {
 /** One card. On a laptop the three start close together in the middle and
  *  spread to their places as the band scrolls in (and close up again on the
  *  way back); on a phone they sit in a row to swipe through. */
-function FeatureCard({ card: c, index, spread, wide }: {
+function FeatureCard({ card: c, words, index, spread, wide }: {
   card: (typeof cards)[number]
+  /** Its title, text and description, in the language picked. */
+  words: { title: string; text: string; alt: string }
   index: number
   spread: MotionValue<number>
   wide: boolean
@@ -111,7 +96,7 @@ function FeatureCard({ card: c, index, spread, wide }: {
           <div className="relative h-[230px] overflow-hidden rounded-[14px] bg-canvas sm:h-[340px]">
             <motion.img
               src={c.src}
-              alt={c.alt}
+              alt={words.alt}
               loading="lazy"
               draggable={false}
               initial={{ opacity: 0, scale: 1.12, y: 24 }}
@@ -122,8 +107,8 @@ function FeatureCard({ card: c, index, spread, wide }: {
             />
             <div aria-hidden className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-paper to-transparent" />
           </div>
-          <h3 className="mt-3 px-2 text-[17px] font-extrabold tracking-tight sm:mt-4 sm:px-3 sm:text-xl">{c.title}</h3>
-          <p className="mt-1 px-2 text-[13px] leading-relaxed text-ink-soft sm:mt-1.5 sm:px-3 sm:text-[15px]">{c.text}</p>
+          <h3 className="mt-3 px-2 text-[17px] font-extrabold tracking-tight sm:mt-4 sm:px-3 sm:text-xl">{words.title}</h3>
+          <p className="mt-1 px-2 text-[13px] leading-relaxed text-ink-soft sm:mt-1.5 sm:px-3 sm:text-[15px]">{words.text}</p>
         </div>
       </Stamp>
     </motion.article>

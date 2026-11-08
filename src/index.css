@@ -18,7 +18,7 @@
   --color-pin: #e0453f;
   --color-doodle: #c2d3ff;
 
-  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Noto Sans SC", "PingFang SC", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-han: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", sans-serif;
 }
 

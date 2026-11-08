@@ -2,6 +2,7 @@ import Lenis from "lenis"
 import "lenis/dist/lenis.css"
 import { MotionConfig } from "motion/react"
 import { useEffect } from "react"
+import { LanguageProvider } from "./i18n/LanguageProvider"
 import { Footer } from "./sections/Footer"
 import { Demo } from "./sections/Demo"
 import { Download } from "./sections/Download"
@@ -24,19 +25,21 @@ export default function App() {
   }, [])
 
   return (
-    // Animations follow the system's Reduce Motion setting.
-    <MotionConfig reducedMotion="user">
-      <Nav />
-      <main>
-        <Hero />
-        <Quote />
-        <Story />
-        <Features />
-        <Demo />
-        <FAQ />
-        <Download />
-      </main>
-      <Footer />
-    </MotionConfig>
+    <LanguageProvider>
+      {/* Animations follow the system's Reduce Motion setting. */}
+      <MotionConfig reducedMotion="user">
+        <Nav />
+        <main>
+          <Hero />
+          <Quote />
+          <Story />
+          <Features />
+          <Demo />
+          <FAQ />
+          <Download />
+        </main>
+        <Footer />
+      </MotionConfig>
+    </LanguageProvider>
   )
 }

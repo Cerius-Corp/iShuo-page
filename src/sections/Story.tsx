@@ -3,26 +3,23 @@ import { useEffect, useRef, useState, type ReactNode } from "react"
 import { KindIcon } from "../components/KindIcon"
 import { SentenceMorph } from "../components/Morph"
 import { Bubble, Doodle, Stamp, StickyNote } from "../components/Stationery"
+import { useCopy } from "../i18n/useCopy"
 
-/** The three steps, and where along the section's scroll each one starts. */
-const steps = [
-  { title: "Rekam obrolanmu", text: "Nyalakan Ngobrol langsung. Tiap kalimat muncul dengan pinyin dan artinya.", from: 0 },
-  { title: "iShuo memeriksa", text: "Kalimat yang bisa lebih tepat ditandai, lengkap dengan alasannya.", from: 0.34 },
-  { title: "Latih sampai lancar", text: "Ucapkan lagi kalimatnya. Tiap karakter dicek sampai pas.", from: 0.67 },
-]
+/** Where along the section's scroll each of the three steps starts (their
+ *  words are in the copy, in the same order). */
+const steps = [{ from: 0 }, { from: 0.34 }, { from: 0.67 }]
 const stepEnd = (i: number) => steps[i + 1]?.from ?? 1
 
-/** One conversation, from the moment it's said to the moment it's right. */
+/** One conversation, from the moment it's said to the moment it's right
+ *  (the meanings and the why are in the copy). */
 const talk = [
-  { hanzi: "你是哪国人？", pinyin: "nǐ shì nǎ guó rén?", meaning: "Kamu dari negara mana?", mine: false },
-  { hanzi: "我是印尼人。", pinyin: "wǒ shì Yìnní rén.", meaning: "Aku orang Indonesia.", mine: true },
-  { hanzi: "你来中国多久了？", pinyin: "nǐ lái Zhōngguó duōjiǔ le?", meaning: "Sudah berapa lama di China?", mine: false },
+  { hanzi: "你是哪国人？", pinyin: "nǐ shì nǎ guó rén?", mine: false },
+  { hanzi: "我是印尼人。", pinyin: "wǒ shì Yìnní rén.", mine: true },
+  { hanzi: "你来中国多久了？", pinyin: "nǐ lái Zhōngguó duōjiǔ le?", mine: false },
 ]
-const said = { hanzi: "我来中国两个月。", pinyin: "wǒ lái Zhōngguó liǎng gè yuè.", meaning: "Aku di China dua bulan." }
+const said = { hanzi: "我来中国两个月。", pinyin: "wǒ lái Zhōngguó liǎng gè yuè." }
 const better = {
   hanzi: "我来中国两个月了。",
-  meaning: "Aku sudah dua bulan di China.",
-  why: "了 di akhir kalimat: sudah berlangsung sampai sekarang.",
   chars: [["我", "wǒ"], ["来", "lái"], ["中", "zhōng"], ["国", "guó"], ["两", "liǎng"], ["个", "gè"], ["月", "yuè"], ["了", "le"]],
 }
 
@@ -31,6 +28,7 @@ const better = {
 export function Story() {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] })
+  const { story } = useCopy()
   const [step, setStep] = useState(0)
   const fit = usePhoneFit()
   useMotionValueEvent(scrollYProgress, "change", (v) => {
@@ -50,14 +48,14 @@ export function Story() {
       <div className="sticky top-0 flex h-svh items-center overflow-hidden">
         <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 pt-20 sm:px-6 lg:grid-cols-[minmax(0,28rem)_auto] lg:items-center lg:justify-center lg:gap-24 lg:pt-16">
           <div>
-            <h2 className="hidden text-[44px] font-extrabold leading-[1.08] tracking-[-0.03em] text-balance lg:block">Dari obrolan ke kalimat yang lancar.</h2>
+            <h2 className="hidden text-[44px] font-extrabold leading-[1.08] tracking-[-0.03em] text-balance lg:block">{story.title}</h2>
 
             {/* Laptop: the three steps on one line that fills as you scroll. */}
             <ol className="relative mt-10 hidden space-y-8 lg:block">
               <span aria-hidden className="absolute bottom-6 left-[15px] top-4 w-[3px] overflow-hidden rounded-full bg-grid">
                 <motion.span className="block size-full origin-top bg-brand" style={{ scaleY: scrollYProgress }} />
               </span>
-              {steps.map((s, i) => {
+              {story.steps.map((s, i) => {
                 const state = i < step ? "done" : i === step ? "now" : "next"
                 return (
                   <li key={s.title}>
@@ -86,7 +84,7 @@ export function Story() {
             {/* Phone: only the current step, with three bars for where you are. */}
             <div className="lg:hidden">
               <div className="flex gap-1.5" aria-hidden>
-                {steps.map((s, i) => (
+                {story.steps.map((s, i) => (
                   <span key={s.title} className="h-1 flex-1 overflow-hidden rounded-full bg-grid">
                     <StepFill progress={scrollYProgress} index={i} />
                   </span>
@@ -96,9 +94,9 @@ export function Story() {
                 <motion.div key={step} className="min-h-[112px]" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.25 }}>
                   <h3 className="mt-3 text-[22px] font-extrabold tracking-tight">
                     <span className="mr-2 text-brand">0{step + 1}</span>
-                    {steps[step].title}
+                    {story.steps[step].title}
                   </h3>
-                  <p className="mt-1 text-[14px] leading-relaxed text-ink-soft">{steps[step].text}</p>
+                  <p className="mt-1 text-[14px] leading-relaxed text-ink-soft">{story.steps[step].text}</p>
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -199,7 +197,8 @@ const swap = {
 
 /** 1 · Ngobrol langsung: each line arrives as you scroll. */
 function Talk({ progress }: { progress: MotionValue<number> }) {
-  const lines = [...talk, { ...said, mine: true }]
+  const { story } = useCopy()
+  const lines = [...talk.map((l, i) => ({ ...l, meaning: story.meanings[i] })), { ...said, mine: true, meaning: story.saidMeaning }]
   const slip = useTransform(progress, [0.27, 0.32], [0, 1])
   return (
     <motion.div {...swap} className="absolute inset-0 flex flex-col">
@@ -211,10 +210,10 @@ function Talk({ progress }: { progress: MotionValue<number> }) {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-[#d4371c] opacity-60 motion-reduce:hidden" />
               <span className="relative inline-flex size-2 rounded-full bg-[#d4371c]" />
             </span>
-            Ngobrol langsung
+            {story.screen.live}
           </>
         }
-        action={<BarPill>Akhiri</BarPill>}
+        action={<BarPill>{story.screen.end}</BarPill>}
       />
       {/* Older lines slide up and fade under the bar, as in a chat. */}
       <div className="flex flex-1 flex-col justify-end space-y-3 overflow-hidden px-4 pb-28 [mask-image:linear-gradient(to_bottom,transparent,#000_16%)]">
@@ -231,7 +230,7 @@ function Talk({ progress }: { progress: MotionValue<number> }) {
                     )}
                   </span>
                   <span className="block text-[11px] text-ink-soft">{l.pinyin}</span>
-                  <span className="block text-[11px] text-ink-soft/80">{l.meaning}</span>
+                  {l.meaning && <span className="block text-[11px] text-ink-soft/80">{l.meaning}</span>}
                 </Bubble>
               </motion.div>
             </Arrives>
@@ -244,7 +243,7 @@ function Talk({ progress }: { progress: MotionValue<number> }) {
           <span className="flex size-10 items-center justify-center rounded-full bg-paper shadow-[0_2px_8px_-4px_rgba(0,9,55,0.3)]">
             <svg viewBox="0 0 24 24" aria-hidden className="size-4 fill-ink"><path d="M6 3.5h12a1 1 0 0 1 1 1v16.2a.6.6 0 0 1-.95.49L12 17l-6.05 4.19A.6.6 0 0 1 5 20.7V4.5a1 1 0 0 1 1-1Z" /></svg>
           </span>
-          <span className="text-[10px] font-medium text-ink-soft">Pocket</span>
+          <span className="text-[10px] font-medium text-ink-soft">{story.screen.pocket}</span>
         </span>
         <span className="relative flex size-16 items-center justify-center">
           <motion.span
@@ -273,11 +272,12 @@ function MicIcon({ className }: { className: string }) {
 
 /** A line of the conversation, rising in at its point of the scroll. */
 function Arrives({ progress, at, mine, children }: { progress: MotionValue<number>; at: number; mine: boolean; children: ReactNode }) {
+  const { story } = useCopy()
   const opacity = useTransform(progress, [at, at + 0.04], [0, 1])
   const y = useTransform(progress, [at, at + 0.04], [24, 0])
   return (
     <motion.div style={{ opacity, y }} className={`flex flex-col ${mine ? "items-end" : "items-start"}`}>
-      <span className="mb-1 text-[10px] font-semibold text-ink-soft">{mine ? "Kamu" : "Mereka"}</span>
+      <span className="mb-1 text-[10px] font-semibold text-ink-soft">{mine ? story.screen.you : story.screen.them}</span>
       {children}
     </motion.div>
   )
@@ -285,6 +285,7 @@ function Arrives({ progress, at, mine, children }: { progress: MotionValue<numbe
 
 /** 2 · Hasil obrolan: what you said, turning into the better way. */
 function Check() {
+  const { story, kinds, demo } = useCopy()
   const [fixed, setFixed] = useState(false)
   useEffect(() => {
     const t = setTimeout(() => setFixed(true), 650)
@@ -292,19 +293,19 @@ function Check() {
   }, [])
   return (
     <motion.div {...swap} className="absolute inset-0 flex flex-col">
-      <AppBar title="Hasil obrolan" action={<BarPill>•••</BarPill>} />
+      <AppBar title={story.screen.results} action={<BarPill>•••</BarPill>} />
       <div className="relative flex flex-1 flex-col px-4 pb-6">
         <Doodle kind="flower" className="-left-4 bottom-12 w-14 opacity-80" />
         <img src="/img/mascotreading.png" alt="" aria-hidden className="mx-auto mt-3 w-20" />
-        <p className="mt-2 text-center text-[15px] font-extrabold">Yuk, perbaiki bareng!</p>
+        <p className="mt-2 text-center text-[15px] font-extrabold">{story.screen.fixTogether}</p>
         <motion.div layoutId="said" className="relative mt-4 rounded-2xl bg-paper px-4 py-3.5 shadow-[0_10px_24px_-16px_rgba(0,9,55,0.45)]">
           <p className="flex items-center gap-1.5 text-[12px] font-bold">
             <span className="flex size-5 items-center justify-center rounded-md bg-box text-brand"><KindIcon kind="missingOrExtra" className="size-3.5" /></span>
-            Kata kurang/lebih
+            {kinds.missingOrExtra}
           </p>
-          <p className={`mt-3 text-[11px] font-bold transition-colors duration-500 ${fixed ? "text-mint" : "text-ink-soft"}`}>{fixed ? "✓ Lebih tepat" : "Kamu bilang"}</p>
+          <p className={`mt-3 text-[11px] font-bold transition-colors duration-500 ${fixed ? "text-mint" : "text-ink-soft"}`}>{fixed ? demo.better : demo.said}</p>
           <SentenceMorph said={said.hanzi} better={better.hanzi} fixed={fixed} className="mt-1 text-[24px] leading-[1.3]" />
-          <p className="mt-1 text-[12px] text-ink-soft">{fixed ? better.meaning : said.meaning}</p>
+          {story.betterMeaning && <p className="mt-1 text-[12px] text-ink-soft">{fixed ? story.betterMeaning : story.saidMeaning}</p>}
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 20, rotate: 0 }}
@@ -313,8 +314,8 @@ function Check() {
           className="relative mx-1 mt-5"
         >
           <StickyNote pin="right-6" className="!px-4 !pb-3 !pt-5">
-            <p className="text-[13px] font-bold">Kenapa begitu?</p>
-            <p className="mt-0.5 text-[12px] leading-relaxed text-butter-ink">{better.why}</p>
+            <p className="text-[13px] font-bold">{demo.why}</p>
+            <p className="mt-0.5 text-[12px] leading-relaxed text-butter-ink">{story.why}</p>
           </StickyNote>
         </motion.div>
       </div>
@@ -345,15 +346,16 @@ function Voice() {
 
 /** 3 · Latihan lafal: say it again; each character gets its dot as it's heard. */
 function Practice() {
+  const { story } = useCopy()
   return (
     <motion.div {...swap} className="absolute inset-0 flex flex-col">
-      <AppBar title="Latihan lafal" action={<BarPill>Lewati</BarPill>} />
+      <AppBar title={story.screen.practice} action={<BarPill>{story.screen.skip}</BarPill>} />
       <div className="mx-4 flex gap-1.5" aria-hidden>
         <span className="h-1 flex-1 rounded-full bg-brand" />
         <span className="h-1 flex-1 rounded-full bg-brand/20" />
       </div>
       <div className="relative flex flex-1 flex-col items-center px-4 pb-6 pt-8">
-        <p className="text-[13px] font-semibold text-ink-soft">Ucapkan kalimat ini</p>
+        <p className="text-[13px] font-semibold text-ink-soft">{story.screen.sayThis}</p>
         <div className="relative mt-3 w-full">
           <Stamp small>
             <div className="px-2 py-6 text-center">
@@ -371,7 +373,7 @@ function Practice() {
                   </div>
                 ))}
               </div>
-              <p className="mt-3 text-[12px] text-ink-soft">{better.meaning}</p>
+              {story.betterMeaning && <p className="mt-3 text-[12px] text-ink-soft">{story.betterMeaning}</p>}
             </div>
           </Stamp>
           <motion.span
@@ -380,7 +382,7 @@ function Practice() {
             transition={{ delay: heard, type: "spring", stiffness: 300, damping: 12 }}
             className="absolute -right-1 -top-4 rounded-[3px] bg-sage px-2.5 py-1 text-[13px] font-extrabold text-mint shadow-md"
           >
-            Pas!
+            {story.screen.nailed}
           </motion.span>
         </div>
         <Voice />
@@ -390,7 +392,7 @@ function Practice() {
           transition={{ delay: heard + 0.2 }}
           className="mt-4 rounded-full bg-sage/70 px-3.5 py-1.5 text-[12px] font-bold text-mint"
         >
-          ✓ Semua karakter pas
+          {story.screen.allRight}
         </motion.p>
         <div className="mt-auto flex flex-col items-center gap-2 pt-4">
           <span className="relative flex size-16 items-center justify-center">
@@ -404,7 +406,7 @@ function Practice() {
               <MicIcon className="size-6" />
             </span>
           </span>
-          <span className="text-[11px] font-semibold text-ink-soft">Ketuk lalu ucapkan</span>
+          <span className="text-[11px] font-semibold text-ink-soft">{story.screen.tapToSay}</span>
         </div>
         <img src="/img/mascotcheer.png" alt="" aria-hidden className="pointer-events-none absolute -right-2 bottom-24 w-20" />
       </div>

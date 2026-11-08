@@ -1,0 +1,122 @@
+// The page's words in Simplified Chinese. The meanings of the Mandarin
+// examples are left out here: the sentences already say it.
+
+import type { Copy } from "./id"
+
+export const zh: Copy = {
+  meta: {
+    title: "iShuo · 从自己的对话里学中文",
+    description: "录下你的中文对话，看看哪些句子可以说得更好，再练到说得流利。",
+  },
+  language: { label: "语言", name: "中文" },
+  nav: {
+    label: "主导航",
+    sections: { how: "使用方式", features: "功能", faq: "常见问题", contact: "联系我们" },
+    try: "TestFlight 试用",
+    tryShort: "试用",
+    download: "下载",
+  },
+  download: { testFlight: "在 TestFlight 免费试用", appStore: "在 App Store 下载" },
+  hero: {
+    lines: ["大胆", "说中文，", "不怕", "说错。"],
+    accentFrom: 2,
+    lead: "录下日常对话。iShuo 帮你找出可以说得更好的句子，再陪你练到熟练。",
+    how: "看看怎么用",
+    recording: "录音中",
+    sticker: "nǐ ne?",
+    alts: {
+      live: "实时对话：每句话都显示拼音和意思",
+      learn: "学习页面：22 句对话里的句子等着练习",
+      words: "学校报到用的词汇，每个词都在一张邮票上",
+    },
+  },
+  quote: {
+    join: "",
+    plain: ["“我刚才", "说了", "什么？", "好像", "哪里", "不对，"],
+    accent: ["可", "没人", "帮我", "纠正。”"],
+  },
+  story: {
+    title: "从一段对话，到说得流利。",
+    steps: [
+      { title: "录下对话", text: "打开实时对话，每句话都会显示拼音和意思。" },
+      { title: "iShuo 帮你检查", text: "标出可以说得更好的句子，并说明原因。" },
+      { title: "练到熟练", text: "再说一遍这句话，每个字都会检查，直到说准。" },
+    ],
+    screen: {
+      live: "实时对话",
+      end: "结束",
+      pocket: "Pocket",
+      them: "对方",
+      you: "我",
+      results: "对话结果",
+      fixTogether: "一起改一改！",
+      practice: "发音练习",
+      skip: "跳过",
+      sayThis: "读出这句话",
+      allRight: "✓ 每个字都准",
+      tapToSay: "点一下再说",
+      nailed: "很准！",
+    },
+    meanings: ["", "", ""],
+    saidMeaning: "",
+    betterMeaning: "",
+    why: "句末的“了”：表示一直持续到现在。",
+  },
+  features: {
+    marquee: "开口说",
+    title: "开口前做好准备，聊完再继续练。",
+    cards: [
+      { title: "按场景学词汇", text: "要去学校报到或打车？先把词学好。", alt: "词汇：按场景分类的文件夹，从学校报到到图书馆" },
+      { title: "和 AI 练习", text: "随时开聊。不知道怎么回答？有参考答案。", alt: "在咖啡馆和 AI 练习，有可以跟读的参考答案" },
+      { title: "真实的进步", text: "看看哪些问题越来越少。没有打卡压力。", alt: "进步：对话次数上升，需要改的地方减少" },
+    ],
+    extras: ["麦克风旁的 Pocket 词汇", "可以夹杂印尼语", "逐字纠正发音", "按主题整理的词汇夹"],
+  },
+  kinds: { choice: "用词", order: "语序", missingOrExtra: "漏词或多词" },
+  demo: {
+    title: "自己试试。",
+    lead: "学习者常说的句子。点一句，看看更地道的说法。",
+    listLabel: "例句",
+    switchLabel: "显示句子",
+    said: "你说的",
+    better: "✓ 更地道",
+    flip: "在你说的和更地道的说法之间切换",
+    hint: "点句子，看看更地道的说法。",
+    why: "为什么？",
+    examples: [
+      { meaning: "", why: "“没”表示结果没有达成，“不”表示习惯或意愿。" },
+      { meaning: "", why: "地点放在动词前面，不放在句末。" },
+      { meaning: "", why: "描述动作做得怎么样，用“得”：说得很快。" },
+    ],
+  },
+  faq: {
+    title: "常见问题",
+    more: "还有疑问？",
+    ask: "问我们",
+    items: [
+      { q: "iShuo 免费吗？", a: "免费。TestFlight 测试期间不收费。" },
+      { q: "哪些 iPhone 可以用 iShuo？", a: "运行 iOS 26 或更新版本的 iPhone，不需要 Apple Intelligence。" },
+      { q: "我的录音会被保存吗？", a: "不会。对话分析完成后，录音就会删除。文字保存在你的 iPhone 上，只会发给 iShuo 的 AI 做检查。" },
+      { q: "录音前需要征得同意吗？", a: "需要。录音前请先征得对方同意。" },
+      { q: "适合什么水平？", a: "各个水平都适合，讲解会按你选择的水平调整。" },
+      { q: "如果我夹杂印尼语怎么办？", a: "没关系。iShuo 依然听得懂，还会告诉你中文怎么说。" },
+      { q: "怎么加入测试？", a: "从 App Store 安装 TestFlight，在 iPhone 上打开 iShuo 的邀请链接，然后点“接受”和“安装”。" },
+    ],
+  },
+  get: {
+    title: "今天就",
+    titleAccent: "开口说。",
+    beta: "测试期间免费。安装 TestFlight，打开邀请链接，就能开始。",
+    store: "下载 iShuo，录下你的第一段对话。",
+    scan: "或扫码",
+    qr: "在 iPhone 上打开 iShuo 的二维码",
+  },
+  footer: {
+    title: "有问题吗？",
+    lead: "欢迎来信，每条反馈我们都会看。",
+    contacts: { email: "邮箱", instagram: "Instagram", testflight: "在 iPhone 上" },
+    feedback: "在 TestFlight 中发送测试反馈",
+    sectionsLabel: "页面导航",
+    made: ["Cerius 团队用", "打造"],
+  },
+}

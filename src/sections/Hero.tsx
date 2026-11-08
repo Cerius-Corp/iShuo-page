@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "motion/react"
-import { useRef, type PointerEvent, type ReactNode } from "react"
+import { Fragment, useRef, type PointerEvent, type ReactNode } from "react"
 import { DownloadButton } from "../components/Buttons"
 import { CursorGrid } from "../components/CursorGrid"
 import { Phone } from "../components/Phone"
@@ -53,15 +53,19 @@ export function Hero() {
       <Doodle kind="flower" className="-left-8 top-20 w-20 sm:top-24 sm:w-32 lg:left-[3%] lg:top-16" />
       <div className="relative mx-auto grid max-w-6xl items-center gap-6 px-4 pb-8 pt-24 sm:px-6 sm:pb-10 sm:pt-28 md:pt-36 lg:grid-cols-[1fr_1.05fr] lg:gap-4 lg:pb-24">
         <div className="relative z-10 text-center lg:text-left">
-          <h1 className="text-[38px] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-[64px] lg:text-[68px]">
-            {/* A line each; from accentFrom on in blue, the last one underlined. */}
+          <h1 className="text-[clamp(30px,10.1vw,38px)] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-[64px] lg:text-[68px]">
+            {/* A line each (on phones they flow together, so the headline takes
+                two or three lines); from accentFrom on in blue, the last one underlined. */}
             {hero.lines.map((line, i) => {
               const last = i === hero.lines.length - 1
               return (
-                <Rise key={line + i} delay={0.15 + i * 0.07} className={`${i >= hero.accentFrom ? "text-brand" : ""} ${last ? "relative" : ""}`} underlined={last}>
+                <Fragment key={line + i}>
+                {i > 0 && " "}
+                <Rise delay={0.15 + i * 0.07} className={`${i >= hero.accentFrom ? "text-brand" : ""} ${last ? "relative" : ""}`} underlined={last}>
                   {line}
                   {last && <Squiggle />}
                 </Rise>
+                </Fragment>
               )
             })}
           </h1>
@@ -163,7 +167,7 @@ function Rise({ children, delay, className = "", underlined = false }: {
   underlined?: boolean
 }) {
   return (
-    <span className={`block overflow-hidden ${underlined ? "-mb-4 pb-5" : "-mb-[0.16em] pb-[0.16em]"}`}>
+    <span className={`inline-block overflow-hidden align-top sm:block ${underlined ? "-mb-4 pb-5" : "-mb-[0.16em] pb-[0.16em]"}`}>
       <motion.span
         className={`inline-block ${className}`}
         initial={{ y: "105%" }}

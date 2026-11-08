@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "motion/react"
 import { useRef } from "react"
+import { CursorGrid } from "../components/CursorGrid"
 
 /** The rest of the app, each with a screen from it. `tilt` fans the three
  *  cards out on a laptop (written whole, so Tailwind sees the classes). */
@@ -29,7 +30,7 @@ const cards = [
 
 const extras = ["Pocket kata di samping mic", "Bisa campur bahasa Indonesia", "Latih lafal per karakter", "Folder kosa kata per topik"]
 
-/** A band of brand blue: the three steps sliding past in huge letters, then
+/** A band of brand blue: "ngobrol" sliding past in huge letters, then
  *  the rest of the app on cards. */
 export function Features() {
   const ref = useRef<HTMLElement>(null)
@@ -38,11 +39,10 @@ export function Features() {
 
   return (
     <section id="fitur" ref={ref} className="relative overflow-hidden bg-brand py-20 text-white lg:py-28">
-      {/* Faint squared paper over the blue. */}
-      <div aria-hidden className="absolute inset-0 opacity-[0.1] [background-image:linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] [background-size:28px_28px]" />
+      <CursorGrid tone="brand" />
 
       <motion.p aria-hidden style={{ x: slide }} className="relative whitespace-nowrap text-[22vw] font-extrabold leading-[0.9] tracking-[-0.04em] text-white/15 lg:text-[15vw]">
-        NGOBROL · PERIKSA · LATIH · NGOBROL · PERIKSA · LATIH
+        NGOBROL · NGOBROL · NGOBROL · NGOBROL
       </motion.p>
 
       <div className="relative mx-auto mt-10 max-w-6xl px-4 sm:px-6 lg:mt-14">
@@ -68,9 +68,20 @@ export function Features() {
             transition={{ type: "spring", stiffness: 110, damping: 18, delay: i * 0.12 }}
             className="w-[80vw] max-w-[330px] shrink-0 snap-center lg:w-auto lg:max-w-none"
           >
-            <div className={`rounded-[30px] bg-paper p-3 pb-6 text-ink shadow-[0_30px_60px_-30px_rgba(0,9,55,0.6)] transition-transform duration-500 ease-out lg:hover:rotate-0 lg:hover:translate-y-0 ${c.tilt}`}>
+            {/* On hover it straightens and lifts, and the screen inside scrolls down a little. */}
+            <div className={`group rounded-[30px] bg-paper p-3 pb-6 text-ink shadow-[0_30px_60px_-30px_rgba(0,9,55,0.6)] transition-[rotate,translate,scale] duration-500 ease-out lg:hover:-translate-y-3 lg:hover:rotate-0 lg:hover:scale-[1.03] ${c.tilt}`}>
               <div className="relative h-[300px] overflow-hidden rounded-[22px] bg-canvas sm:h-[340px]">
-                <img src={c.src} alt={c.alt} loading="lazy" className="absolute inset-x-0 top-0 w-full select-none" draggable={false} />
+                <motion.img
+                  src={c.src}
+                  alt={c.alt}
+                  loading="lazy"
+                  draggable={false}
+                  initial={{ opacity: 0, scale: 1.12, y: 24 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+                  transition={{ duration: 0.9, delay: 0.25 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-x-0 top-0 w-full origin-top select-none transition-[translate] duration-700 ease-out lg:group-hover:-translate-y-[18%]"
+                />
                 <div aria-hidden className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-paper to-transparent" />
               </div>
               <h3 className="mt-4 px-3 text-xl font-extrabold tracking-tight">{c.title}</h3>

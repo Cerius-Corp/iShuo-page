@@ -2,7 +2,7 @@ import { motion } from "motion/react"
 import { useEffect, useState } from "react"
 import { SentenceMorph } from "../components/Morph"
 import { Reveal, SectionHead } from "../components/Reveal"
-import { StickyNote, Tape } from "../components/Stationery"
+import { Doodle, StickyNote, Tape } from "../components/Stationery"
 
 /** Sentences learners really say, each a different kind of fix. */
 const examples = [
@@ -32,6 +32,12 @@ const examples = [
   },
 ]
 
+/** The switch over the sentence: as said, or the better way. */
+const views = [
+  { label: "Kamu bilang", fixed: false, tint: "text-ink" },
+  { label: "✓ Lebih tepat", fixed: true, tint: "text-mint" },
+]
+
 /** Try it: pick a sentence, watch it turn into the better way (the
  *  characters move, fall away and pop in, as in the app), and back.
  *  Everything that comes and goes keeps its place, so nothing below jumps. */
@@ -56,11 +62,11 @@ export function Demo() {
     <section id="coba" className="px-4 py-20 sm:px-6 lg:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionHead title="Lihat kalimatmu jadi lebih tepat." center>
-          Pilih contoh, lalu ketuk kalimatnya untuk bolak-balik.
+          Pilih contoh, lalu lihat kalimatnya berubah.
         </SectionHead>
 
-        <Reveal className="mx-auto mt-12 max-w-3xl">
-          <div className="mb-6 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Contoh kalimat">
+        <Reveal className="mx-auto mt-12 max-w-5xl">
+          <div className="mb-8 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Contoh kalimat">
             {examples.map((e, i) => (
               <button
                 key={e.kind}
@@ -75,34 +81,45 @@ export function Demo() {
             ))}
           </div>
 
-          <div className="relative">
-            <Tape className="-top-4 left-8 z-10 rotate-[-6deg]" />
-            <div className="squared relative rounded-[28px] border border-grid px-6 pb-8 pt-9 sm:px-12 sm:pb-10 sm:pt-11">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <p className={`text-sm font-bold transition-colors duration-300 ${fixed ? "text-mint" : "text-ink-soft"}`}>
-                  {fixed ? "✓ Lebih tepat" : "Kamu bilang"}
-                </p>
-                <button
-                  onClick={() => setFixed((f) => !f)}
-                  className="min-h-[40px] cursor-pointer rounded-full bg-box px-4 text-sm font-semibold text-brand transition-colors hover:bg-brand-soft"
-                >
-                  {fixed ? "↩ Lihat ucapanmu" : "Lihat yang tepat ↪"}
-                </button>
-              </div>
+          {/* The sheet, and beside it (below on a phone) why it changed. */}
+          <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-10">
+            <div className="relative">
+              <Tape className="-top-4 left-8 z-10 rotate-[-6deg]" />
+              <div className="squared relative rounded-[28px] border border-grid px-6 pb-8 pt-9 sm:px-10 sm:pb-10">
+                <Doodle kind="squiggle" className="bottom-6 right-6 w-24 opacity-90" />
 
-              <button onClick={() => setFixed((f) => !f)} className="mt-5 block w-full cursor-pointer text-left" aria-label="Bolak-balik antara ucapanmu dan yang lebih tepat">
-                <SentenceMorph key={pick} said={ex.said} better={ex.better} fixed={fixed} className="text-[34px] leading-[1.35] sm:text-5xl" />
-              </button>
-
-              {/* The pinyin and meaning, or the hint: both always laid out, one shown. */}
-              <div className="mt-3 grid text-[15px]">
-                <div className={`col-start-1 row-start-1 transition-opacity duration-300 ${fixed ? "opacity-100" : "opacity-0"}`} aria-hidden={!fixed}>
-                  <p className="font-medium text-ink-soft">{ex.pinyin}</p>
-                  <p className="mt-1 text-ink">{ex.meaning}</p>
+                {/* What you said, or the better way: a two-way switch. */}
+                <div role="radiogroup" aria-label="Tampilkan kalimat" className="relative inline-flex rounded-full border border-grid bg-canvas p-1">
+                  {views.map((v) => (
+                    <button
+                      key={v.label}
+                      role="radio"
+                      aria-checked={fixed === v.fixed}
+                      onClick={() => setFixed(v.fixed)}
+                      className={`relative min-h-[38px] cursor-pointer rounded-full px-4 text-sm font-bold transition-colors ${fixed === v.fixed ? v.tint : "text-ink-soft hover:text-ink"}`}
+                    >
+                      {fixed === v.fixed && (
+                        <motion.span layoutId="demo-view" className="absolute inset-0 rounded-full bg-paper shadow-[0_2px_8px_-4px_rgba(0,9,55,0.3)]" transition={{ type: "spring", stiffness: 420, damping: 32 }} />
+                      )}
+                      <span className="relative">{v.label}</span>
+                    </button>
+                  ))}
                 </div>
-                <p className={`col-start-1 row-start-1 text-ink-soft transition-opacity duration-300 ${fixed ? "opacity-0" : "opacity-100"}`} aria-hidden={fixed}>
-                  Ketuk kalimatnya untuk bolak-balik.
-                </p>
+
+                <button onClick={() => setFixed((f) => !f)} className="relative mt-6 block w-full cursor-pointer text-left" aria-label="Bolak-balik antara ucapanmu dan yang lebih tepat">
+                  <SentenceMorph key={pick} said={ex.said} better={ex.better} fixed={fixed} className="text-[34px] leading-[1.35] sm:text-5xl" />
+                </button>
+
+                {/* The pinyin and meaning, or the hint: both always laid out, one shown. */}
+                <div className="relative mt-3 grid text-[15px]">
+                  <div className={`col-start-1 row-start-1 transition-opacity duration-300 ${fixed ? "opacity-100" : "opacity-0"}`} aria-hidden={!fixed}>
+                    <p className="font-medium text-ink-soft">{ex.pinyin}</p>
+                    <p className="mt-1 text-ink">{ex.meaning}</p>
+                  </div>
+                  <p className={`col-start-1 row-start-1 text-ink-soft transition-opacity duration-300 ${fixed ? "opacity-0" : "opacity-100"}`} aria-hidden={fixed}>
+                    Ketuk kalimatnya untuk melihat yang lebih tepat.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -110,14 +127,14 @@ export function Demo() {
             <motion.div
               key={pick}
               initial={false}
-              animate={fixed ? { opacity: 1, y: 0, rotate: -1.5 } : { opacity: 0, y: 14, rotate: 0 }}
+              animate={fixed ? { opacity: 1, y: 0, rotate: 1.5 } : { opacity: 0, y: 14, rotate: 0 }}
               transition={{ type: "spring", stiffness: 260, damping: 22, delay: fixed ? 0.35 : 0 }}
               aria-hidden={!fixed}
-              className="relative z-10 mx-4 -mt-5 sm:ml-auto sm:mr-10 sm:max-w-md"
+              className="mx-3 lg:mx-0"
             >
-              <StickyNote pin="right-8">
-                <p className="font-bold">Kenapa begitu?</p>
-                <p className="mt-1 text-[15px] leading-relaxed text-butter-ink">{ex.why}</p>
+              <StickyNote pin="right-8" className="pb-6">
+                <p className="text-lg font-bold">Kenapa begitu?</p>
+                <p className="mt-1.5 text-[16px] leading-relaxed text-butter-ink">{ex.why}</p>
               </StickyNote>
             </motion.div>
           </div>

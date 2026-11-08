@@ -1,7 +1,8 @@
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react"
 import { useRef } from "react"
+import { Doodle } from "../components/Stationery"
 
-/** What a learner thinks on the way home, on a sticky-note yellow band. Each word lights up as the page
+/** What a learner thinks on the way home, between two of the app's doodles turning as you scroll. Each word lights up as the page
  *  scrolls past it; the second sentence is the one that hurts, in blue. */
 const lines = [
   { text: "“Tadi aku bilang apa, ya? Rasanya ada yang salah,", accent: false },
@@ -12,10 +13,13 @@ const words = lines.flatMap((l) => l.text.split(" ").map((w) => ({ w, accent: l.
 export function Quote() {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 45%"] })
+  const turn = useTransform(scrollYProgress, [0, 1], [-30, 60])
 
   return (
-    <section className="bg-butter px-4 py-24 sm:px-6 lg:py-32">
-      <div ref={ref} className="mx-auto max-w-4xl text-center">
+    <section className="relative overflow-hidden px-4 py-24 sm:px-6 lg:py-32">
+      <Doodle kind="flower" style={{ rotate: turn }} className="left-[4%] top-12 w-20 sm:w-28 lg:left-[10%] lg:top-20 lg:w-32" />
+      <Doodle kind="squiggle" className="bottom-14 right-[6%] w-28 sm:w-36 lg:right-[12%]" />
+      <div ref={ref} className="relative mx-auto max-w-4xl text-center">
         <p className="text-[34px] font-extrabold leading-[1.15] tracking-[-0.03em] sm:text-5xl lg:text-[60px]">
           {words.map((x, i) => (
             <Word key={i} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]} accent={x.accent}>
@@ -23,15 +27,6 @@ export function Quote() {
             </Word>
           ))}
         </p>
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto mt-8 max-w-xl text-[17px] leading-relaxed text-butter-ink text-balance"
-        >
-          Lawan bicaramu tetap paham, jadi tidak ada yang bilang. Besoknya, kalimat yang sama terulang lagi.
-        </motion.p>
       </div>
     </section>
   )

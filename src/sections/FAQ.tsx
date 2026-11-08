@@ -47,16 +47,18 @@ export function FAQ() {
                   >
                     <span className="w-7 shrink-0 text-sm font-semibold tabular-nums text-white/35">{String(i + 1).padStart(2, "0")}</span>
                     <span className={`flex-1 text-[17px] font-bold transition-colors sm:text-lg ${isOpen ? "text-white" : "text-white/85 group-hover:text-white"}`}>{f.q}</span>
-                    <motion.span
-                      animate={{ rotate: isOpen ? 45 : 0 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                      className={`flex size-9 shrink-0 items-center justify-center rounded-full transition-colors ${isOpen ? "bg-white text-ink" : "bg-white/10 text-white group-hover:bg-white/20"}`}
+                    <motion.svg
+                      viewBox="0 0 24 24"
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 24 }}
+                      className={`size-5 shrink-0 fill-none stroke-current transition-colors ${isOpen ? "text-white" : "text-white/50 group-hover:text-white"}`}
+                      strokeWidth="2.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       aria-hidden
                     >
-                      <svg viewBox="0 0 16 16" className="size-3.5 fill-none stroke-current" strokeWidth="2.2" strokeLinecap="round">
-                        <path d="M8 2.5v11M2.5 8h11" />
-                      </svg>
-                    </motion.span>
+                      <path d="m6 9 6 6 6-6" />
+                    </motion.svg>
                   </button>
                 </h3>
                 <AnimatePresence initial={false}>
@@ -69,7 +71,7 @@ export function FAQ() {
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-6 pl-11 pr-12 text-[16px] leading-relaxed text-white/65">{f.a}</p>
+                      <p className="pb-6 pl-11 pr-9 text-[16px] leading-relaxed text-white/65">{f.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

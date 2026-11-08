@@ -1,13 +1,13 @@
 import { AnimatePresence, LayoutGroup, motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "motion/react"
 import { useEffect, useRef, useState, type ReactNode } from "react"
 import { SentenceMorph } from "../components/Morph"
-import { Bubble, Stamp, StickyNote } from "../components/Stationery"
+import { Bubble, Doodle, Stamp, StickyNote } from "../components/Stationery"
 
 /** The three steps, and where along the section's scroll each one starts. */
 const steps = [
-  { title: "Rekam obrolanmu", text: "Nyalakan Ngobrol langsung. Tiap kalimat muncul dengan pinyin dan artinya.", from: 0 },
-  { title: "iShuo memeriksa", text: "Kalimat yang bisa lebih tepat ditandai, lengkap dengan alasannya.", from: 0.34 },
-  { title: "Latih sampai lancar", text: "Ucapkan lagi kalimatnya. Tiap karakter dicek sampai pas.", from: 0.67 },
+  { title: "Rekam obrolanmu", text: "Nyalakan Ngobrol langsung. Tiap kalimat muncul dengan pinyin dan artinya.", screen: "Ngobrol langsung", from: 0 },
+  { title: "iShuo memeriksa", text: "Kalimat yang bisa lebih tepat ditandai, lengkap dengan alasannya.", screen: "Hasil obrolan", from: 0.34 },
+  { title: "Latih sampai lancar", text: "Ucapkan lagi kalimatnya. Tiap karakter dicek sampai pas.", screen: "Latih lafal", from: 0.67 },
 ]
 const stepEnd = (i: number) => steps[i + 1]?.from ?? 1
 
@@ -35,6 +35,14 @@ export function Story() {
     setStep(steps.findLastIndex((s) => v >= s.from))
   })
 
+  /** Scrolls to just inside a step, so it can be picked from the list. */
+  function goTo(i: number) {
+    const section = ref.current
+    if (!section) return
+    const travel = section.offsetHeight - window.innerHeight
+    window.scrollTo({ top: section.offsetTop + travel * (steps[i].from + 0.03), behavior: "smooth" })
+  }
+
   return (
     <section id="cara-kerja" ref={ref} className="relative h-[330vh] bg-paper">
       <div className="sticky top-0 flex h-svh items-center overflow-hidden">
@@ -45,17 +53,23 @@ export function Story() {
             {/* Laptop: all three steps, the current one lit, each with its own progress. */}
             <ol className="mt-10 hidden space-y-7 lg:block">
               {steps.map((s, i) => (
-                <li key={s.title} className="relative pl-8">
-                  <span aria-hidden className="absolute bottom-0 left-0 top-1 w-[3px] overflow-hidden rounded-full bg-grid">
-                    <StepFill progress={scrollYProgress} index={i} axis="y" />
-                  </span>
-                  <motion.div animate={{ opacity: step === i ? 1 : 0.35 }} transition={{ duration: 0.3 }}>
-                    <h3 className="text-[22px] font-extrabold tracking-tight">
-                      <span className="mr-2 text-brand">0{i + 1}</span>
-                      {s.title}
-                    </h3>
-                    <p className="mt-1.5 max-w-sm text-[16px] leading-relaxed text-ink-soft">{s.text}</p>
-                  </motion.div>
+                <li key={s.title}>
+                  <button
+                    onClick={() => goTo(i)}
+                    aria-current={step === i ? "step" : undefined}
+                    className="group relative block w-full cursor-pointer pl-8 text-left"
+                  >
+                    <span aria-hidden className="absolute bottom-0 left-0 top-1 w-1 overflow-hidden rounded-full bg-grid">
+                      <StepFill progress={scrollYProgress} index={i} axis="y" />
+                    </span>
+                    <motion.span className="block" animate={{ opacity: step === i ? 1 : 0.4 }} transition={{ duration: 0.3 }}>
+                      <span className="flex items-center gap-3 text-[22px] font-extrabold tracking-tight">
+                        <span className={`flex size-8 items-center justify-center rounded-full text-sm transition-colors ${step === i ? "bg-brand text-white" : "bg-box text-brand"}`}>{i + 1}</span>
+                        <span className="group-hover:text-brand">{s.title}</span>
+                      </span>
+                      <span className="mt-1.5 block max-w-sm pl-11 text-[16px] leading-relaxed text-ink-soft">{s.text}</span>
+                    </motion.span>
+                  </button>
                 </li>
               ))}
             </ol>
@@ -81,15 +95,43 @@ export function Story() {
             </div>
           </div>
 
-          {/* The sheet that changes. */}
-          <div className="squared relative mx-auto h-[min(440px,54svh)] min-h-[340px] w-full max-w-[480px] overflow-hidden rounded-[28px] border border-grid shadow-[0_30px_60px_-36px_rgba(0,9,55,0.4)] sm:h-[480px] sm:max-h-none">
-            <LayoutGroup>
-              <AnimatePresence mode="popLayout" initial={false}>
-                {step === 0 && <Talk key="talk" progress={scrollYProgress} />}
-                {step === 1 && <Check key="check" />}
-                {step === 2 && <Practice key="practice" />}
+          {/* A screen of the app: its bar on top, and what's on it changing. */}
+          <div className="relative mx-auto flex h-[min(500px,58svh)] min-h-[380px] w-full max-w-[480px] flex-col overflow-hidden rounded-[32px] border border-grid bg-paper shadow-[0_30px_60px_-36px_rgba(0,9,55,0.35)] sm:h-[520px] sm:max-h-none">
+            <div className="relative z-10 flex h-14 shrink-0 items-center justify-between border-b border-grid bg-paper px-5 sm:px-6">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.p
+                  key={step}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.2 }}
+                  className={`flex items-center gap-2 text-[15px] font-bold ${step === 0 ? "text-[#d4371c]" : "text-ink"}`}
+                >
+                  {step === 0 && (
+                    <span className="relative flex size-2.5">
+                      <span className="absolute inline-flex size-full animate-ping rounded-full bg-[#d4371c] opacity-60 motion-reduce:hidden" />
+                      <span className="relative inline-flex size-2.5 rounded-full bg-[#d4371c]" />
+                    </span>
+                  )}
+                  {steps[step].screen}
+                </motion.p>
               </AnimatePresence>
-            </LayoutGroup>
+              <span className="flex gap-1.5" aria-hidden>
+                {steps.map((s, i) => (
+                  <span key={s.title} className={`h-1.5 rounded-full transition-all duration-300 ${step === i ? "w-5 bg-brand" : "w-1.5 bg-grid"}`} />
+                ))}
+              </span>
+            </div>
+            <div className="squared relative flex-1 overflow-hidden">
+              <Doodle kind="flower" className="-left-3 bottom-20 w-16 opacity-80" />
+              <LayoutGroup>
+                <AnimatePresence mode="popLayout" initial={false}>
+                  {step === 0 && <Talk key="talk" progress={scrollYProgress} />}
+                  {step === 1 && <Check key="check" />}
+                  {step === 2 && <Practice key="practice" />}
+                </AnimatePresence>
+              </LayoutGroup>
+            </div>
           </div>
         </div>
       </div>
@@ -115,17 +157,9 @@ function Talk({ progress }: { progress: MotionValue<number> }) {
   const lines = [...talk, { ...said, mine: true }]
   const slip = useTransform(progress, [0.27, 0.32], [0, 1])
   return (
-    <motion.div {...swap} className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
-      {/* Older lines slide up under the label, as in a chat. */}
-      <div aria-hidden className="absolute inset-x-0 top-0 z-10 h-20 bg-gradient-to-b from-paper via-paper/80 to-transparent" />
-      <p className="absolute left-5 top-5 z-10 flex items-center gap-2 text-[13px] font-bold text-[#d4371c] sm:left-6 sm:top-6">
-        <span className="relative flex size-2.5">
-          <span className="absolute inline-flex size-full animate-ping rounded-full bg-[#d4371c] opacity-60 motion-reduce:hidden" />
-          <span className="relative inline-flex size-2.5 rounded-full bg-[#d4371c]" />
-        </span>
-        Ngobrol langsung
-      </p>
-      <div className="space-y-3.5">
+    <motion.div {...swap} className="absolute inset-0">
+      {/* Older lines slide up and fade under the bar, as in a chat. */}
+      <div className="absolute inset-0 flex flex-col justify-end space-y-3.5 px-5 pb-24 pt-5 [mask-image:linear-gradient(to_bottom,transparent,#000_18%)] sm:px-6">
         {lines.map((l, i) => {
           const last = i === lines.length - 1
           return (
@@ -146,7 +180,36 @@ function Talk({ progress }: { progress: MotionValue<number> }) {
           )
         })}
       </div>
+      <Listening />
     </motion.div>
+  )
+}
+
+/** The mic at the bottom of Ngobrol langsung, red while it listens. */
+function Listening() {
+  return (
+    <div className="absolute inset-x-0 bottom-5 flex justify-center">
+      <span className="relative flex size-14 items-center justify-center">
+        <motion.span
+          aria-hidden
+          className="absolute inset-0 rounded-full bg-[#d4371c]/25"
+          animate={{ scale: [1, 1.4, 1], opacity: [0.9, 0, 0.9] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
+        />
+        <span className="relative flex size-12 items-center justify-center rounded-full bg-[#d4371c] text-white">
+          <MicIcon className="size-6" />
+        </span>
+      </span>
+    </div>
+  )
+}
+
+/** A microphone, in the current text colour. */
+function MicIcon({ className }: { className: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden className={`fill-current ${className}`}>
+      <path d="M12 14.5a3.5 3.5 0 0 0 3.5-3.5V5.5a3.5 3.5 0 1 0-7 0V11a3.5 3.5 0 0 0 3.5 3.5Zm6-3.5a.9.9 0 1 0-1.8 0 4.2 4.2 0 0 1-8.4 0 .9.9 0 1 0-1.8 0 6 6 0 0 0 5.1 5.93V19H9.5a.9.9 0 1 0 0 1.8h5a.9.9 0 1 0 0-1.8h-1.6v-2.07A6 6 0 0 0 18 11Z" />
+    </svg>
   )
 }
 
@@ -238,9 +301,7 @@ function Practice() {
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
         />
         <span className="relative flex size-[64px] items-center justify-center rounded-full bg-brand text-white shadow-[0_4px_12px_-6px_rgba(15,68,209,0.5)]">
-          <svg viewBox="0 0 24 24" aria-hidden className="size-7 fill-current">
-            <path d="M12 14.5a3.5 3.5 0 0 0 3.5-3.5V5.5a3.5 3.5 0 1 0-7 0V11a3.5 3.5 0 0 0 3.5 3.5Zm6-3.5a.9.9 0 1 0-1.8 0 4.2 4.2 0 0 1-8.4 0 .9.9 0 1 0-1.8 0 6 6 0 0 0 5.1 5.93V19H9.5a.9.9 0 1 0 0 1.8h5a.9.9 0 1 0 0-1.8h-1.6v-2.07A6 6 0 0 0 18 11Z" />
-          </svg>
+          <MicIcon className="size-7" />
         </span>
       </div>
       <img src="/img/mascotcheer.png" alt="" aria-hidden className="pointer-events-none absolute -bottom-3 -right-3 w-24 sm:w-28" />

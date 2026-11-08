@@ -1,7 +1,7 @@
 import { motion } from "motion/react"
 import { QRCodeSVG } from "qrcode.react"
 import { DownloadButton } from "../components/Buttons"
-import { Stamp } from "../components/Stationery"
+import { Doodle, Stamp } from "../components/Stationery"
 import { downloadURL, onAppStore } from "../site"
 
 /** The way in: the icon, a big line, the button, and on a laptop a QR code
@@ -9,6 +9,7 @@ import { downloadURL, onAppStore } from "../site"
 export function Download() {
   return (
     <section className="relative overflow-hidden px-4 py-24 text-center sm:px-6 lg:py-32">
+      <Doodle kind="flower" className="left-1/2 top-14 w-16 translate-x-[70px] rotate-12 sm:top-16 sm:w-20 sm:translate-x-[84px]" />
       <motion.img
         src="/img/appicon.png"
         alt=""

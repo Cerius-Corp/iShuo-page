@@ -2,6 +2,7 @@
 // pinned sticky notes, speech bubbles and washi tape. The same pieces the
 // iOS app is drawn with, so the page looks like iShuo, not a template.
 
+import { motion, type MotionStyle } from "motion/react"
 import type { CSSProperties, ReactNode } from "react"
 
 /** A postage stamp: its perforated edge round paper, a soft shadow under the holes. */
@@ -103,4 +104,23 @@ export function Bubble({
 /** A strip of washi tape holding something on. */
 export function Tape({ className = "" }: { className?: string }) {
   return <img src="/img/washitape.png" alt="" aria-hidden className={`pointer-events-none absolute w-24 select-none ${className}`} />
+}
+
+/** One of the app's hand-drawn doodles, in soft blue: a flower or a squiggle.
+ *  Positioned by its className; `style` takes motion values (a slow turn). */
+export function Doodle({ kind, className = "", style }: {
+  kind: "flower" | "squiggle"
+  className?: string
+  style?: MotionStyle
+}) {
+  return (
+    <motion.img
+      src={`/img/doodle-${kind}.svg`}
+      alt=""
+      aria-hidden
+      draggable={false}
+      style={style}
+      className={`pointer-events-none absolute select-none ${className}`}
+    />
+  )
 }

@@ -42,33 +42,33 @@ export function Features() {
   const { scrollYProgress: spread } = useScroll({ target: row, offset: ["start end", "center 60%"] })
 
   return (
-    <section id="fitur" ref={ref} className="relative overflow-hidden bg-brand py-20 text-white lg:py-28">
+    <section id="fitur" ref={ref} className="relative overflow-hidden bg-brand py-14 text-white sm:py-20 lg:py-28">
       <CursorGrid tone="brand" />
 
-      <motion.p aria-hidden style={{ x: slide }} className="relative whitespace-nowrap text-[22vw] font-extrabold leading-[0.9] tracking-[-0.04em] text-white/15 lg:text-[15vw]">
+      <motion.p aria-hidden style={{ x: slide }} className="relative whitespace-nowrap text-[18vw] font-extrabold leading-[0.9] tracking-[-0.04em] text-white/15 lg:text-[15vw]">
         NGOBROL · NGOBROL · NGOBROL · NGOBROL
       </motion.p>
 
-      <div className="relative mx-auto mt-10 max-w-6xl px-4 sm:px-6 lg:mt-14">
+      <div className="relative mx-auto mt-6 max-w-6xl px-4 sm:mt-10 sm:px-6 lg:mt-14">
         <motion.h2
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "0px 0px -15% 0px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-2xl text-[34px] font-extrabold leading-[1.08] tracking-[-0.03em] text-balance sm:text-5xl"
+          className="max-w-2xl text-[28px] font-extrabold leading-[1.1] tracking-[-0.03em] text-balance sm:text-5xl"
         >
           Siap sebelum ngobrol, lanjut latihan sesudahnya.
         </motion.h2>
       </div>
 
       {/* Phone: a row to swipe through. Laptop: three cards fanned out. */}
-      <div ref={row} className="relative mx-auto mt-12 flex max-w-6xl snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-10 [scrollbar-width:none] sm:px-6 lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:pb-12">
+      <div ref={row} className="relative mx-auto mt-8 flex max-w-6xl snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-10 [scrollbar-width:none] sm:px-6 lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:pb-12">
         {cards.map((c, i) => (
           <FeatureCard key={c.title} card={c} index={i} spread={spread} wide={wide} />
         ))}
       </div>
 
-      <ul className="relative mx-auto mt-4 flex max-w-6xl flex-wrap gap-2.5 px-4 sm:px-6 lg:mt-10">
+      <ul className="relative mx-auto mt-2 flex max-w-6xl flex-wrap gap-2 sm:mt-4 sm:gap-2.5 px-4 sm:px-6 lg:mt-10">
         {extras.map((e, i) => (
           <motion.li
             key={e}
@@ -76,7 +76,7 @@ export function Features() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.1 + i * 0.07 }}
-            className="rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[15px] font-semibold"
+            className="rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-[13px] font-semibold sm:px-4 sm:py-2 sm:text-[15px]"
           >
             {e}
           </motion.li>
@@ -103,12 +103,12 @@ function FeatureCard({ card: c, index, spread, wide }: {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "0px 0px -10% 0px" }}
       transition={{ type: "spring", stiffness: 110, damping: 18, delay: index * 0.12 }}
-      className="w-[80vw] max-w-[330px] shrink-0 snap-center lg:w-auto lg:max-w-none"
+      className="w-[68vw] max-w-[290px] shrink-0 snap-center sm:w-[80vw] sm:max-w-[330px] lg:w-auto lg:max-w-none"
     >
       {/* On hover it straightens and lifts, and the screen inside scrolls down a little. */}
       <Stamp edge="bg-paper" className={`group text-ink transition-[rotate,translate,scale] duration-500 ease-out lg:hover:-translate-y-3 lg:hover:rotate-0 lg:hover:scale-[1.03] ${c.tilt}`}>
-        <div className="p-2 pb-6">
-          <div className="relative h-[300px] overflow-hidden rounded-[14px] bg-canvas sm:h-[340px]">
+        <div className="p-1.5 pb-4 sm:p-2 sm:pb-6">
+          <div className="relative h-[230px] overflow-hidden rounded-[14px] bg-canvas sm:h-[340px]">
             <motion.img
               src={c.src}
               alt={c.alt}
@@ -122,8 +122,8 @@ function FeatureCard({ card: c, index, spread, wide }: {
             />
             <div aria-hidden className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-paper to-transparent" />
           </div>
-          <h3 className="mt-4 px-3 text-xl font-extrabold tracking-tight">{c.title}</h3>
-          <p className="mt-1.5 px-3 text-[15px] leading-relaxed text-ink-soft">{c.text}</p>
+          <h3 className="mt-3 px-2 text-[17px] font-extrabold tracking-tight sm:mt-4 sm:px-3 sm:text-xl">{c.title}</h3>
+          <p className="mt-1 px-2 text-[13px] leading-relaxed text-ink-soft sm:mt-1.5 sm:px-3 sm:text-[15px]">{c.text}</p>
         </div>
       </Stamp>
     </motion.article>

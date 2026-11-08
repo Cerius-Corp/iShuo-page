@@ -40,10 +40,10 @@ export function Hero() {
   return (
     <section ref={ref} onPointerMove={onMove} onPointerLeave={() => { px.set(0); py.set(0) }} className="relative overflow-hidden">
       <CursorGrid className="[mask-image:linear-gradient(to_bottom,#000_55%,transparent)]" />
-      <Doodle kind="flower" className="-left-8 top-24 w-24 sm:w-32 lg:left-[3%] lg:top-16" />
-      <div className="relative mx-auto grid max-w-6xl items-center gap-6 px-4 pb-10 pt-28 sm:px-6 md:pt-36 lg:grid-cols-[1fr_1.05fr] lg:gap-4 lg:pb-24">
+      <Doodle kind="flower" className="-left-8 top-20 w-20 sm:top-24 sm:w-32 lg:left-[3%] lg:top-16" />
+      <div className="relative mx-auto grid max-w-6xl items-center gap-6 px-4 pb-8 pt-24 sm:px-6 sm:pb-10 sm:pt-28 md:pt-36 lg:grid-cols-[1fr_1.05fr] lg:gap-4 lg:pb-24">
         <div className="relative z-10 text-center lg:text-left">
-          <h1 className="text-[44px] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-[64px] lg:text-[68px]">
+          <h1 className="text-[38px] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-[64px] lg:text-[68px]">
             <Rise delay={0.15}>Ngobrol</Rise>
             <Rise delay={0.22}>Mandarin,</Rise>
             <Rise delay={0.29} className="text-brand">tanpa takut</Rise>
@@ -68,7 +68,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45 }}
-            className="mx-auto mt-8 max-w-[31rem] text-[17px] leading-relaxed text-ink-soft sm:text-lg lg:mx-0"
+            className="mx-auto mt-6 max-w-[31rem] text-[15px] leading-relaxed text-ink-soft sm:mt-8 sm:text-lg lg:mx-0"
           >
             Rekam obrolanmu sehari-hari. iShuo menunjukkan kalimat yang bisa lebih tepat, lalu melatihnya bersamamu.
           </motion.p>
@@ -77,9 +77,9 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.55 }}
-            className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start"
+            className="mt-6 flex flex-col items-center gap-2 sm:mt-8 sm:flex-row sm:justify-center sm:gap-4 lg:justify-start"
           >
-            <DownloadButton />
+            <DownloadButton className="!min-h-[46px] !px-5 !text-[14px] sm:!min-h-[52px] sm:!px-6 sm:!text-[15px]" />
             <a href="#cara-kerja" className="group inline-flex min-h-[44px] items-center gap-1.5 px-2 text-[15px] font-semibold text-brand">
               Lihat cara kerjanya
               <span className="transition-transform group-hover:translate-y-0.5" aria-hidden>↓</span>

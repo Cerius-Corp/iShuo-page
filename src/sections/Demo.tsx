@@ -70,7 +70,7 @@ export function Demo() {
           <h2 className="text-[34px] font-extrabold leading-[1.08] tracking-[-0.03em] text-balance sm:text-5xl">
             Coba sendiri.
           </h2>
-          <p className="mt-4 max-w-sm text-[17px] leading-relaxed text-ink-soft">Kalimat yang sering diucapkan pelajar. Pilih satu, lalu lihat yang lebih tepat.</p>
+          <p className="mt-4 max-w-sm text-[17px] leading-relaxed text-ink-soft">Kalimat yang sering diucapkan pelajar. Ketuk salah satu untuk melihat yang lebih tepat.</p>
 
           {/* The sentences on a ruled note, the picked one marked with a highlighter. */}
           <div className="relative mt-10 max-w-md rotate-[-1deg] rounded-[4px] bg-paper px-2 py-3 shadow-[0_10px_24px_-14px_rgba(0,9,55,0.35)]">
@@ -85,7 +85,7 @@ export function Demo() {
                     role="tab"
                     aria-selected={on}
                     onClick={() => choose(i)}
-                    className="group relative flex w-full cursor-pointer items-center gap-5 border-b border-dashed border-grid py-4 pl-3 pr-4 text-left last:border-b-0"
+                    className="group relative flex w-full cursor-pointer items-center gap-5 border-b border-dashed border-grid py-4 pl-3 pr-3 text-left transition-colors last:border-b-0 hover:bg-canvas/70"
                   >
                     <span className={`flex w-7 shrink-0 justify-center transition-colors ${on ? "text-brand" : "text-ink-soft/60 group-hover:text-ink-soft"}`}>
                       <KindIcon kind={e.mark} />
@@ -103,6 +103,17 @@ export function Demo() {
                         <span className={`relative text-[16px] font-bold transition-colors ${on ? "text-ink" : "text-ink-soft group-hover:text-ink"}`}>{e.kind}</span>
                       </span>
                       <span className="han mt-0.5 block truncate text-[15px] text-ink-soft" lang="zh-Hans">{e.said}</span>
+                    </span>
+                    {/* A radio mark: filled for the one shown, empty (and lit on hover) for the others. */}
+                    <span
+                      aria-hidden
+                      className={`flex size-6 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
+                        on ? "border-brand bg-brand text-white" : "border-grid text-transparent group-hover:border-brand/60"
+                      }`}
+                    >
+                      <svg viewBox="0 0 24 24" className="size-3.5 fill-none stroke-current" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m5 12.5 4.5 4.5L19 7.5" />
+                      </svg>
                     </span>
                   </button>
                 )

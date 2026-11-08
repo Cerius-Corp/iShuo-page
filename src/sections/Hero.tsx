@@ -88,7 +88,7 @@ export function Hero() {
         </div>
 
         {/* The phones: Ngobrol langsung in front, Belajar and Kosa Kata behind. */}
-        <div className="relative mx-auto h-[440px] w-full max-w-[560px] sm:h-[600px] lg:h-[640px]">
+        <div className="relative mx-auto h-[390px] w-full max-w-[500px] sm:h-[520px] lg:h-[560px]">
           {sidePhones.map((p) => (
             <SidePhone key={p.src} phone={p} progress={scrollYProgress} pointer={pointer} />
           ))}
@@ -96,7 +96,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 140 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 90, damping: 18, delay: 0.3 }}
-            className="absolute left-1/2 top-0 z-10 w-[205px] -translate-x-1/2 sm:w-[270px] lg:w-[290px]"
+            className="absolute left-1/2 top-0 z-10 w-[180px] -translate-x-1/2 sm:w-[235px] lg:w-[250px]"
           >
             <motion.div style={{ y: lift }}>
               <Drift pointer={pointer} depth={14} turn={7}>
@@ -185,7 +185,7 @@ function SidePhone({ phone, progress, pointer }: { phone: (typeof sidePhones)[nu
       initial={{ opacity: 0, y: 160 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 80, damping: 18, delay: phone.delay }}
-      className="absolute left-1/2 top-[9%] w-[172px] -translate-x-1/2 sm:w-[230px] lg:w-[245px]"
+      className="absolute left-1/2 top-[9%] w-[150px] -translate-x-1/2 sm:w-[200px] lg:w-[212px]"
     >
       <Drift pointer={pointer} depth={phone.depth} turn={phone.turn}>
         <motion.div style={{ x, rotate }}>

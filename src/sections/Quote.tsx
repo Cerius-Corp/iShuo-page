@@ -17,7 +17,7 @@ export function Quote() {
 
   return (
     <section className="relative overflow-hidden px-4 py-24 sm:px-6 lg:py-32">
-      <Doodle kind="flower" style={{ rotate: turn }} className="left-[4%] top-12 w-20 sm:w-28 lg:left-[10%] lg:top-20 lg:w-32" />
+      <Doodle kind="flower" style={{ rotate: turn }} className="left-[3%] top-4 w-14 sm:top-12 sm:w-28 lg:left-[10%] lg:top-20 lg:w-32" />
       <Doodle kind="squiggle" className="bottom-14 right-[6%] w-28 sm:w-36 lg:right-[12%]" />
       <div ref={ref} className="relative mx-auto max-w-4xl text-center">
         <p className="text-[34px] font-extrabold leading-[1.15] tracking-[-0.03em] sm:text-5xl lg:text-[60px]">

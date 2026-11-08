@@ -1,32 +1,53 @@
-# React + TypeScript + Vite
+# iShuo landing page
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+The website for [iShuo](https://testflight.apple.com/join/XFYwWf6x), an iPhone app that helps Indonesian learners in China speak Mandarin. You record your real conversations; iShuo shows which sentences could be better, explains why, and practises them with you.
 
-Currently, two official plugins are available:
+The page comes in Indonesian, English and Chinese.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Built with
 
-## React Compiler
+- [Vite](https://vite.dev) and [React](https://react.dev) with TypeScript
+- [Tailwind CSS](https://tailwindcss.com) v4
+- [Motion](https://motion.dev) for the animations, [Lenis](https://lenis.darkroom.engineering) for smooth scrolling
+- [qrcode.react](https://github.com/zpao/qrcode.react) for the download QR code
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Running it
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Then open the address Vite prints (usually http://localhost:5173).
+
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Starts the dev server with hot reload |
+| `npm run build` | Type-checks and builds the site into `dist/` |
+| `npm run preview` | Serves the built site locally |
+| `npm run lint` | Lints with Oxlint |
+
+## Where things are
+
+| Path | What's in it |
+| --- | --- |
+| `src/sections/` | One file per section of the page, top to bottom |
+| `src/components/` | Shared pieces: stamps, sticky notes, the iPhone frame, buttons, the language menu |
+| `src/copy/` | Every word on the page, one file per language (`id.ts` sets the shape the others follow) |
+| `src/i18n/` | Picking and remembering the language |
+| `src/site.ts` | Links: TestFlight, the App Store, email and Instagram |
+| `public/img/` | The mascot, doodles and screenshots of the app |
+
+## Common changes
+
+- **Editing text:** change it in `src/copy/id.ts`, `en.ts` and `zh.ts`.
+- **Going live on the App Store:** set `appStoreURL` in `src/site.ts`. The buttons, their labels and the QR code switch from TestFlight to the App Store.
+- **Linking to one language:** add `?lang=en` or `?lang=zh` to the address. Without it the page opens in Indonesian, or in the language last picked on that device.
+
+## Deploying
+
+The site is static. On Vercel or Netlify, use `npm run build` as the build command and `dist` as the output folder. `vercel.json` sends every path to `index.html`.
+
+---
+
+Made by the Cerius team · cerius.corp@gmail.com · [@cerius_id](https://instagram.com/cerius_id)

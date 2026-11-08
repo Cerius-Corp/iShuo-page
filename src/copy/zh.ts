@@ -18,8 +18,8 @@ export const zh: Copy = {
   },
   download: { testFlight: "在 TestFlight 免费试用", appStore: "在 App Store 下载" },
   hero: {
-    lines: ["大胆", "说中文，", "不怕", "说错。"],
-    accentFrom: 2,
+    lines: ["大胆说中文，", "不怕说错。"],
+    accentFrom: 1,
     lead: "录下日常对话。iShuo 帮你找出可以说得更好的句子，再陪你练到熟练。",
     how: "看看怎么用",
     recording: "录音中",

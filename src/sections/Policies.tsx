@@ -1,12 +1,12 @@
 import { AnimatePresence, motion, useAnimate } from "motion/react"
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react"
 import { Doodle, Tape } from "../components/Stationery"
-import { policies, type Block, type PolicyKey } from "../copy/policies"
-import { useCopy } from "../i18n/useCopy"
+import { policiesIn, policyKeys, type Block, type Labelled, type Policy, type PolicyKey } from "../copy/policies"
+import { languages } from "../i18n/languages"
+import { useCopy, useLang } from "../i18n/useCopy"
 import { scrollToElement } from "../scroll"
 import { site } from "../site"
 
-const keys = Object.keys(policies) as PolicyKey[]
 
 /** How far below the top of the screen a section lands, clear of the nav
  *  and the bar (and where it counts as the one being read). */
@@ -18,7 +18,7 @@ const sectionId = (tab: PolicyKey, i: number) => `${tab}-${String(i + 1).padStar
 /** The tab a link asks for (/policies#privacy), else the Terms. */
 const tabFromHash = (): PolicyKey => {
   const hash = window.location.hash.slice(1)
-  return hash in policies ? (hash as PolicyKey) : "terms"
+  return (policyKeys as readonly string[]).includes(hash) ? (hash as PolicyKey) : "terms"
 }
 
 /** The Terms of Service and the Privacy Policy, at /policies: a title on
@@ -29,7 +29,8 @@ export function Policies() {
   const copy = useCopy()
   const [tab, setTab] = useState<PolicyKey>(tabFromHash)
   const sheet = useRef<HTMLDivElement>(null)
-  const policy = policies[tab]
+  const { lang } = useLang()
+  const policy = policiesIn[lang][tab]
   const [current, setCurrent] = useState(0)
 
   // The section being read: the last one whose top has passed the reading line.
@@ -101,7 +102,6 @@ export function Policies() {
             className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-ink-soft text-balance sm:mt-5 sm:text-[17px]"
           >
             {copy.policies.lead}
-            {copy.policies.englishOnly && <span className="mt-1 block text-[13px] sm:text-sm">{copy.policies.englishOnly}</span>}
           </motion.p>
         </div>
       </section>
@@ -118,11 +118,11 @@ export function Policies() {
           <motion.span
             aria-hidden
             initial={false}
-            animate={{ x: `${keys.indexOf(tab) * 100}%` }}
+            animate={{ x: `${policyKeys.indexOf(tab) * 100}%` }}
             transition={{ type: "spring", stiffness: 420, damping: 34 }}
             className="absolute inset-y-1.5 left-1.5 w-[calc(50%-6px)] rounded-full bg-brand"
           />
-          {keys.map((k) => {
+          {policyKeys.map((k) => {
             const active = k === tab
             return (
               <button
@@ -153,7 +153,7 @@ export function Policies() {
               id="policy"
               role="tabpanel"
               aria-labelledby={`tab-${tab}`}
-              lang="en"
+              lang={languages[lang].tag}
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
@@ -161,7 +161,7 @@ export function Policies() {
             >
               <header className="border-b border-grid pb-6 sm:pb-8">
                 <span className="inline-block rounded-full bg-butter px-3 py-1 text-[12px] font-semibold text-butter-ink sm:text-[13px]">
-                  Last updated on {policy.updated}
+                  {policy.updated}
                 </span>
                 <h2 className="mt-4 text-[28px] font-extrabold leading-[1.08] tracking-[-0.03em] sm:text-[44px]">{policy.title}</h2>
                 <div className="mt-3 space-y-3 text-[15px] leading-relaxed text-ink-soft sm:text-[17px]">
@@ -181,7 +181,7 @@ export function Policies() {
                           <div key={part.heading ?? j}>
                             {part.heading && <h4 className="mb-1.5 text-[15px] font-semibold text-brand sm:text-[16px]">{part.heading}</h4>}
                             <div className="space-y-3 text-[15px] leading-relaxed text-ink-soft sm:text-[16px]">
-                              {part.blocks.map((b, k) => <PolicyBlock key={k} block={b} />)}
+                              {part.blocks.map((b, k) => <PolicyBlock key={k} block={b} policy={policy} />)}
                             </div>
                           </div>
                         ))}
@@ -317,12 +317,13 @@ function JumpMenu({ titles, onJump, label }: { titles: string[]; onJump: (i: num
   )
 }
 
-function PolicyBlock({ block }: { block: Block }) {
+function PolicyBlock({ block, policy }: { block: Block; policy: Policy }) {
   if (typeof block === "string") return <p>{withEmail(block)}</p>
   if ("note" in block) {
     return (
       <p className="rounded-[3px] bg-butter px-4 py-3 text-butter-ink shadow-[0_6px_14px_-10px_rgba(0,9,55,0.35)]">
-        <span className="font-semibold">Note:</span> {withEmail(block.note)}
+        <Lead label={policy.noteLabel ?? "Note"} colon={policy.colon} className="font-semibold" />
+        {withEmail(block.note)}
       </p>
     )
   }
@@ -330,9 +331,9 @@ function PolicyBlock({ block }: { block: Block }) {
     return (
       <ul className="space-y-2">
         {block.list.map((item) => (
-          <li key={item} className="relative pl-5">
+          <li key={typeof item === "string" ? item : item.label} className="relative pl-5">
             <span aria-hidden className="absolute left-0 top-[0.6em] block size-[7px] rounded-full bg-doodle" />
-            <ListItem text={item} />
+            {typeof item === "string" ? withEmail(item) : <LabelledText item={item} colon={policy.colon} />}
           </li>
         ))}
       </ul>
@@ -340,18 +341,28 @@ function PolicyBlock({ block }: { block: Block }) {
   }
   return (
     <p>
-      <span className="font-semibold text-ink">{block.label}:</span> {withEmail(block.text)}
+      <LabelledText item={block} colon={policy.colon} />
     </p>
   )
 }
 
-/** A list item like "Apple: speech recognition…" gets its lead-in in bold. */
-function ListItem({ text }: { text: string }) {
-  const named = /^([A-Z][\w’ ]{0,24}): (.+)$/.exec(text)
-  if (!named) return <>{withEmail(text)}</>
+function LabelledText({ item, colon }: { item: Labelled; colon?: string }) {
   return (
     <>
-      <span className="font-semibold text-ink">{named[1]}:</span> {withEmail(named[2])}
+      <Lead label={item.label} colon={colon} className="font-semibold text-ink" />
+      {withEmail(item.text)}
+    </>
+  )
+}
+
+/** A bold lead-in and what follows it: "Label: " in English and
+ *  Indonesian, "标签：" in Chinese (the colon there takes up the space). */
+function Lead({ label, colon = ": ", className }: { label: string; colon?: string; className: string }) {
+  const mark = colon.trimEnd()
+  return (
+    <>
+      <span className={className}>{label}{mark}</span>
+      {colon.slice(mark.length)}
     </>
   )
 }

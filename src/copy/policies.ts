@@ -1,22 +1,37 @@
-// iShuo's Terms of Service and Privacy Policy, shown at /policies. They're
-// in English only (the page around them follows the language picked).
+// iShuo's Terms of Service and Privacy Policy, shown at /policies, in
+// English. They come in every language the page does: terms-id.ts,
+// privacy-id.ts, terms-zh.ts and privacy-zh.ts, translated from these
+// (the English is the original; keep them in step).
 //
 // Each policy is numbered sections; a section is parts, each with an
 // optional heading. A block is a paragraph, a paragraph led by a bold
-// label, a list, or a note set apart from the text.
+// label, a list (whose items can have a bold label too), or a note set
+// apart from the text.
 
-export type Block = string | { label: string; text: string } | { list: string[] } | { note: string }
+import type { Lang } from "../i18n/languages"
+import { privacyId } from "./privacy-id"
+import { privacyZh } from "./privacy-zh"
+import { termsId } from "./terms-id"
+import { termsZh } from "./terms-zh"
+
+export type Labelled = { label: string; text: string }
+export type Block = string | Labelled | { list: (string | Labelled)[] } | { note: string }
 
 export type Policy = {
   title: string
+  /** The line with the date, as it reads in the policy's language. */
   updated: string
+  /** What follows a bold label: ": " in English and Indonesian, "：" in Chinese. */
+  colon?: string
+  /** The word that leads a note ("Note" when not given). */
+  noteLabel?: string
   intro: string[]
   sections: { title: string; parts: { heading?: string; blocks: Block[] }[] }[]
   /** A last line, after the sections. */
   outro?: string
 }
 
-const updated = "November 9, 2026"
+const updated = "Last updated on November 9, 2026"
 
 export const terms: Policy = {
   title: "Terms of Service",
@@ -176,9 +191,9 @@ export const terms: Policy = {
             "iShuo works with:",
             {
               list: [
-                "Apple: speech recognition, translation, voices and Apple Intelligence;",
-                "Hugging Face: the optional Qwen3.5-4B download;",
-                "Mixpanel: usage analytics.",
+                { label: "Apple", text: "speech recognition, translation, voices and Apple Intelligence;" },
+                { label: "Hugging Face", text: "the optional Qwen3.5-4B download;" },
+                { label: "Mixpanel", text: "usage analytics." },
               ],
             },
             "We don’t control these services, and your use of them is covered by their own terms.",
@@ -374,9 +389,9 @@ export const privacy: Policy = {
             "iShuo asks for each permission when it’s first needed. You can change them any time in iOS Settings.",
             {
               list: [
-                "Microphone: to record.",
-                "Speech recognition: to turn speech into text.",
-                "Camera: to read Chinese in a photo.",
+                { label: "Microphone", text: "to record." },
+                { label: "Speech recognition", text: "to turn speech into text." },
+                { label: "Camera", text: "to read Chinese in a photo." },
               ],
             },
           ],
@@ -411,9 +426,9 @@ export const privacy: Policy = {
           blocks: [
             {
               list: [
-                "On your iPhone: until you delete it or the app.",
-                "On our server: nothing is stored.",
-                "Usage Data: kept only as long as we need it to improve iShuo. We review it at least once a year.",
+                { label: "On your iPhone", text: "until you delete it or the app." },
+                { label: "On our server", text: "nothing is stored." },
+                { label: "Usage Data", text: "kept only as long as we need it to improve iShuo. We review it at least once a year." },
               ],
             },
           ],
@@ -467,5 +482,12 @@ export const privacy: Policy = {
   ],
 }
 
-export const policies = { terms, privacy } as const
-export type PolicyKey = keyof typeof policies
+export const policyKeys = ["terms", "privacy"] as const
+export type PolicyKey = (typeof policyKeys)[number]
+
+/** Both policies in each language. */
+export const policiesIn: Record<Lang, Record<PolicyKey, Policy>> = {
+  en: { terms, privacy },
+  id: { terms: termsId, privacy: privacyId },
+  zh: { terms: termsZh, privacy: privacyZh },
+}

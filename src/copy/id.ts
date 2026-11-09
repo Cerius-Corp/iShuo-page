@@ -132,8 +132,6 @@ export const id = {
     },
     title: "Kebijakan",
     lead: "Aturan pakai iShuo, dan apa saja yang tetap di iPhone-mu.",
-    /** Shown when the policies aren't in this language (they're in English). */
-    englishOnly: "Kebijakan ini tersedia dalam bahasa Inggris.",
     tabsLabel: "Pilih kebijakan",
     tabs: { terms: "Ketentuan Layanan", privacy: "Kebijakan Privasi" },
     /** The list of sections beside a policy. */

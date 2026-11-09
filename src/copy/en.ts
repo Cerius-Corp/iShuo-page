@@ -124,7 +124,6 @@ export const en: Copy = {
     },
     title: "Policies",
     lead: "The rules for using iShuo, and what stays on your iPhone.",
-    englishOnly: "",
     tabsLabel: "Choose a policy",
     tabs: { terms: "Terms of Service", privacy: "Privacy Policy" },
     contents: "On this page",

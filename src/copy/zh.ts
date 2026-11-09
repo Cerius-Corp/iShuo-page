@@ -125,7 +125,6 @@ export const zh: Copy = {
     },
     title: "政策",
     lead: "使用 iShuo 的规则，以及哪些内容只留在你的 iPhone 上。",
-    englishOnly: "以下政策仅提供英文版本。",
     tabsLabel: "选择政策",
     tabs: { terms: "服务条款", privacy: "隐私政策" },
     contents: "本页内容",

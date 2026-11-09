@@ -2,7 +2,7 @@ import { motion } from "motion/react"
 import { DownloadButton } from "../components/Buttons"
 import { LanguageSwitch } from "../components/LanguageSwitch"
 import { useCopy } from "../i18n/useCopy"
-import { onAppStore, sections } from "../site"
+import { onAppStore, onPolicies, sections } from "../site"
 
 /** A bar floating over the page (the hero's paper runs under it): the name,
  *  the sections, the language, and the way to try it. Its frosted blur is for
@@ -21,13 +21,13 @@ export function Nav() {
         className="mx-auto flex h-14 max-w-5xl items-center justify-between rounded-full border border-grid bg-paper/95 pl-3 pr-2 shadow-[0_6px_20px_-14px_rgba(0,9,55,0.25)] sm:h-16 sm:pl-4 lg:bg-paper/85 lg:backdrop-blur-md"
         aria-label={copy.nav.label}
       >
-        <a href="#" className="flex items-center gap-2.5 font-extrabold tracking-tight">
+        <a href={onPolicies ? "/" : "#"} className="flex items-center gap-2.5 font-extrabold tracking-tight">
           <img src="/img/appicon.png" alt="" className="size-8 rounded-[9px] sm:size-9 sm:rounded-[10px]" />
           <span className="text-lg">iShuo</span>
         </a>
         <div className="hidden items-center gap-1 md:flex">
           {sections.map((l) => (
-            <a key={l.href} href={l.href} className="rounded-full px-3.5 py-2 text-[15px] font-medium text-ink-soft transition-colors hover:bg-brand-soft hover:text-brand">
+            <a key={l.href} href={onPolicies ? `/${l.href}` : l.href} className="rounded-full px-3.5 py-2 text-[15px] font-medium text-ink-soft transition-colors hover:bg-brand-soft hover:text-brand">
               {copy.nav.sections[l.key]}
             </a>
           ))}

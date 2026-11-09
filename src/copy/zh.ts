@@ -116,5 +116,19 @@ export const zh: Copy = {
     feedback: "在 TestFlight 中发送测试反馈",
     sectionsLabel: "页面导航",
     made: ["Cerius 团队用", "打造"],
+    policies: "条款与隐私",
+  },
+  policies: {
+    meta: {
+      title: "政策 · iShuo",
+      description: "iShuo 的服务条款和隐私政策。",
+    },
+    title: "政策",
+    lead: "使用 iShuo 的规则，以及哪些内容只留在你的 iPhone 上。",
+    englishOnly: "以下政策仅提供英文版本。",
+    tabsLabel: "选择政策",
+    tabs: { terms: "服务条款", privacy: "隐私政策" },
+    contents: "本页内容",
+    jump: "跳到章节",
   },
 }

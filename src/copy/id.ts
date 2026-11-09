@@ -123,6 +123,22 @@ export const id = {
     sectionsLabel: "Bagian halaman",
     /** The credit, either side of a 心 (spaces included). */
     made: ["Dibuat dengan ", " oleh tim Cerius"],
+    policies: "Ketentuan & Privasi",
+  },
+  policies: {
+    meta: {
+      title: "Kebijakan · iShuo",
+      description: "Ketentuan Layanan dan Kebijakan Privasi iShuo.",
+    },
+    title: "Kebijakan",
+    lead: "Aturan pakai iShuo, dan apa saja yang tetap di iPhone-mu.",
+    /** Shown when the policies aren't in this language (they're in English). */
+    englishOnly: "Kebijakan ini tersedia dalam bahasa Inggris.",
+    tabsLabel: "Pilih kebijakan",
+    tabs: { terms: "Ketentuan Layanan", privacy: "Kebijakan Privasi" },
+    /** The list of sections beside a policy. */
+    contents: "Isi halaman",
+    jump: "Lompat ke bagian",
   },
 }
 

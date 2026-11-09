@@ -12,6 +12,12 @@ export const site = {
   instagram: "cerius_id",
 } as const
 
+/** The page with the Terms of Service and the Privacy Policy. */
+export const policiesPath = "/policies"
+
+/** Whether this is the policies page (else it's the landing page). */
+export const onPolicies = /^\/policies\/?$/.test(window.location.pathname)
+
 /** Where the download buttons go now. */
 export const downloadURL = site.appStoreURL || site.testFlightURL
 export const onAppStore = site.appStoreURL !== ""

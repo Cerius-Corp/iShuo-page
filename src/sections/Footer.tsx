@@ -1,11 +1,11 @@
 import { useCopy } from "../i18n/useCopy"
-import { contacts, sections } from "../site"
+import { contacts, onPolicies, policiesPath, sections } from "../site"
 
 /** The year shown in the footer (worked out once, not on every render). */
 const year = new Date().getFullYear()
 
 /** The end of the page, on dark: where to reach the team, then the name,
- *  the sections and the small print. */
+ *  the sections, the policies and the small print. */
 export function Footer() {
   const copy = useCopy()
   return (
@@ -45,8 +45,9 @@ export function Footer() {
         </div>
         <nav aria-label={copy.footer.sectionsLabel} className="flex flex-wrap gap-x-5 gap-y-2">
           {sections.map((s) => (
-            <a key={s.href} href={s.href} className="transition-colors hover:text-white">{copy.nav.sections[s.key]}</a>
+            <a key={s.href} href={onPolicies && s.key !== "contact" ? `/${s.href}` : s.href} className="transition-colors hover:text-white">{copy.nav.sections[s.key]}</a>
           ))}
+          <a href={policiesPath} aria-current={onPolicies ? "page" : undefined} className="transition-colors hover:text-white aria-[current=page]:text-white">{copy.footer.policies}</a>
         </nav>
         <p>
           © {year} · {copy.footer.made[0]}<span className="han" lang="zh-Hans">心</span>{copy.footer.made[1]}

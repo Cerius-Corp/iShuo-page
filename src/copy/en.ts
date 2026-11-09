@@ -115,5 +115,19 @@ export const en: Copy = {
     feedback: "Send Beta Feedback in TestFlight",
     sectionsLabel: "Sections",
     made: ["Made with ", " by the Cerius team"],
+    policies: "Terms & Privacy",
+  },
+  policies: {
+    meta: {
+      title: "Policies · iShuo",
+      description: "iShuo's Terms of Service and Privacy Policy.",
+    },
+    title: "Policies",
+    lead: "The rules for using iShuo, and what stays on your iPhone.",
+    englishOnly: "",
+    tabsLabel: "Choose a policy",
+    tabs: { terms: "Terms of Service", privacy: "Privacy Policy" },
+    contents: "On this page",
+    jump: "Jump to a section",
   },
 }

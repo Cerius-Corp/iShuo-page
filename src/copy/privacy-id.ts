@@ -39,7 +39,7 @@ export const privacyId: Policy = {
         },
         {
           heading: "Jawabanmu",
-          blocks: ["Namamu (jika kamu memberikannya), level Mandarin-mu, alasanmu belajar, dan hal yang sulit bagimu tetap di iPhone-mu."],
+          blocks: ["Namamu (jika kamu memberikannya), alasanmu belajar, dan hal yang sulit bagimu tetap di iPhone-mu."],
         },
         {
           heading: "Fitur Apple",
@@ -54,7 +54,7 @@ export const privacyId: Policy = {
           heading: "Masukan AI",
           blocks: [
             { label: "Aktif secara default", text: "iShuo memakai server iShuo untuk memberimu masukan." },
-            { label: "Yang dikirim", text: "Teks obrolanmu, situasinya, dan levelmu. Tidak pernah audio, dan tidak pernah namamu." },
+            { label: "Yang dikirim", text: "Teks obrolanmu dan situasinya. Tidak pernah audio, dan tidak pernah namamu." },
             {
               label: "Cara penanganannya",
               text: "Server memproses teks itu dan mengirim hasilnya kembali ke iPhone-mu. Tidak ada yang disimpan di server, dan tidak ada yang dipakai untuk melatih model AI.",
@@ -74,7 +74,7 @@ export const privacyId: Policy = {
           heading: "Pilihan Belajar (dengan izinmu)",
           blocks: [
             "Hanya jika kamu mengizinkan, Data Penggunaan juga mencakup:",
-            { list: ["level Mandarin-mu;", "alasanmu belajar;", "kesulitanmu saat berbicara;", "kata yang kamu simpan."] },
+            { list: ["alasanmu belajar;", "kesulitanmu saat berbicara;", "kata yang kamu simpan."] },
           ],
         },
         {
@@ -113,7 +113,6 @@ export const privacyId: Policy = {
               list: [
                 { label: "Mikrofon", text: "untuk merekam." },
                 { label: "Pengenalan ucapan", text: "untuk mengubah ucapan menjadi teks." },
-                { label: "Kamera", text: "untuk membaca tulisan Mandarin di foto." },
               ],
             },
           ],

@@ -31,7 +31,7 @@ export const privacyZh: Policy = {
           heading: "声音档案",
           blocks: ["如果你设置了自己的声音，iShuo 只保存描述它的数值（音高和声纹），用来区分你和对方说的话。这些数值从不离开你的 iPhone。"],
         },
-        { heading: "你的回答", blocks: ["你的名字（如果你填写了）、中文水平、学习原因以及你觉得难的地方，都留在你的 iPhone 上。"] },
+        { heading: "你的回答", blocks: ["你的名字（如果你填写了）、学习原因以及你觉得难的地方，都留在你的 iPhone 上。"] },
         { heading: "Apple 功能", blocks: ["语音识别、翻译和朗读语音由 Apple 在你的 iPhone 上提供。Apple 的服务适用 Apple 的隐私政策。"] },
       ],
     },
@@ -42,7 +42,7 @@ export const privacyZh: Policy = {
           heading: "AI 反馈",
           blocks: [
             { label: "默认开启", text: "iShuo 使用 iShuo 服务器为你提供反馈。" },
-            { label: "发送的内容", text: "你的对话文字、场景和你的水平。从不发送音频，也从不发送你的名字。" },
+            { label: "发送的内容", text: "你的对话文字和场景。从不发送音频，也从不发送你的名字。" },
             { label: "处理方式", text: "服务器处理文字后把结果发回你的 iPhone。服务器上不保存任何内容，也不会用于训练 AI 模型。" },
             { label: "让 AI 只在 iPhone 上运行", text: "前往 Pengaturan → Pengaturan AI → Model AI，选择 Apple 或 Qwen3.5-4B。" },
           ],
@@ -59,7 +59,7 @@ export const privacyZh: Policy = {
           heading: "学习选择（经你允许）",
           blocks: [
             "只有在你允许的情况下，使用数据才会包括：",
-            { list: ["你的中文水平；", "你的学习原因；", "你说话时的困难；", "你收藏的词。"] },
+            { list: ["你的学习原因；", "你说话时的困难；", "你收藏的词。"] },
           ],
         },
         { heading: "你联系我们时", blocks: ["如果你给我们发邮件，我们会收到你的邮箱地址和邮件内容，只用于回复你。"] },
@@ -95,7 +95,6 @@ export const privacyZh: Policy = {
               list: [
                 { label: "麦克风", text: "用于录音。" },
                 { label: "语音识别", text: "用于把语音转成文字。" },
-                { label: "相机", text: "用于识别照片中的中文。" },
               ],
             },
           ],

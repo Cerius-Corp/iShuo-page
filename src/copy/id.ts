@@ -128,12 +128,12 @@ export const id = {
   policies: {
     meta: {
       title: "Kebijakan · iShuo",
-      description: "Ketentuan Layanan dan Kebijakan Privasi iShuo.",
+      description: "Syarat & Ketentuan dan Kebijakan Privasi iShuo.",
     },
     title: "Kebijakan",
     lead: "Aturan pakai iShuo, dan apa saja yang tetap di iPhone-mu.",
     tabsLabel: "Pilih kebijakan",
-    tabs: { terms: "Ketentuan Layanan", privacy: "Kebijakan Privasi" },
+    tabs: { terms: "Syarat & Ketentuan", privacy: "Kebijakan Privasi" },
     /** The list of sections beside a policy. */
     contents: "Isi halaman",
     jump: "Lompat ke bagian",

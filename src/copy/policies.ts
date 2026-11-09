@@ -317,7 +317,7 @@ export const privacy: Policy = {
         },
         {
           heading: "Your Answers",
-          blocks: ["Your name (if you give one), your Mandarin level, your reasons for learning and what’s hard for you stay on your iPhone."],
+          blocks: ["Your name (if you give one), your reasons for learning and what’s hard for you stay on your iPhone."],
         },
         {
           heading: "Apple Features",
@@ -332,7 +332,7 @@ export const privacy: Policy = {
           heading: "AI Feedback",
           blocks: [
             { label: "On by default", text: "iShuo uses the iShuo server to give you feedback." },
-            { label: "What’s sent", text: "Your conversation text, the situation and your level. Never audio, and never your name." },
+            { label: "What’s sent", text: "Your conversation text and the situation. Never audio, and never your name." },
             {
               label: "How it’s handled",
               text: "The server processes the text and sends the result back to your iPhone. Nothing is stored on the server, and nothing is used to train AI models.",
@@ -352,7 +352,7 @@ export const privacy: Policy = {
           heading: "Learning Choices (with your permission)",
           blocks: [
             "Only if you allow it, Usage Data also includes:",
-            { list: ["your Mandarin level;", "your reasons for learning;", "your speaking difficulties;", "the words you save."] },
+            { list: ["your reasons for learning;", "your speaking difficulties;", "the words you save."] },
           ],
         },
         {
@@ -391,7 +391,6 @@ export const privacy: Policy = {
               list: [
                 { label: "Microphone", text: "to record." },
                 { label: "Speech recognition", text: "to turn speech into text." },
-                { label: "Camera", text: "to read Chinese in a photo." },
               ],
             },
           ],

@@ -4,11 +4,11 @@
 import type { Policy } from "./policies"
 
 export const termsId: Policy = {
-  title: "Ketentuan Layanan",
+  title: "Syarat & Ketentuan",
   updated: "Terakhir diperbarui 9 November 2026",
   noteLabel: "Catatan",
   intro: [
-    "Selamat datang di iShuo, aplikasi yang membantumu belajar berbicara Mandarin dari obrolan nyatamu sendiri. Dengan mengunduh atau memakai iShuo, kamu menyetujui Ketentuan Layanan ini (“Ketentuan”). Ketentuan ini berlaku untuk semua pengguna iShuo, di Indonesia maupun di tempat lain.",
+    "Selamat datang di iShuo, aplikasi yang membantumu belajar berbicara Mandarin dari obrolan nyatamu sendiri. Dengan mengunduh atau memakai iShuo, kamu menyetujui Syarat & Ketentuan ini (“Ketentuan”). Ketentuan ini berlaku untuk semua pengguna iShuo, di Indonesia maupun di tempat lain.",
     "iShuo memakai pengenalan ucapan, terjemahan, dan model bahasa AI untuk mengubah obrolanmu menjadi masukan dan latihan. Masukan buatan AI diberi label di aplikasi, dan kamu tetap bertanggung jawab untuk memeriksanya.",
     "Jika kamu mengunduh iShuo dari App Store, Apple Inc. adalah pihak ketiga penerima manfaat dari Ketentuan ini, seperti dijelaskan di bawah.",
   ],
@@ -249,5 +249,5 @@ export const termsId: Policy = {
       parts: [{ blocks: ["Untuk pertanyaan tentang Ketentuan ini, hubungi kami di cerius.corp@gmail.com."] }],
     },
   ],
-  outro: "Dengan memakai iShuo, kamu menyatakan telah membaca, memahami, dan menyetujui Ketentuan Layanan ini.",
+  outro: "Dengan memakai iShuo, kamu menyatakan telah membaca, memahami, dan menyetujui Syarat & Ketentuan ini.",
 }

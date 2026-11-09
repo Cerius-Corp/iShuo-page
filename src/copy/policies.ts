@@ -434,7 +434,7 @@ export const privacy: Policy = {
           blocks: [
             {
               list: [
-                "Turn off Usage Data or learning choices any time in Pengaturan.",
+                "Turn off learning choices any time in Pengaturan. To stop Usage Data, delete the app.",
                 "Delete conversations, or the app, to remove your data from your iPhone.",
               ],
             },

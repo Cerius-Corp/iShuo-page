@@ -349,7 +349,7 @@ export const privacy: Policy = {
           blocks: [
             {
               label: "Sent to server by default",
-              text: "iShuo uses the iShuo server to generate content for your learning feedback. But you can change this anytime at Pengaturan → Pengaturan AI → Model AI.",
+              text: "iShuo uses AI on the iShuo server to create your learning feedback and practice. You can also use the AI on your iPhone instead, by changing this anytime at Pengaturan → Pengaturan AI → Model AI. If the server can’t be reached, the AI on your iPhone is used.",
             },
             {
               label: "What’s sent",
@@ -361,7 +361,7 @@ export const privacy: Policy = {
           heading: "Usage Data",
           blocks: [
             "We collect information about how iShuo is used, without your name. For example: which pages are opened, how long a recording lasts, or how many replies a practice chat has (“Usage Data”). Usage Data comes with a random app ID, the app version and basic device information (iPhone model and iOS version).",
-            "It never includes:",
+            { label: "It never includes", text: "" },
             { list: ["your name;", "your recordings;", "your transcripts;", "anything you say or type."] },
           ],
         },

@@ -43,7 +43,7 @@ export const privacyZh: Policy = {
           blocks: [
             {
               label: "默认发送到服务器",
-              text: "iShuo 使用 iShuo 服务器为你的学习反馈生成内容。你可以随时在 Pengaturan → Pengaturan AI → Model AI 中更改。",
+              text: "iShuo 使用 iShuo 服务器上的 AI 为你生成学习反馈和练习。你也可以随时在 Pengaturan → Pengaturan AI → Model AI 中更改，改用你 iPhone 上的 AI。如果无法连接服务器，则会使用你 iPhone 上的 AI。",
             },
             {
               label: "发送的内容",
@@ -55,7 +55,7 @@ export const privacyZh: Policy = {
           heading: "使用数据",
           blocks: [
             "我们会收集关于 iShuo 使用情况的信息，不含你的名字。例如：打开了哪些页面、一段录音有多长、一次练习对话有多少轮回复（“使用数据”）。使用数据附带一个随机应用 ID、应用版本和基本设备信息（iPhone 型号和 iOS 版本）。",
-            "使用数据从不包括：",
+            { label: "使用数据从不包括", text: "" },
             { list: ["你的名字；", "你的录音；", "你的转写；", "你说的或输入的任何内容。"] },
           ],
         },

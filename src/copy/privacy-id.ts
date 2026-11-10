@@ -55,7 +55,7 @@ export const privacyId: Policy = {
           blocks: [
             {
               label: "Dikirim ke server secara bawaan",
-              text: "iShuo memakai server iShuo untuk membuat konten bagi masukan belajarmu. Tetapi kamu bisa mengubahnya kapan saja di Pengaturan → Pengaturan AI → Model AI.",
+              text: "iShuo memakai AI di server iShuo untuk membuat masukan belajar dan latihanmu. Kamu juga bisa memakai AI di iPhone-mu, dengan mengubahnya kapan saja di Pengaturan → Pengaturan AI → Model AI. Jika server tidak bisa dihubungi, AI di iPhone-mu yang dipakai.",
             },
             {
               label: "Yang dikirim",
@@ -67,7 +67,7 @@ export const privacyId: Policy = {
           heading: "Data Penggunaan",
           blocks: [
             "Kami mengumpulkan informasi tentang cara iShuo dipakai, tanpa namamu. Misalnya: halaman mana yang dibuka, berapa lama sebuah rekaman, atau berapa banyak balasan dalam latihan obrolan (“Data Penggunaan”). Data Penggunaan disertai ID aplikasi acak, versi aplikasi, dan informasi dasar perangkat (model iPhone dan versi iOS).",
-            "Data ini tidak pernah mencakup:",
+            { label: "Data ini tidak pernah mencakup", text: "" },
             { list: ["namamu;", "rekamanmu;", "transkripmu;", "apa pun yang kamu ucapkan atau ketik."] },
           ],
         },

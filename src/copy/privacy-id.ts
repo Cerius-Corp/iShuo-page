@@ -29,7 +29,7 @@ export const privacyId: Policy = {
         },
         {
           heading: "Obrolan dan Belajar",
-          blocks: ["Transkrip, terjemahan, masukan, riwayat obrolan, kata yang kamu simpan, dan pengaturanmu hanya disimpan di iPhone-mu."],
+          blocks: ["Transkrip, terjemahan, masukan, riwayat obrolan, kata yang kamu simpan, dan pengaturanmu hanya disimpan di iPhone-mu, kecuali kamu mengizinkan (lihat bagian 03)."],
         },
         {
           heading: "Profil Suara",
@@ -39,7 +39,7 @@ export const privacyId: Policy = {
         },
         {
           heading: "Jawabanmu",
-          blocks: ["Namamu (jika kamu memberikannya), alasanmu belajar, dan hal yang sulit bagimu tetap di iPhone-mu."],
+          blocks: ["Namamu (jika kamu memberikannya) tetap di iPhone-mu. Alasanmu belajar dan hal yang sulit bagimu juga tetap di iPhone-mu, kecuali kamu mengizinkan (lihat bagian 03)."],
         },
         {
           heading: "Fitur Apple",
@@ -74,7 +74,7 @@ export const privacyId: Policy = {
           heading: "Pilihan Belajar (dengan izinmu)",
           blocks: [
             "Hanya jika kamu mengizinkan, Data Penggunaan juga mencakup:",
-            { list: ["alasanmu belajar;", "kesulitanmu saat berbicara;", "kata yang kamu simpan."] },
+            { list: ["alasanmu belajar;", "kesulitanmu saat berbicara;", "kata yang kamu buka dan simpan."] },
           ],
         },
         {

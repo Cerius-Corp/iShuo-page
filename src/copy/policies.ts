@@ -307,7 +307,7 @@ export const privacy: Policy = {
         },
         {
           heading: "Conversations and Learning",
-          blocks: ["Your transcripts, translations, feedback, conversation history, saved words and settings are stored only on your iPhone."],
+          blocks: ["Your transcripts, translations, feedback, conversation history, saved words and settings are stored only on your iPhone, unless you allow it (see section 03)."],
         },
         {
           heading: "Voice Profile",
@@ -317,7 +317,7 @@ export const privacy: Policy = {
         },
         {
           heading: "Your Answers",
-          blocks: ["Your name (if you give one), your reasons for learning and what’s hard for you stay on your iPhone."],
+          blocks: ["Your name (if you give one) stays on your iPhone. Your reasons for learning and what’s hard for you also stay on your iPhone, unless you allow it (see section 03)."],
         },
         {
           heading: "Apple Features",
@@ -352,7 +352,7 @@ export const privacy: Policy = {
           heading: "Learning Choices (with your permission)",
           blocks: [
             "Only if you allow it, Usage Data also includes:",
-            { list: ["your reasons for learning;", "your speaking difficulties;", "the words you save."] },
+            { list: ["your reasons for learning;", "your speaking difficulties;", "the words you open and save."] },
           ],
         },
         {

@@ -26,12 +26,12 @@ export const privacyZh: Policy = {
       title: "留在你 iPhone 上的信息",
       parts: [
         { heading: "录音", blocks: ["你的对话音频在 iPhone 上处理，分析完成后即被删除，从不上传。"] },
-        { heading: "对话与学习", blocks: ["你的转写、翻译、反馈、对话记录、收藏的词和设置只保存在你的 iPhone 上。"] },
+        { heading: "对话与学习", blocks: ["你的转写、翻译、反馈、对话记录、收藏的词和设置只保存在你的 iPhone 上，除非你允许（见第 03 部分）。"] },
         {
           heading: "声音档案",
           blocks: ["如果你设置了自己的声音，iShuo 只保存描述它的数值（音高和声纹），用来区分你和对方说的话。这些数值从不离开你的 iPhone。"],
         },
-        { heading: "你的回答", blocks: ["你的名字（如果你填写了）、学习原因以及你觉得难的地方，都留在你的 iPhone 上。"] },
+        { heading: "你的回答", blocks: ["你的名字（如果你填写了）留在你的 iPhone 上。你的学习原因以及你觉得难的地方也留在你的 iPhone 上，除非你允许（见第 03 部分）。"] },
         { heading: "Apple 功能", blocks: ["语音识别、翻译和朗读语音由 Apple 在你的 iPhone 上提供。Apple 的服务适用 Apple 的隐私政策。"] },
       ],
     },
@@ -59,7 +59,7 @@ export const privacyZh: Policy = {
           heading: "学习选择（经你允许）",
           blocks: [
             "只有在你允许的情况下，使用数据才会包括：",
-            { list: ["你的学习原因；", "你说话时的困难；", "你收藏的词。"] },
+            { list: ["你的学习原因；", "你说话时的困难；", "你查看和收藏的词。"] },
           ],
         },
         { heading: "你联系我们时", blocks: ["如果你给我们发邮件，我们会收到你的邮箱地址和邮件内容，只用于回复你。"] },

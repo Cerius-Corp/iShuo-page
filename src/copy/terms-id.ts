@@ -5,11 +5,11 @@ import type { Policy } from "./policies"
 
 export const termsId: Policy = {
   title: "Syarat & Ketentuan",
-  updated: "Terakhir diperbarui 9 November 2026",
+  updated: "Terakhir diperbarui 10 November 2026",
   noteLabel: "Catatan",
   intro: [
     "Selamat datang di iShuo, aplikasi yang membantumu belajar berbicara Mandarin dari obrolan nyatamu sendiri. Dengan mengunduh atau memakai iShuo, kamu menyetujui Syarat & Ketentuan ini (“Ketentuan”). Ketentuan ini berlaku untuk semua pengguna iShuo, di Indonesia maupun di tempat lain.",
-    "iShuo memakai pengenalan ucapan, terjemahan, dan model bahasa AI untuk mengubah obrolanmu menjadi masukan dan latihan. Masukan buatan AI diberi label di aplikasi, dan kamu tetap bertanggung jawab untuk memeriksanya.",
+    "iShuo memakai pengenalan ucapan, terjemahan, dan model bahasa AI untuk mengubah obrolanmu menjadi masukan dan latihan. Hasil buatan AI bisa mengandung kesalahan atau ketidaktepatan, dan tidak boleh dianggap pasti atau sudah diverifikasi secara independen.",
     "Jika kamu mengunduh iShuo dari App Store, Apple Inc. adalah pihak ketiga penerima manfaat dari Ketentuan ini, seperti dijelaskan di bawah.",
   ],
   sections: [
@@ -25,8 +25,7 @@ export const termsId: Policy = {
                 "merekam obrolan dalam bahasa Mandarin (boleh dicampur bahasa Indonesia) serta membaca transkrip dan terjemahannya secara langsung;",
                 "mendapat masukan untuk kalimat yang kamu ucapkan;",
                 "berlatih dengan teman ngobrol AI;",
-                "menyiapkan kosakata untuk situasi yang akan kamu hadapi;",
-                "menyimpan kata ke kantongmu;",
+                "menyiapkan dan menyimpan kosakata untuk situasi yang akan kamu hadapi;",
                 "melatih pelafalan.",
               ],
             },
@@ -35,7 +34,7 @@ export const termsId: Policy = {
         {
           heading: "Di iPhone-mu Dulu",
           blocks: [
-            "Pengenalan ucapan, terjemahan, dan riwayat obrolanmu berjalan di iPhone-mu dan tetap di sana. Masukan AI berjalan di iPhone-mu atau di server iShuo, yang hanya menerima teks dan tidak menyimpan apa pun.",
+            "Pengenalan ucapan, pengenalan suara, terjemahan, dan riwayat obrolanmu berjalan di iPhone-mu dan tetap di sana. Profil suaramu tidak pernah meninggalkan iPhone-mu. Konten buatan AI berasal dari server iShuo secara bawaan, atau hanya dari iPhone-mu jika kamu mematikan server di Pengaturan → Pengaturan AI → Model AI. Server menerima teks obrolanmu dan beberapa detail tentang setiap baris, seperti siapa yang mengucapkannya, tetapi tidak pernah audio atau profil suaramu, dan tidak menyimpannya. Data penggunaan, seperti fitur yang dipakai dan waktu yang dihabiskan, dapat dikumpulkan tanpa namamu atau isi obrolanmu untuk membantu kami meningkatkan iShuo dan fitur-fiturnya.",
           ],
         },
         {
@@ -54,7 +53,7 @@ export const termsId: Policy = {
         {
           heading: "Tempat iShuo Tersedia",
           blocks: [
-            "iShuo tidak tersedia di Tiongkok daratan, Uni Eropa, Kawasan Ekonomi Eropa, Inggris Raya, atau Swiss. Jika kamu memakai iShuo saat bepergian, beberapa fitur mungkin tidak berfungsi di tempatmu berada.",
+            "iShuo tidak tersedia di Tiongkok daratan, Uni Eropa, Kawasan Ekonomi Eropa, Inggris Raya, atau Swiss. Jika kamu memakai iShuo saat bepergian, beberapa fitur mungkin tidak berfungsi dengan baik di tempatmu berada.",
           ],
         },
       ],
@@ -65,7 +64,8 @@ export const termsId: Policy = {
         {
           heading: "Izin Lebih Dulu",
           blocks: [
-            "iShuo merekam obrolan yang kamu ikuti. Selalu beri tahu lawan bicaramu, dan minta izinnya, sebelum merekam. Aturan hukum tentang perekaman berbeda di tiap tempat, dan kamu sepenuhnya bertanggung jawab untuk mendapatkan persetujuan yang diwajibkan hukum. iShuo mengingatkanmu sebelum rekaman pertamamu.",
+            "iShuo merekam obrolan yang kamu ikuti. Selalu beri tahu lawan bicaramu, dan minta izinnya, sebelum merekam. Aturan hukum tentang perekaman berbeda di tiap tempat, dan kamu sepenuhnya bertanggung jawab untuk mendapatkan persetujuan yang diwajibkan hukum. iShuo mengingatkanmu sebelum kamu merekam.",
+            "Untuk menunjukkan siapa yang mengucapkan setiap baris, iShuo membedakan suara di iPhone-mu. iShuo tidak menyimpan profil suara siapa pun selain kamu.",
           ],
         },
       ],
@@ -76,28 +76,30 @@ export const termsId: Policy = {
         {
           heading: "Kontenmu",
           blocks: [
-            "Rekaman, transkrip, judul obrolan, kata yang kamu simpan, dan jawabanmu adalah milikmu, dan semuanya disimpan di iPhone-mu. Rekaman audio dihapus setelah dianalisis.",
+            "Transkrip, judul obrolan, kata yang kamu simpan, dan jawabanmu adalah milikmu, dan semuanya disimpan di iPhone-mu. Rekaman audio dihapus setelah dianalisis.",
           ],
         },
         {
-          heading: "Pemrosesan untuk Masukan",
+          heading: "Membantu Meningkatkan iShuo",
           blocks: [
-            "Saat server iShuo dipakai, server hanya memproses teksmu untuk membuat masukan yang kamu minta. Server mengirim hasilnya kembali ke iPhone-mu dan tidak menyimpannya.",
+            "Jika kamu mengizinkan, tujuan belajarmu, kesulitan berbicaramu, dan kata yang kamu simpan membantu kami meningkatkan iShuo. Rekaman, transkrip, dan obrolanmu tidak pernah disertakan. Kamu bisa mengubahnya kapan saja di Pengaturan → Tentang iShuo → Privasi.",
           ],
         },
       ],
     },
     {
-      title: "AI dan Masukan Otomatis",
+      title: "Konten Buatan AI",
       parts: [
         {
           heading: "Cara AI Dipakai",
           blocks: [
-            "iShuo memakai model AI (Apple Intelligence atau Qwen3.5-4B di iPhone-mu, atau server iShuo) untuk:",
+            "iShuo memakai AI untuk:",
             {
               list: [
                 "memperbaiki dan menjelaskan kalimatmu;",
                 "menyarankan cara yang lebih alami untuk mengatakan sesuatu;",
+                "memperbaiki kata yang salah ditangkap oleh pengenalan ucapan;",
+                "menjawab pertanyaanmu tentang sebuah obrolan;",
                 "berperan sebagai lawan bicara dalam latihan obrolan;",
                 "membuat kosakata untuk situasi yang kamu gambarkan.",
               ],
@@ -107,7 +109,13 @@ export const termsId: Policy = {
         {
           heading: "Ketepatan",
           blocks: [
-            "Masukan AI, terjemahan, pinyin, dan transkrip dibuat secara otomatis. Semuanya bisa saja tidak tepat atau tidak lengkap. Pakailah sebagai alat bantu belajar, bukan nasihat profesional, dan periksa hal yang penting dengan guru atau penutur asli.",
+            "Masukan AI, terjemahan, pinyin, transkrip, dan siapa yang mengucapkan setiap baris dibuat secara otomatis. Semuanya bisa saja tidak tepat atau tidak lengkap. Pakailah sebagai alat bantu belajar, bukan nasihat profesional, dan periksa hal yang penting dengan guru atau penutur asli.",
+          ],
+        },
+        {
+          heading: "Pemrosesan untuk Konten Buatan AI",
+          blocks: [
+            "Secara bawaan, iShuo memakai server iShuo. Jika server tidak bisa dihubungi, atau kamu mematikannya di Pengaturan → Pengaturan AI → Model AI, AI di iPhone-mu yang dipakai: Apple Intelligence, atau Qwen3.5-4B jika kamu sudah mengunduhnya. Saat server iShuo dipakai, server menerima teks obrolanmu dan beberapa detail tentang setiap baris, seperti siapa yang mengucapkannya, tetapi tidak pernah audio atau profil suaramu. Server memakainya hanya untuk membuat masukan dan konten AI lain di iShuo, mengirim hasilnya kembali ke iPhone-mu, dan tidak menyimpannya.",
           ],
         },
         { heading: "Tidak untuk Pelatihan AI", blocks: ["Kami tidak memakai kontenmu untuk melatih model AI."] },
@@ -144,7 +152,7 @@ export const termsId: Policy = {
         {
           heading: "Hak Kami",
           blocks: [
-            "Aplikasi, kode, desain, maskot, konten kosakata, nama, dan logo iShuo adalah milik Cerius atau pemberi lisensinya. Kamu tidak boleh menyalin, mengubah, atau menyebarkannya kembali tanpa izin tertulis dari kami.",
+            "Aplikasi, kode, desain, maskot, konten kosakata, nama, dan logo iShuo adalah milik Cerius atau pemberi lisensinya. Kamu tidak boleh menyalin, mengubah, atau menyebarkannya kembali tanpa izin tertulis dari kami, kecuali konten berlisensi terbuka yang tercantum di Atribusi, yang boleh kamu pakai sesuai lisensinya.",
           ],
         },
         {

@@ -5,9 +5,9 @@ import type { Policy } from "./policies"
 
 export const privacyId: Policy = {
   title: "Kebijakan Privasi",
-  updated: "Terakhir diperbarui 9 November 2026",
+  updated: "Terakhir diperbarui 10 November 2026",
   intro: [
-    "Di iShuo, kami tahu obrolanmu bersifat pribadi. Kebijakan Privasi ini menjelaskan apa yang tetap di iPhone-mu, apa yang kami terima, dan bagaimana kami menggunakannya. Singkatnya: rekamanmu tidak pernah keluar dari iPhone-mu, dan kami tidak pernah menanyakan siapa kamu.",
+    "Di iShuo, kami tahu obrolanmu bersifat pribadi. Kebijakan Privasi ini menjelaskan apa yang tetap di iPhone-mu, apa yang kami terima, dan bagaimana kami menggunakannya. Singkatnya: rekamanmu tetap di iPhone-mu dan dihapus setelah dianalisis, dan kami tidak pernah meminta email, nomor telepon, atau kata sandimu.",
   ],
   sections: [
     {
@@ -15,21 +15,21 @@ export const privacyId: Policy = {
       parts: [
         {
           blocks: [
-            "iShuo dibuat oleh Cerius (“kami”). Kebijakan ini berlaku untuk aplikasi iShuo dan server iShuo. iShuo tidak memakai akun: kami tidak pernah meminta nama, email, nomor telepon, atau kata sandimu.",
+            "iShuo dibuat oleh Cerius (“kami”). Kebijakan ini berlaku untuk aplikasi iShuo dan server iShuo. iShuo tidak memakai akun. Kami tidak pernah meminta email, nomor telepon, atau kata sandimu. Jika kamu memberikan namamu, nama itu tetap di iPhone-mu.",
           ],
         },
       ],
     },
     {
-      title: "Informasi yang Tetap di iPhone-mu",
+      title: "Informasi yang Tetap Lokal",
       parts: [
         {
           heading: "Rekaman",
-          blocks: ["Audio obrolanmu diproses di iPhone-mu dan dihapus setelah dianalisis. Audio itu tidak pernah diunggah."],
+          blocks: ["Audio obrolanmu diproses di iPhone-mu dan dihapus setelah dianalisis. Audio itu tidak pernah diunggah ke server iShuo. Jika iPhone-mu tidak bisa mengenali ucapan sendiri, pengenalan ucapan Apple mungkin memproses audio itu di server Apple (lihat Fitur Apple)."],
         },
         {
           heading: "Obrolan dan Belajar",
-          blocks: ["Transkrip, terjemahan, masukan, riwayat obrolan, kata yang kamu simpan, dan pengaturanmu hanya disimpan di iPhone-mu, kecuali kamu mengizinkan (lihat bagian 03)."],
+          blocks: ["Transkrip, terjemahan, masukan, dan riwayat obrolanmu hanya disimpan di iPhone-mu. Kata yang kamu simpan juga tetap di iPhone-mu, kecuali kamu mengizinkan (lihat bagian 03)."],
         },
         {
           heading: "Profil Suara",
@@ -38,12 +38,12 @@ export const privacyId: Policy = {
           ],
         },
         {
-          heading: "Jawabanmu",
-          blocks: ["Namamu (jika kamu memberikannya) tetap di iPhone-mu. Alasanmu belajar dan hal yang sulit bagimu juga tetap di iPhone-mu, kecuali kamu mengizinkan (lihat bagian 03)."],
+          heading: "Personalisasi Belajar",
+          blocks: ["Namamu (jika kamu memberikannya) tetap di iPhone-mu. Alasanmu belajar dan hal yang sulit bagimu juga tetap di iPhone-mu, kecuali latihan obrolan memakainya untuk menyesuaikan obrolan denganmu (lihat bagian 03). Semua itu hanya disertakan dalam Data Penggunaan jika kamu mengizinkan."],
         },
         {
           heading: "Fitur Apple",
-          blocks: ["Pengenalan ucapan, terjemahan, dan suara disediakan oleh Apple di iPhone-mu. Kebijakan privasi Apple berlaku untuk layanan Apple."],
+          blocks: ["Pengenalan ucapan, terjemahan, suara, dan Apple Intelligence disediakan oleh Apple, di iPhone-mu jika memungkinkan. Kebijakan privasi Apple berlaku untuk layanan Apple."],
         },
       ],
     },
@@ -51,21 +51,22 @@ export const privacyId: Policy = {
       title: "Informasi yang Kami Terima",
       parts: [
         {
-          heading: "Masukan AI",
+          heading: "Pemrosesan AI",
           blocks: [
-            { label: "Aktif secara default", text: "iShuo memakai server iShuo untuk memberimu masukan." },
-            { label: "Yang dikirim", text: "Teks obrolanmu dan situasinya. Tidak pernah audio, dan tidak pernah namamu." },
             {
-              label: "Cara penanganannya",
-              text: "Server memproses teks itu dan mengirim hasilnya kembali ke iPhone-mu. Tidak ada yang disimpan di server, dan tidak ada yang dipakai untuk melatih model AI.",
+              label: "Dikirim ke server secara bawaan",
+              text: "iShuo memakai server iShuo untuk membuat konten bagi masukan belajarmu. Tetapi kamu bisa mengubahnya kapan saja di Pengaturan → Pengaturan AI → Model AI.",
             },
-            { label: "Agar AI tetap di iPhone-mu", text: "Buka Pengaturan → Pengaturan AI → Model AI, lalu pilih Apple atau Qwen3.5-4B." },
+            {
+              label: "Yang dikirim",
+              text: "teks yang dibutuhkan fitur, seperti obrolanmu, pesan latihan obrolanmu, pertanyaanmu, dan situasi yang kamu gambarkan, beserta beberapa detail tentang setiap baris, seperti siapa yang mengucapkannya. Latihan obrolan juga menyertakan alasanmu belajar dan hal yang sulit bagimu. Tidak pernah audio, profil suaramu, atau namamu.",
+            },
           ],
         },
         {
           heading: "Data Penggunaan",
           blocks: [
-            "Kami mengumpulkan informasi anonim tentang cara iShuo dipakai, misalnya halaman mana yang dibuka, berapa lama sebuah rekaman, atau berapa banyak balasan dalam latihan obrolan (“Data Penggunaan”). Data Penggunaan disertai ID aplikasi acak, versi aplikasi, dan informasi dasar perangkat (model iPhone dan versi iOS).",
+            "Kami mengumpulkan informasi tentang cara iShuo dipakai, tanpa namamu. Misalnya: halaman mana yang dibuka, berapa lama sebuah rekaman, atau berapa banyak balasan dalam latihan obrolan (“Data Penggunaan”). Data Penggunaan disertai ID aplikasi acak, versi aplikasi, dan informasi dasar perangkat (model iPhone dan versi iOS).",
             "Data ini tidak pernah mencakup:",
             { list: ["namamu;", "rekamanmu;", "transkripmu;", "apa pun yang kamu ucapkan atau ketik."] },
           ],
@@ -77,10 +78,6 @@ export const privacyId: Policy = {
             { list: ["alasanmu belajar;", "kesulitanmu saat berbicara;", "kata yang kamu buka dan simpan."] },
           ],
         },
-        {
-          heading: "Saat Kamu Menghubungi Kami",
-          blocks: ["Jika kamu mengirim email kepada kami, kami menerima alamat email dan pesanmu, dan hanya memakainya untuk membalas."],
-        },
       ],
     },
     {
@@ -91,10 +88,9 @@ export const privacyId: Policy = {
             "iShuo memakai data di atas untuk:",
             {
               list: [
-                "memberimu masukan AI dan latihan;",
+                "memberimu masukan buatan AI dan latihan;",
                 "memahami fitur mana yang dipakai, dan di bagian mana pengguna kesulitan;",
                 "meningkatkan iShuo;",
-                "mendeteksi dan memperbaiki masalah teknis;",
                 "membalas pertanyaanmu.",
               ],
             },
@@ -170,7 +166,7 @@ export const privacyId: Policy = {
           blocks: [
             {
               list: [
-                "Matikan pilihan belajar kapan saja di Pengaturan. Untuk menghentikan Data Penggunaan, hapus aplikasinya.",
+                "Matikan pilihan belajar kapan saja di Pengaturan → Tentang iShuo → Privasi. Untuk menghentikan Data Penggunaan, hapus aplikasinya.",
                 "Hapus obrolan, atau aplikasinya, untuk menghapus datamu dari iPhone-mu.",
               ],
             },
@@ -181,7 +177,7 @@ export const privacyId: Policy = {
           blocks: [
             "Tergantung tempat tinggalmu, termasuk berdasarkan Undang-Undang Pelindungan Data Pribadi (UU PDP) Indonesia, kamu mungkin berhak untuk:",
             { list: ["mengakses datamu;", "memperbaikinya;", "menghapusnya;", "membatasi penggunaannya;", "menarik persetujuan."] },
-            "Untuk mengajukan permintaan, kirim email kepada kami.",
+            "Untuk mengajukan permintaan, kirim email kepada kami. Data Penggunaan tidak terhubung dengan namamu, jadi kami mungkin tidak bisa mengetahui Data Penggunaan mana yang milikmu. Kami akan memberitahumu jika tidak bisa.",
           ],
         },
         {

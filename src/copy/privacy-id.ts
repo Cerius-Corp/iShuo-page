@@ -84,6 +84,7 @@ export const privacyId: Policy = {
       title: "Cara Kami Menggunakan Data",
       parts: [
         {
+          heading: "Untuk Apa Kami Memakainya",
           blocks: [
             "iShuo memakai data di atas untuk:",
             {
@@ -92,6 +93,20 @@ export const privacyId: Policy = {
                 "memahami fitur mana yang dipakai, dan di bagian mana pengguna kesulitan;",
                 "meningkatkan iShuo;",
                 "membalas pertanyaanmu.",
+              ],
+            },
+          ],
+        },
+        {
+          heading: "Dasar Hukum",
+          blocks: [
+            "Kami memproses setiap jenis data dengan alasan berikut:",
+            {
+              list: [
+                { label: "Pemrosesan AI", text: "untuk menyediakan fitur yang kamu pakai." },
+                { label: "Data Penggunaan", text: "kepentingan sah kami untuk meningkatkan iShuo." },
+                { label: "Pilihan Belajar", text: "persetujuanmu, untuk meningkatkan konten iShuo. Kamu bisa menariknya kapan saja." },
+                { label: "Emailmu kepada kami", text: "untuk membalas pertanyaan dan permintaanmu." },
               ],
             },
           ],
@@ -132,6 +147,10 @@ export const privacyId: Policy = {
             "Kami memakai Mixpanel, Inc. (Amerika Serikat) untuk menganalisis Data Penggunaan, dan penyedia hosting untuk menjalankan server iShuo. Mereka memproses data hanya atas nama kami.",
           ],
         },
+        {
+          heading: "Transfer ke Luar Indonesia",
+          blocks: ["Data Penggunaan diproses di Amerika Serikat. Kami mengandalkan perlindungan dari Mixpanel untuk menjaganya."],
+        },
         { heading: "Permintaan Hukum", blocks: ["Kami dapat mengungkapkan data jika diwajibkan oleh hukum."] },
       ],
     },
@@ -145,7 +164,7 @@ export const privacyId: Policy = {
               list: [
                 { label: "Di iPhone-mu", text: "sampai kamu menghapusnya atau menghapus aplikasinya." },
                 { label: "Di server kami", text: "tidak ada yang disimpan." },
-                { label: "Data Penggunaan", text: "disimpan hanya selama kami membutuhkannya untuk meningkatkan iShuo. Kami meninjaunya setidaknya setahun sekali." },
+                { label: "Data Penggunaan", text: "disimpan paling lama 2 tahun, lalu dihapus." },
               ],
             },
           ],

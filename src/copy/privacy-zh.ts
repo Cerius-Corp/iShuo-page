@@ -72,6 +72,7 @@ export const privacyZh: Policy = {
       title: "我们如何使用数据",
       parts: [
         {
+          heading: "我们用它做什么",
           blocks: [
             "iShuo 使用上述数据来：",
             {
@@ -80,6 +81,20 @@ export const privacyZh: Policy = {
                 "了解哪些功能被使用，以及大家在哪里遇到困难；",
                 "改进 iShuo；",
                 "回复你的问题。",
+              ],
+            },
+          ],
+        },
+        {
+          heading: "法律依据",
+          blocks: [
+            "我们基于以下理由处理每类数据：",
+            {
+              list: [
+                { label: "AI 处理", text: "为了提供你使用的功能。" },
+                { label: "使用数据", text: "我们改进 iShuo 的合法利益。" },
+                { label: "学习选择", text: "你的同意，用于改进 iShuo 的内容。你可以随时撤回。" },
+                { label: "你发给我们的邮件", text: "为了回复你的问题和请求。" },
               ],
             },
           ],
@@ -112,6 +127,7 @@ export const privacyZh: Policy = {
           heading: "服务提供商",
           blocks: ["我们使用 Mixpanel, Inc.（美国）分析使用数据，并使用一家托管服务商运行 iShuo 服务器。它们只代表我们处理数据。"],
         },
+        { heading: "向印度尼西亚境外传输", blocks: ["使用数据在美国处理。我们依靠 Mixpanel 的保障措施来保护这些数据。"] },
         { heading: "法律要求", blocks: ["如法律要求，我们可能会披露数据。"] },
       ],
     },
@@ -125,7 +141,7 @@ export const privacyZh: Policy = {
               list: [
                 { label: "在你的 iPhone 上", text: "直到你删除数据或应用。" },
                 { label: "在我们的服务器上", text: "不保存任何内容。" },
-                { label: "使用数据", text: "只在改进 iShuo 所需的期限内保留，我们至少每年审查一次。" },
+                { label: "使用数据", text: "最多保留 2 年，之后删除。" },
               ],
             },
           ],

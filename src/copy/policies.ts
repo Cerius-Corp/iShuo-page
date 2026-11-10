@@ -378,6 +378,7 @@ export const privacy: Policy = {
       title: "How We Use Data",
       parts: [
         {
+          heading: "What We Use It For",
           blocks: [
             "iShuo uses the data above to:",
             {
@@ -386,6 +387,20 @@ export const privacy: Policy = {
                 "understand which features are used, and where people get stuck;",
                 "improve iShuo;",
                 "reply to your questions.",
+              ],
+            },
+          ],
+        },
+        {
+          heading: "Legal Basis",
+          blocks: [
+            "We process each kind of data for the following reason:",
+            {
+              list: [
+                { label: "AI Processing", text: "to provide the feature you use." },
+                { label: "Usage Data", text: "our legitimate interest in improving iShuo." },
+                { label: "Learning Choices", text: "your consent, to improve iShuo’s content. You can withdraw it at any time." },
+                { label: "Your emails to us", text: "to reply to your questions and requests." },
               ],
             },
           ],
@@ -426,6 +441,10 @@ export const privacy: Policy = {
             "We use Mixpanel, Inc. (United States) to analyze Usage Data, and a hosting provider to run the iShuo server. They process data only on our behalf.",
           ],
         },
+        {
+          heading: "Transfers Outside Indonesia",
+          blocks: ["Usage Data is processed in the United States. We rely on Mixpanel’s safeguards to protect it."],
+        },
         { heading: "Legal Requests", blocks: ["We may disclose data if the law requires it."] },
       ],
     },
@@ -439,7 +458,7 @@ export const privacy: Policy = {
               list: [
                 { label: "On your iPhone", text: "until you delete it or the app." },
                 { label: "On our server", text: "nothing is stored." },
-                { label: "Usage Data", text: "kept only as long as we need it to improve iShuo. We review it at least once a year." },
+                { label: "Usage Data", text: "kept for up to 2 years, then deleted." },
               ],
             },
           ],

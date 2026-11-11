@@ -34,7 +34,7 @@ export const termsZh: Policy = {
         },
         {
           heading: "优先在你的 iPhone 上",
-          blocks: ["声音识别和你的对话记录都在你的 iPhone 上运行并保存。语音识别和翻译也会尽可能在你的 iPhone 上运行；否则 Apple 可能会在 Apple 的服务器上处理。你的声音档案从不离开你的 iPhone。AI 生成的内容默认来自 iShuo 服务器；如果你在 Pengaturan → Pengaturan AI → Model AI 中关闭服务器，则只来自你的 iPhone。服务器会接收你对话的文字和每一句的一些信息（例如是谁说的），在练习对话中还会接收你的学习原因以及你觉得难的地方，但从不接收音频或你的声音档案，也不会保存这些内容。我们可能会收集使用数据（例如使用了哪些功能、使用了多长时间），其中不含你的名字或对话内容，用于帮助我们改进 iShuo 及其功能。"],
+          blocks: ["声音识别和你的对话记录都在你的 iPhone 上运行并保存。语音识别和翻译也会尽可能在你的 iPhone 上运行；否则 Apple 可能会在 Apple 的服务器上处理。你的声音档案从不离开你的 iPhone。AI 生成的内容默认来自 iShuo 服务器；如果你在 Pengaturan → Pengaturan AI → Model AI 中关闭服务器，则只来自你的 iPhone。服务器会接收你对话的文字和每一句的一些信息（例如是谁说的），在练习对话中还会接收你的学习原因以及你觉得难的地方。**服务器从不接收音频或你的声音档案，也不会保存这些内容。**我们可能会收集使用数据（例如使用了哪些功能、使用了多长时间），其中不含你的名字或对话内容，用于帮助我们改进 iShuo 及其功能。"],
         },
         { heading: "无需账号", blocks: ["iShuo 没有账号。你不需要注册或登录，也不需要向我们提供邮箱或手机号。"] },
       ],
@@ -66,7 +66,7 @@ export const termsZh: Policy = {
       parts: [
         {
           heading: "你的内容",
-          blocks: ["你的转写、对话标题、收藏的词和回答都属于你，并保存在你的 iPhone 上。录音在分析完成后即被删除。"],
+          blocks: ["你的转写、对话标题、收藏的词和回答都属于你，并保存在你的 iPhone 上。**录音在分析完成后即被删除。**"],
         },
         {
           heading: "帮助改进 iShuo",
@@ -98,7 +98,7 @@ export const termsZh: Policy = {
             "iShuo 默认使用 iShuo 服务器。如果无法连接服务器，或你在 Pengaturan → Pengaturan AI → Model AI 中将其关闭，则改用你 iPhone 上的 AI：Apple Intelligence，或你已下载的 Qwen3.5-4B。使用 iShuo 服务器时，服务器会接收你对话的文字和每一句的一些信息（例如是谁说的），在练习对话中还会接收你的学习原因以及你觉得难的地方，但从不接收音频或你的声音档案。服务器只用这些信息在 iShuo 中生成反馈和其他 AI 内容，把结果发回你的 iPhone，并且不会保存。",
           ],
         },
-        { heading: "不用于训练", blocks: ["我们不会用你的内容训练 AI 模型。"] },
+        { heading: "不用于训练", blocks: ["**我们不会用你的内容训练 AI 模型。**"] },
         {
           heading: "举报",
           blocks: ["如果你看到有害或冒犯性的 AI 输出，请发邮件至 cerius.corp@gmail.com。我们会审查举报并改进过滤机制。"],

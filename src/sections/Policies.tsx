@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useAnimate } from "motion/react"
-import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react"
+import { Fragment, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react"
 import { Doodle, Tape } from "../components/Stationery"
 import { policiesIn, policyKeys, type Block, type Labelled, type Policy, type PolicyKey } from "../copy/policies"
 import { languages } from "../i18n/languages"
@@ -165,7 +165,7 @@ export function Policies() {
                 </span>
                 <h2 className="mt-4 text-[28px] font-extrabold leading-[1.08] tracking-[-0.03em] sm:text-[44px]">{policy.title}</h2>
                 <div className="mt-3 space-y-3 text-[15px] leading-relaxed text-ink-soft sm:text-[17px]">
-                  {policy.intro.map((p) => <p key={p}>{p}</p>)}
+                  {policy.intro.map((p) => <p key={p}>{rich(p)}</p>)}
                 </div>
                 <JumpMenu titles={policy.sections.map((s) => s.title)} onJump={jump} label={copy.policies.jump} />
               </header>
@@ -318,12 +318,12 @@ function JumpMenu({ titles, onJump, label }: { titles: string[]; onJump: (i: num
 }
 
 function PolicyBlock({ block, policy }: { block: Block; policy: Policy }) {
-  if (typeof block === "string") return <p>{withEmail(block)}</p>
+  if (typeof block === "string") return <p>{rich(block)}</p>
   if ("note" in block) {
     return (
       <p className="rounded-[3px] bg-butter px-4 py-3 text-butter-ink shadow-[0_6px_14px_-10px_rgba(0,9,55,0.35)]">
         <Lead label={policy.noteLabel ?? "Note"} colon={policy.colon} className="font-semibold" />
-        {withEmail(block.note)}
+        {rich(block.note)}
       </p>
     )
   }
@@ -333,7 +333,7 @@ function PolicyBlock({ block, policy }: { block: Block; policy: Policy }) {
         {block.list.map((item) => (
           <li key={typeof item === "string" ? item : item.label} className="relative pl-5">
             <span aria-hidden className="absolute left-0 top-[0.6em] block size-[7px] rounded-full bg-doodle" />
-            {typeof item === "string" ? withEmail(item) : <LabelledText item={item} colon={policy.colon} />}
+            {typeof item === "string" ? rich(item) : <LabelledText item={item} colon={policy.colon} />}
           </li>
         ))}
       </ul>
@@ -350,7 +350,7 @@ function LabelledText({ item, colon }: { item: Labelled; colon?: string }) {
   return (
     <>
       <Lead label={item.label} colon={colon} className="font-semibold text-ink" />
-      {withEmail(item.text)}
+      {rich(item.text)}
     </>
   )
 }
@@ -364,6 +364,22 @@ function Lead({ label, colon = ": ", className }: { label: string; colon?: strin
       <span className={className}>{label}{mark}</span>
       {colon.slice(mark.length)}
     </>
+  )
+}
+
+/** A policy's text with its **bold** parts in bold, as the policy documents
+ *  have them, and the contact address as a link. */
+function rich(text: string): ReactNode {
+  const parts = text.split("**")
+  if (parts.length === 1) return withEmail(text)
+  return parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} className="font-semibold text-ink">
+        {withEmail(part)}
+      </strong>
+    ) : (
+      <Fragment key={i}>{withEmail(part)}</Fragment>
+    ),
   )
 }
 

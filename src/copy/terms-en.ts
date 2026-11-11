@@ -33,7 +33,7 @@ export const termsEn: Policy = {
         {
           heading: "On Your iPhone First",
           blocks: [
-            "Voice recognition and your conversation history run on your iPhone and stay there. Speech recognition and translation also run on your iPhone where possible; otherwise Apple may process them on Apple’s servers. Your voice profile never leaves your iPhone. AI-generated content comes from the iShuo server by default, or only from your iPhone if you turn the server off in Pengaturan → Pengaturan AI → Model AI. The server receives your conversation’s text and a few details about each line, such as who said it, and, in practice chats, your reasons for learning and what’s hard for you. The server never receives audio or your voice profile, and it doesn’t keep any of it. Usage data, such as features used and time spent, may be collected without your name or conversation content to help us improve iShuo and its features.",
+            "Voice recognition and your conversation history run on your iPhone and stay there. Speech recognition and translation also run on your iPhone where possible; otherwise Apple may process them on Apple’s servers. Your voice profile never leaves your iPhone. AI-generated content comes from the iShuo server by default, or only from your iPhone if you turn the server off in Pengaturan → Pengaturan AI → Model AI. The server receives your conversation’s text and a few details about each line, such as who said it, and, in practice chats, your reasons for learning and what’s hard for you. **The server never receives audio or your voice profile, and it doesn’t keep any of it.** Usage data, such as features used and time spent, may be collected without your name or conversation content to help us improve iShuo and its features.",
           ],
         },
         {
@@ -75,7 +75,7 @@ export const termsEn: Policy = {
         {
           heading: "Your Content",
           blocks: [
-            "Your transcripts, conversation titles, saved words and answers belong to you, and they are stored on your iPhone. Audio recordings are deleted once they have been analyzed.",
+            "Your transcripts, conversation titles, saved words and answers belong to you, and they are stored on your iPhone. **Audio recordings are deleted once they have been analyzed.**",
           ],
         },
         {
@@ -117,7 +117,7 @@ export const termsEn: Policy = {
             "By default, iShuo uses the iShuo server. If the server can’t be reached, or you turn it off in Pengaturan → Pengaturan AI → Model AI, the AI on your iPhone is used instead: Apple Intelligence, or Qwen3.5-4B if you’ve downloaded it. When the iShuo server is used, it receives your conversation’s text and a few details about each line, such as who said it, and, in practice chats, your reasons for learning and what’s hard for you. It never receives audio or your voice profile. It uses them only to create feedback and other AI content in iShuo, sends the result back to your iPhone, and does not store it.",
           ],
         },
-        { heading: "No Training", blocks: ["We do not use your content to train AI models."] },
+        { heading: "No Training", blocks: ["**We do not use your content to train AI models.**"] },
         {
           heading: "Reporting",
           blocks: ["If you see harmful or offensive AI output, email us at cerius.corp@gmail.com. We review reports and improve our filters."],

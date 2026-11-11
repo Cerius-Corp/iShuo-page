@@ -6,7 +6,8 @@
 // Each policy is numbered sections; a section is parts, each with an
 // optional heading. A block is a paragraph, a paragraph led by a bold
 // label, a list (whose items can have a bold label too), or a note set
-// apart from the text.
+// apart from the text. Wrap words in **two asterisks** to make them bold
+// within the text, where the policy documents have them bold.
 
 import type { Lang } from "../i18n/languages"
 import { privacyEn } from "./privacy-en"

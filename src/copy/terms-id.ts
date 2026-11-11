@@ -34,7 +34,7 @@ export const termsId: Policy = {
         {
           heading: "Di iPhone Anda Dulu",
           blocks: [
-            "Pengenalan suara dan riwayat percakapan Anda berjalan di iPhone Anda dan tetap tersimpan di sana. Pengenalan ucapan dan terjemahan juga berjalan di iPhone Anda jika memungkinkan; jika tidak, Apple dapat memprosesnya di server Apple. Profil suara Anda tidak pernah meninggalkan iPhone Anda. Secara bawaan, konten AI diproses melalui server iShuo. Jika Anda menonaktifkan server di Pengaturan → Pengaturan AI → Model AI, konten AI hanya diproses di iPhone Anda. Server iShuo menerima teks percakapan dan beberapa detail tiap kalimat, seperti siapa yang berbicara, serta, dalam sesi latihan, alasan Anda belajar dan hal yang sulit bagi Anda. Server tidak pernah menerima audio atau profil suara Anda, dan tidak menyimpan data tersebut. Data penggunaan, seperti fitur yang Anda gunakan dan berapa lama Anda menggunakannya, dapat dikumpulkan tanpa menyertakan nama atau isi percakapan Anda. Data ini membantu kami mengembangkan iShuo dan fitur-fiturnya agar semakin baik.",
+            "Pengenalan suara dan riwayat percakapan Anda berjalan di iPhone Anda dan tetap tersimpan di sana. Pengenalan ucapan dan terjemahan juga berjalan di iPhone Anda jika memungkinkan; jika tidak, Apple dapat memprosesnya di server Apple. Profil suara Anda tidak pernah meninggalkan iPhone Anda. Secara bawaan, konten AI diproses melalui server iShuo. Jika Anda menonaktifkan server di Pengaturan → Pengaturan AI → Model AI, konten AI hanya diproses di iPhone Anda. Server iShuo menerima teks percakapan dan beberapa detail tiap kalimat, seperti siapa yang berbicara, serta, dalam sesi latihan, alasan Anda belajar dan hal yang sulit bagi Anda. **Server tidak pernah menerima audio atau profil suara Anda, dan tidak menyimpan data tersebut.** Data penggunaan, seperti fitur yang Anda gunakan dan berapa lama Anda menggunakannya, dapat dikumpulkan tanpa menyertakan nama atau isi percakapan Anda. Data ini membantu kami mengembangkan iShuo dan fitur-fiturnya agar semakin baik.",
           ],
         },
         {
@@ -76,7 +76,7 @@ export const termsId: Policy = {
         {
           heading: "Konten Anda",
           blocks: [
-            "Transkrip, judul percakapan, kata yang Anda simpan, dan jawaban Anda adalah milik Anda, dan semuanya disimpan di iPhone Anda. Rekaman audio dihapus setelah dianalisis.",
+            "Transkrip, judul percakapan, kata yang Anda simpan, dan jawaban Anda adalah milik Anda, dan semuanya disimpan di iPhone Anda. **Rekaman audio dihapus setelah dianalisis.**",
           ],
         },
         {
@@ -118,7 +118,7 @@ export const termsId: Policy = {
             "Secara bawaan, iShuo menggunakan server iShuo. Jika server tidak dapat dihubungi atau Anda menonaktifkannya melalui Pengaturan → Pengaturan AI → Model AI, iShuo akan menggunakan AI langsung di iPhone Anda: Apple Intelligence, atau Qwen3.5-4B jika sudah Anda unduh. Saat server iShuo digunakan, server menerima teks percakapan dan beberapa detail setiap baris, seperti siapa yang mengucapkannya, serta, dalam sesi latihan, alasan Anda belajar dan hal yang sulit bagi Anda. Server tidak pernah menerima audio atau profil suara Anda. Data tersebut hanya digunakan untuk menghasilkan masukan dan konten AI lainnya di iShuo, lalu hasilnya dikirim kembali ke iPhone Anda. Server tidak menyimpan data tersebut.",
           ],
         },
-        { heading: "Tidak untuk Pelatihan AI", blocks: ["Kami tidak memakai konten Anda untuk melatih model AI."] },
+        { heading: "Tidak untuk Pelatihan AI", blocks: ["**Kami tidak memakai konten Anda untuk melatih model AI.**"] },
         {
           heading: "Melaporkan",
           blocks: ["Jika Anda menemukan hasil AI yang berbahaya atau menyinggung, kirim email ke cerius.corp@gmail.com. Kami meninjau laporan dan memperbaiki filter kami."],

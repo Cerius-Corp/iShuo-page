@@ -34,7 +34,9 @@ export const termsId: Policy = {
         {
           heading: "Di iPhone Anda Dulu",
           blocks: [
-            "Pengenalan suara dan riwayat percakapan Anda berjalan di iPhone Anda dan tetap tersimpan di sana. Pengenalan ucapan dan terjemahan juga berjalan di iPhone Anda jika memungkinkan; jika tidak, Apple dapat memprosesnya di server Apple. Profil suara Anda tidak pernah meninggalkan iPhone Anda. Secara bawaan, konten AI diproses melalui server iShuo. Jika Anda menonaktifkan server di Pengaturan → Pengaturan AI → Model AI, konten AI hanya diproses di iPhone Anda. Server iShuo menerima teks percakapan dan beberapa detail tiap kalimat, seperti siapa yang berbicara, serta, dalam sesi latihan, alasan Anda belajar dan hal yang sulit bagi Anda. **Server tidak pernah menerima audio atau profil suara Anda, dan tidak menyimpan data tersebut.** Data penggunaan, seperti fitur yang Anda gunakan dan berapa lama Anda menggunakannya, dapat dikumpulkan tanpa menyertakan nama atau isi percakapan Anda. Data ini membantu kami mengembangkan iShuo dan fitur-fiturnya agar semakin baik.",
+            "Pengenalan suara dan riwayat percakapan Anda berjalan di iPhone Anda dan tetap tersimpan di sana. Pengenalan ucapan dan terjemahan juga berjalan di iPhone Anda jika memungkinkan; jika tidak, Apple dapat memprosesnya di server Apple. Profil suara Anda tidak pernah meninggalkan iPhone Anda.",
+            "Secara bawaan, konten AI diproses melalui server iShuo. Jika Anda menonaktifkan server di Pengaturan → Pengaturan AI → Model AI, konten AI hanya diproses di iPhone Anda. Server iShuo menerima teks percakapan dan beberapa detail tiap kalimat, seperti siapa yang berbicara, serta, dalam sesi latihan, alasan Anda belajar dan hal yang sulit bagi Anda. **Server tidak pernah menerima audio atau profil suara Anda, dan tidak menyimpan data tersebut.**",
+            "Data penggunaan, seperti fitur yang Anda gunakan dan berapa lama Anda menggunakannya, dapat dikumpulkan tanpa menyertakan nama atau isi percakapan Anda. Data ini membantu kami mengembangkan iShuo dan fitur-fiturnya agar semakin baik.",
           ],
         },
         {

@@ -33,7 +33,9 @@ export const termsEn: Policy = {
         {
           heading: "On Your iPhone First",
           blocks: [
-            "Voice recognition and your conversation history run on your iPhone and stay there. Speech recognition and translation also run on your iPhone where possible; otherwise Apple may process them on Apple’s servers. Your voice profile never leaves your iPhone. AI-generated content comes from the iShuo server by default, or only from your iPhone if you turn the server off in Pengaturan → Pengaturan AI → Model AI. The server receives your conversation’s text and a few details about each line, such as who said it, and, in practice chats, your reasons for learning and what’s hard for you. **The server never receives audio or your voice profile, and it doesn’t keep any of it.** Usage data, such as features used and time spent, may be collected without your name or conversation content to help us improve iShuo and its features.",
+            "Voice recognition and your conversation history run on your iPhone and stay there. Speech recognition and translation also run on your iPhone where possible; otherwise Apple may process them on Apple’s servers. Your voice profile never leaves your iPhone.",
+            "AI-generated content comes from the iShuo server by default, or only from your iPhone if you turn the server off in Pengaturan → Pengaturan AI → Model AI. The server receives your conversation’s text and a few details about each line, such as who said it, and, in practice chats, your reasons for learning and what’s hard for you. **The server never receives audio or your voice profile, and it doesn’t keep any of it.**",
+            "Usage data, such as features used and time spent, may be collected without your name or conversation content to help us improve iShuo and its features.",
           ],
         },
         {

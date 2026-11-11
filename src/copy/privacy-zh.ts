@@ -6,7 +6,7 @@ import type { Policy } from "./policies"
 
 export const privacyZh: Policy = {
   title: "隐私政策",
-  updated: "最后更新：2026年11月10日",
+  updated: "最后更新：2026年11月11日",
   colon: "：",
   intro: [
     "在 iShuo，我们知道你的对话是私密的。本隐私政策说明哪些内容留在你的 iPhone 上、我们会收到什么，以及我们如何使用这些信息。简而言之：你的录音留在你的 iPhone 上，分析完成后即被删除；我们也从不索要你的邮箱、手机号或密码。",
@@ -33,6 +33,10 @@ export const privacyZh: Policy = {
         },
         { heading: "学习个性化", blocks: ["你的名字（如果你填写了）留在你的 iPhone 上。你的学习原因以及你觉得难的地方也留在你的 iPhone 上，但练习对话会用它们让对话更适合你（见第 03 部分）。只有在你允许时，它们才会包含在使用数据中。"] },
         { heading: "Apple 功能", blocks: ["语音识别、翻译、朗读语音和 Apple Intelligence 由 Apple 提供，并尽可能在你的 iPhone 上运行。Apple 的服务适用 Apple 的隐私政策。"] },
+        {
+          heading: "下载 Qwen3.5-4B",
+          blocks: ["如果你下载 Qwen3.5-4B，你的 iPhone 会直接从 Hugging Face 下载。和任何网站一样，Hugging Face 能看到你的 IP 地址。该下载适用 Hugging Face 的隐私政策。"],
+        },
       ],
     },
     {
@@ -110,7 +114,7 @@ export const privacyZh: Policy = {
             "iShuo 会在第一次需要时请求每项权限。你可以随时在 iOS 设置中更改。",
             {
               list: [
-                { label: "麦克风", text: "用于录音。" },
+                { label: "麦克风", text: "用于录制你的对话。" },
                 { label: "语音识别", text: "用于把语音转成文字。" },
               ],
             },

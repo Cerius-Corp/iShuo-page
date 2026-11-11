@@ -31,7 +31,7 @@ export type Policy = {
   outro?: string
 }
 
-const updated = "Last updated on November 10, 2026"
+const updated = "Last updated on November 11, 2026"
 
 export const terms: Policy = {
   title: "Terms of Service",
@@ -63,7 +63,7 @@ export const terms: Policy = {
         {
           heading: "On Your iPhone First",
           blocks: [
-            "Speech recognition, voice recognition, translation and your conversation history run on your iPhone and stay there. Your voice profile never leaves your iPhone. AI-generated content comes from the iShuo server by default, or only from your iPhone if you turn the server off in Pengaturan → Pengaturan AI → Model AI. The server receives your conversation’s text and a few details about each line, such as who said it, but never audio or your voice profile, and it doesn’t keep them. Usage data, such as features used and time spent, may be collected without your name or conversation content to help us improve iShuo and its features.",
+            "Voice recognition and your conversation history run on your iPhone and stay there. Speech recognition and translation also run on your iPhone where possible; otherwise Apple may process them on Apple’s servers. Your voice profile never leaves your iPhone. AI-generated content comes from the iShuo server by default, or only from your iPhone if you turn the server off in Pengaturan → Pengaturan AI → Model AI. The server receives your conversation’s text and a few details about each line, such as who said it, and, in practice chats, your reasons for learning and what’s hard for you. It never receives audio or your voice profile, and it doesn’t keep any of it. Usage data, such as features used and time spent, may be collected without your name or conversation content to help us improve iShuo and its features.",
           ],
         },
         {
@@ -144,7 +144,7 @@ export const terms: Policy = {
         {
           heading: "Processing for AI-generated Content",
           blocks: [
-            "By default, iShuo uses the iShuo server. If the server can’t be reached, or you turn it off in Pengaturan → Pengaturan AI → Model AI, the AI on your iPhone is used instead: Apple Intelligence, or Qwen3.5-4B if you’ve downloaded it. When the iShuo server is used, it receives your conversation’s text and a few details about each line, such as who said it, but never audio or your voice profile. It uses them only to create feedback and other AI content in iShuo, sends the result back to your iPhone, and does not store it.",
+            "By default, iShuo uses the iShuo server. If the server can’t be reached, or you turn it off in Pengaturan → Pengaturan AI → Model AI, the AI on your iPhone is used instead: Apple Intelligence, or Qwen3.5-4B if you’ve downloaded it. When the iShuo server is used, it receives your conversation’s text and a few details about each line, such as who said it, and, in practice chats, your reasons for learning and what’s hard for you. It never receives audio or your voice profile. It uses them only to create feedback and other AI content in iShuo, sends the result back to your iPhone, and does not store it.",
           ],
         },
         { heading: "No Training", blocks: ["We do not use your content to train AI models."] },
@@ -339,6 +339,12 @@ export const privacy: Policy = {
             "Speech recognition, translation, voices and Apple Intelligence are provided by Apple, on your iPhone where possible. Apple’s privacy policy applies to Apple’s services.",
           ],
         },
+        {
+          heading: "Qwen3.5-4B Download",
+          blocks: [
+            "If you download Qwen3.5-4B, your iPhone gets it directly from Hugging Face. Like any website, Hugging Face can see your IP address. Hugging Face’s privacy policy applies to the download.",
+          ],
+        },
       ],
     },
     {
@@ -416,7 +422,7 @@ export const privacy: Policy = {
             "iShuo asks for each permission when it’s first needed. You can change them any time in iOS Settings.",
             {
               list: [
-                { label: "Microphone", text: "to record." },
+                { label: "Microphone", text: "to record your conversations." },
                 { label: "Speech recognition", text: "to turn speech into text." },
               ],
             },

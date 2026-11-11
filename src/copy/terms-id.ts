@@ -1,5 +1,5 @@
-// The Terms of Service in Indonesian (the English ones, in policies.ts,
-// are the original; keep the two in step). Addresses the reader as "Anda".
+// The Terms of Service in Indonesian (the English, in terms-en.ts, is the
+// original; keep the two in step). Addresses the reader as "Anda".
 
 import type { Policy } from "./policies"
 
@@ -51,9 +51,9 @@ export const termsId: Policy = {
           blocks: ["Anda harus berusia minimal 13 tahun untuk menggunakan iShuo. Jika Anda berusia di bawah 18 tahun, orang tua atau wali Anda harus menyetujui Ketentuan ini untuk Anda."],
         },
         {
-          heading: "Tempat iShuo Tersedia",
+          heading: "Dimana iShuo Tersedia",
           blocks: [
-            "iShuo tidak tersedia di Tiongkok daratan, Uni Eropa, Kawasan Ekonomi Eropa (EEA), Inggris Raya, dan Swiss. Jika Anda menggunakan iShuo saat bepergian, beberapa fitur mungkin tidak berfungsi sebagaimana mestinya di tempat Anda berada.",
+            "iShuo tidak tersedia untuk diunduh di Tiongkok daratan, Uni Eropa, Kawasan Ekonomi Eropa (EEA), Inggris Raya, dan Swiss. Jika Anda menggunakan iShuo saat bepergian, beberapa fitur mungkin tidak berfungsi sebagaimana mestinya di tempat Anda berada.",
           ],
         },
       ],
@@ -152,7 +152,7 @@ export const termsId: Policy = {
         {
           heading: "Hak Kami",
           blocks: [
-            "Aplikasi, kode, desain, maskot, konten kosakata, nama, dan logo iShuo adalah milik Cerius atau pemberi lisensinya. Anda tidak boleh menyalin, mengubah, atau menyebarkannya kembali tanpa izin tertulis dari kami, kecuali konten berlisensi terbuka yang tercantum di Atribusi, yang boleh Anda pakai sesuai lisensinya.",
+            "Aplikasi, kode, desain, maskot, konten kosakata, nama, dan logo iShuo adalah milik tim Cerius. Anda tidak boleh menyalin, mengubah, atau menyebarkannya kembali tanpa izin tertulis dari kami, kecuali konten berlisensi terbuka yang tercantum di Atribusi, yang boleh Anda pakai sesuai lisensinya.",
           ],
         },
         {

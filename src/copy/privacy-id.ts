@@ -1,4 +1,4 @@
-// The Privacy Policy in Indonesian (the English one, in policies.ts, is
+// The Privacy Policy in Indonesian (the English, in privacy-en.ts, is
 // the original; keep the two in step). Addresses the reader as "Anda".
 
 import type { Policy } from "./policies"

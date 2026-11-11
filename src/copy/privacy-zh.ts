@@ -1,4 +1,4 @@
-// The Privacy Policy in Chinese (the English one, in policies.ts, is the
+// The Privacy Policy in Chinese (the English, in privacy-en.ts, is the
 // original; keep the two in step). The settings path stays as the app
 // shows it, in Indonesian.
 

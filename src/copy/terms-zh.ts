@@ -1,5 +1,5 @@
-// The Terms of Service in Chinese (the English ones, in policies.ts, are
-// the original; keep the two in step).
+// The Terms of Service in Chinese (the English, in terms-en.ts, is the
+// original; keep the two in step).
 
 import type { Policy } from "./policies"
 
@@ -44,8 +44,8 @@ export const termsZh: Policy = {
       parts: [
         { heading: "年龄要求", blocks: ["你必须年满 13 岁才能使用 iShuo。如果你未满 18 岁，须由父母或法定监护人代你同意本条款。"] },
         {
-          heading: "提供 iShuo 的地区",
-          blocks: ["iShuo 不在中国大陆、欧盟、欧洲经济区、英国或瑞士提供。如果你在旅行时使用 iShuo，部分功能在当地可能无法正常使用。"],
+          heading: "可下载 iShuo 的地区",
+          blocks: ["iShuo 不在中国大陆、欧盟、欧洲经济区、英国或瑞士提供下载。如果你在旅行时使用 iShuo，部分功能在当地可能无法正常使用。"],
         },
       ],
     },
@@ -131,7 +131,7 @@ export const termsZh: Policy = {
       parts: [
         {
           heading: "我们的权利",
-          blocks: ["iShuo 的应用、代码、设计、吉祥物、词汇内容、名称和标志归 Cerius 或其许可方所有。未经我们书面许可，你不得复制、修改或再分发；但列在 Atribusi 中、采用开放许可的内容除外，你可以按照相应许可使用。"],
+          blocks: ["iShuo 的应用、代码、设计、吉祥物、词汇内容、名称和标志归 Cerius 团队所有。未经我们书面许可，你不得复制、修改或再分发；但列在 Atribusi 中、采用开放许可的内容除外，你可以按照相应许可使用。"],
         },
         { heading: "开源软件", blocks: ["iShuo 包含开源软件和模型，各自适用其许可证。详见应用中的 Atribusi。"] },
       ],

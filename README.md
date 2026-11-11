@@ -33,7 +33,7 @@ Then open the address Vite prints (usually http://localhost:5173).
 | --- | --- |
 | `src/sections/` | One file per section of the page, top to bottom |
 | `src/components/` | Shared pieces: stamps, sticky notes, the iPhone frame, buttons, the language menu |
-| `src/copy/` | Every word on the page, one file per language (`id.ts` sets the shape the others follow) |
+| `src/copy/` | Every word on the page, one file per language (`id.ts` sets the shape the others follow), and the Terms and Privacy Policy, one file per policy and language (`terms-en.ts`, `privacy-id.ts`, ...) |
 | `src/i18n/` | Picking and remembering the language |
 | `src/site.ts` | Links: TestFlight, the App Store, email and Instagram |
 | `api/country.ts` | A Vercel Function telling the page which country the visitor is in |
@@ -41,7 +41,7 @@ Then open the address Vite prints (usually http://localhost:5173).
 
 ## Common changes
 
-- **Editing text:** change it in `src/copy/id.ts`, `en.ts` and `zh.ts`.
+- **Editing text:** change it in `src/copy/id.ts`, `en.ts` and `zh.ts`. For the Terms or Privacy Policy, change the English (`terms-en.ts` or `privacy-en.ts`) and the same lines in its `-id` and `-zh` files.
 - **Going live on the App Store:** set `appStoreURL` in `src/site.ts`. The buttons, their labels and the QR code switch from TestFlight to the App Store.
 - **Which language opens:** a `?lang=id`, `?lang=en` or `?lang=zh` link wins, then the language last picked from the menu on that device. Otherwise the visitor's country decides (Indonesian in Indonesia, Chinese in China, English elsewhere), read by `api/country.ts` from the header Vercel adds; where it isn't known, as when running locally, the page opens in English.
 

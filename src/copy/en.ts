@@ -93,11 +93,11 @@ export const en: Copy = {
     more: "Still wondering?",
     ask: "Ask us",
     items: [
-      { q: "Is iShuo free?", a: "Yes, it's free during the TestFlight beta." },
+      { q: "Is iShuo free?", a: "Yes, iShuo is free to download from the App Store." },
       { q: "Which iPhones can use iShuo?", a: "iPhones on iOS 26 or later. Apple Intelligence isn't needed." },
       { q: "What level is it for?", a: "For learners who already have the basics, around HSK 3 and up. The explanations follow the level you choose." },
       { q: "Are my recordings kept?", a: "No. Voice recordings are deleted once the conversation has been analysed, and the text is only sent to iShuo's AI to be checked. Always ask the people you're talking with before you record." },
-      { q: "How do I join the beta?", a: "Install TestFlight from the App Store, open iShuo's invite link on your iPhone, then tap Accept and Install." },
+      { q: "Where can I get it?", a: "On the App Store. Search for “iShuo”, or tap the Download button on this page." },
     ],
   },
   get: {
@@ -111,8 +111,7 @@ export const en: Copy = {
   footer: {
     title: "Questions?",
     lead: "Write to us. We read every message.",
-    contacts: { email: "Email", instagram: "Instagram", testflight: "On your iPhone" },
-    feedback: "Send Beta Feedback in TestFlight",
+    contacts: { email: "Email", instagram: "Instagram" },
     sectionsLabel: "Sections",
     made: ["Made with ", " by the Cerius team"],
     policies: "Terms & Privacy",

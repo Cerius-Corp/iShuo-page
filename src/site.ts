@@ -4,8 +4,8 @@
 
 export const site = {
   testFlightURL: "https://testflight.apple.com/join/XFYwWf6x",
-  /** The App Store page, once it's live. Empty: TestFlight is shown. */
-  appStoreURL: "",
+  /** The App Store page. Empty: TestFlight is shown instead. */
+  appStoreURL: "https://apps.apple.com/id/app/ishuo/id6821036292",
   /** Where questions and feedback go. */
   contactEmail: "cerius.corp@gmail.com",
   /** The Instagram handle, without the @. */
@@ -20,7 +20,7 @@ export const onPolicies = /^\/policies\/?$/.test(window.location.pathname)
 
 /** Where the download buttons go now. */
 export const downloadURL = site.appStoreURL || site.testFlightURL
-export const onAppStore = site.appStoreURL !== ""
+export const onAppStore = Boolean(site.appStoreURL)
 
 /** The page's sections, for the nav and the footer, by their key in the copy. */
 export const sections = [
@@ -30,10 +30,8 @@ export const sections = [
   { href: "#kontak", key: "contact" },
 ] as const
 
-/** Ways to reach the team: email and Instagram when set, TestFlight's
- *  feedback always (its `value` is in the copy, being words, not an address). */
+/** Ways to reach the team: email and Instagram, when set. */
 export const contacts = [
   site.contactEmail && { kind: "email", value: site.contactEmail, href: `mailto:${site.contactEmail}` },
   site.instagram && { kind: "instagram", value: `@${site.instagram}`, href: `https://instagram.com/${site.instagram}` },
-  { kind: "testflight", value: null, href: site.testFlightURL },
-].filter((c) => !!c) as { kind: "email" | "instagram" | "testflight"; value: string | null; href: string }[]
+].filter((c) => !!c) as { kind: "email" | "instagram"; value: string; href: string }[]

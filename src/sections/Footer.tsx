@@ -26,7 +26,7 @@ export function Footer() {
               >
                 <span>
                   <span className="block text-[13px] font-semibold text-white/45">{copy.footer.contacts[c.kind]}</span>
-                  <span className="block break-all text-lg font-bold sm:text-xl">{c.value ?? copy.footer.feedback}</span>
+                  <span className="block break-all text-lg font-bold sm:text-xl">{c.value}</span>
                 </span>
                 <svg viewBox="0 0 24 24" aria-hidden className="size-5 shrink-0 -rotate-45 fill-none stroke-current text-white/50 transition-[rotate,translate,color] duration-300 group-hover:translate-x-1 group-hover:rotate-0 group-hover:text-white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M13 6l6 6-6 6" />

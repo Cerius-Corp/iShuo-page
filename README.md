@@ -1,6 +1,6 @@
 # iShuo landing page
 
-The website for [iShuo](https://testflight.apple.com/join/XFYwWf6x), an iPhone app that helps Indonesian learners in China speak Mandarin. You record your real conversations; iShuo shows which sentences could be better, explains why, and practises them with you.
+The website for [iShuo](https://apps.apple.com/id/app/ishuo/id6821036292), an iPhone app that helps Indonesian learners in China speak Mandarin. You record your real conversations; iShuo shows which sentences could be better, explains why, and practises them with you.
 
 The page comes in Indonesian, English and Chinese.
 
@@ -35,7 +35,7 @@ Then open the address Vite prints (usually http://localhost:5173).
 | `src/components/` | Shared pieces: stamps, sticky notes, the iPhone frame, buttons, the language menu |
 | `src/copy/` | Every word on the page, one file per language (`id.ts` sets the shape the others follow), and the Terms and Privacy Policy, one file per policy and language (`terms-en.ts`, `privacy-id.ts`, ...) |
 | `src/i18n/` | Picking and remembering the language |
-| `src/site.ts` | Links: TestFlight, the App Store, email and Instagram |
+| `src/site.ts` | Links: the App Store, email and Instagram |
 | `api/country.ts` | A Vercel Function telling the page which country the visitor is in |
 | `public/img/` | The mascot, doodles and screenshots of the app |
 

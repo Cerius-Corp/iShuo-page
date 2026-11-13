@@ -99,11 +99,11 @@ export const id = {
     more: "Belum terjawab?",
     ask: "Tanya kami",
     items: [
-      { q: "Apakah iShuo gratis?", a: "Ya, gratis selama masa beta di TestFlight." },
+      { q: "Apakah iShuo gratis?", a: "Ya, iShuo gratis diunduh di App Store." },
       { q: "iPhone apa yang bisa memakai iShuo?", a: "iPhone dengan iOS 26 ke atas. Tidak perlu Apple Intelligence." },
       { q: "Untuk level berapa?", a: "Untuk yang sudah punya dasar, sekitar HSK 3 ke atas. Penjelasannya menyesuaikan level yang kamu pilih." },
       { q: "Apakah rekaman obrolanku disimpan?", a: "Tidak. Rekaman suara dihapus setelah obrolan dianalisis, dan teksnya hanya dikirim ke AI iShuo untuk diperiksa. Selalu minta izin dulu ke lawan bicaramu sebelum merekam." },
-      { q: "Bagaimana cara ikut beta?", a: "Pasang TestFlight dari App Store, buka link undangan iShuo di iPhone, lalu ketuk Terima dan Instal." },
+      { q: "Di mana saya bisa mengunduhnya?", a: "Di App Store. Cari “iShuo”, atau ketuk tombol Download di halaman ini." },
     ],
   },
   get: {
@@ -118,8 +118,7 @@ export const id = {
   footer: {
     title: "Ada pertanyaan?",
     lead: "Tulis saja. Semua masukan kami baca.",
-    contacts: { email: "Email", instagram: "Instagram", testflight: "Dari iPhone" },
-    feedback: "Send Beta Feedback di TestFlight",
+    contacts: { email: "Email", instagram: "Instagram" },
     sectionsLabel: "Bagian halaman",
     /** The credit, either side of a 心 (spaces included). */
     made: ["Dibuat dengan ", " oleh tim Cerius"],

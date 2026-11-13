@@ -94,11 +94,11 @@ export const zh: Copy = {
     more: "还有疑问？",
     ask: "问我们",
     items: [
-      { q: "iShuo 免费吗？", a: "免费。TestFlight 测试期间不收费。" },
+      { q: "iShuo 免费吗？", a: "可以在 App Store 免费下载。" },
       { q: "哪些 iPhone 可以用 iShuo？", a: "运行 iOS 26 或更新版本的 iPhone，不需要 Apple Intelligence。" },
       { q: "适合什么水平？", a: "适合已有基础的学习者，大约 HSK 3 级以上。讲解会按你选择的水平调整。" },
       { q: "我的录音会被保存吗？", a: "不会。对话分析完成后录音就会删除，文字只会发给 iShuo 的 AI 做检查。录音前请先征得对方同意。" },
-      { q: "怎么加入测试？", a: "从 App Store 安装 TestFlight，在 iPhone 上打开 iShuo 的邀请链接，然后点“接受”和“安装”。" },
+      { q: "在哪里下载？", a: "在 App Store 搜索“iShuo”，或点击本页的下载按钮。" },
     ],
   },
   get: {
@@ -112,8 +112,7 @@ export const zh: Copy = {
   footer: {
     title: "有问题吗？",
     lead: "欢迎来信，每条反馈我们都会看。",
-    contacts: { email: "邮箱", instagram: "Instagram", testflight: "在 iPhone 上" },
-    feedback: "在 TestFlight 中发送测试反馈",
+    contacts: { email: "邮箱", instagram: "Instagram" },
     sectionsLabel: "页面导航",
     made: ["Cerius 团队用", "打造"],
     policies: "条款与隐私",

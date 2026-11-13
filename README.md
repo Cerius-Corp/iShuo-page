@@ -51,4 +51,4 @@ The site is built for Vercel: `npm run build` as the build command and `dist` as
 
 ---
 
-Made by the Cerius team · cerius.corp@gmail.com · [@cerius_id](https://instagram.com/cerius_id)
+Made by the Cerius team · cerius.corp@gmail.com · [@ishuo.app](https://instagram.com/ishuo.app)

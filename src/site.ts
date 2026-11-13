@@ -9,7 +9,7 @@ export const site = {
   /** Where questions and feedback go. */
   contactEmail: "cerius.corp@gmail.com",
   /** The Instagram handle, without the @. */
-  instagram: "cerius_id",
+  instagram: "ishuo.app",
 } as const
 
 /** The page with the Terms of Service and the Privacy Policy. */
